@@ -17,7 +17,8 @@ interface Creator {
   share: number;
 }
 
-interface AssetV1 {
+interface AssetData {
+  name: string;
   symbol?: string;
   description?: string;
   royalties?: number;
@@ -27,8 +28,7 @@ interface AssetV1 {
   sellerFeeBasisPoints?: number;
   editionNonce?: number;
   tokenStandard?: string;
-  uri?: string;
-  name: string;
+  uri: string;
   attributes?: {
     attributeList: Array<{
       key: string;
@@ -112,12 +112,13 @@ export default function StatsPage() {
           filteredNFTs.map(async (nft) => {
             try {
               const assetDetails = await fetchAsset(umi, publicKey(nft.publicKey));
+              const assetData = assetDetails as unknown as AssetData;
               let imageUrl = null;
               let metadataAttributes = null;
               
-              if (assetDetails.uri) {
+              if (assetData.uri) {
                 try {
-                  const metadataResponse = await fetch(assetDetails.uri);
+                  const metadataResponse = await fetch(assetData.uri);
                   const metadata = await metadataResponse.json();
                   imageUrl = metadata.image || null;
                   metadataAttributes = metadata.attributes?.map((attr: MetadataAttribute) => ({
@@ -133,32 +134,32 @@ export default function StatsPage() {
                 name: nft.name,
                 publicKey: nft.publicKey.toString(),
                 image: imageUrl,
-                pluginAttributes: assetDetails.attributes?.attributeList
-                  ? assetDetails.attributes.attributeList.map((attr) => ({
+                pluginAttributes: assetData.attributes?.attributeList
+                  ? assetData.attributes.attributeList.map((attr) => ({
                       trait_type: attr.key || "Unknown",
                       value: attr.value || "Unknown",
                     }))
                   : null,
                 metadataAttributes: metadataAttributes,
-                transferDelegate: assetDetails.transferDelegate?.authority?.address?.toString() || null,
-                autograph: assetDetails.autograph?.signatures?.[0]
+                transferDelegate: assetData.transferDelegate?.authority?.address?.toString() || null,
+                autograph: assetData.autograph?.signatures?.[0]
                   ? {
-                      message: assetDetails.autograph.signatures[0].message,
-                      address: assetDetails.autograph.signatures[0].address.toString(),
+                      message: assetData.autograph.signatures[0].message,
+                      address: assetData.autograph.signatures[0].address.toString(),
                     }
                   : null,
-                symbol: assetDetails.symbol,
-                description: assetDetails.description,
-                royalties: assetDetails.royalties,
-                creators: assetDetails.creators?.map((creator) => ({
+                symbol: assetData.symbol,
+                description: assetData.description,
+                royalties: assetData.royalties,
+                creators: assetData.creators?.map((creator: Creator) => ({
                   address: creator.address.toString(),
                   share: creator.share,
                 })),
-                isMutable: assetDetails.isMutable,
-                primarySaleHappened: assetDetails.primarySaleHappened,
-                sellerFeeBasisPoints: assetDetails.sellerFeeBasisPoints,
-                editionNonce: assetDetails.editionNonce,
-                tokenStandard: assetDetails.tokenStandard,
+                isMutable: assetData.isMutable,
+                primarySaleHappened: assetData.primarySaleHappened,
+                sellerFeeBasisPoints: assetData.sellerFeeBasisPoints,
+                editionNonce: assetData.editionNonce,
+                tokenStandard: assetData.tokenStandard,
               } as NFT;
             } catch (err) {
               console.error(`Failed to fetch asset details for ${nft.name}`, err);
