@@ -26,16 +26,4 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const requestData = await request.json();
   return NextResponse.json({ success: true, data: requestData });
-}
-
-// Helper function for fetching data (not exported as a route handler)
-async function fetchData(url: string) {
-  try {
-    const response = await fetch(url);
-    const responseData = await response.json();
-    return responseData;
-  } catch (err) {
-    console.error('Error fetching data:', err);
-    throw new Error('Failed to fetch data');
-  }
 } 
