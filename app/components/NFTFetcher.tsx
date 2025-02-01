@@ -18,8 +18,8 @@ export async function fetchNFTs(connection: Connection, publicKey: PublicKey): P
     return myNfts.filter((nft): nft is Nft | NftWithToken => 
       nft.model === "nft" || nft.model === "metadata"
     );
-  } catch (error) {
-    console.error('Error fetching NFTs:', error);
+  } catch (error: unknown) {
+    console.error('Error fetching NFTs:', error instanceof Error ? error.message : 'Unknown error');
     return [];
   }
 }
@@ -37,8 +37,8 @@ export default function NFTFetcher({ onNFTsFetched }: NFTFetcherProps) {
       try {
         const nfts = await fetchNFTs(connection, publicKey);
         onNFTsFetched(nfts);
-      } catch (error) {
-        console.error('Error fetching NFTs:', error);
+      } catch (error: unknown) {
+        console.error('Error fetching NFTs:', error instanceof Error ? error.message : 'Unknown error');
       } finally {
         setIsLoading(false);
       }
