@@ -12,6 +12,46 @@ import Image from 'next/image';
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
+interface Creator {
+  address: { toString: () => string };
+  share: number;
+}
+
+interface AssetV1 {
+  symbol?: string;
+  description?: string;
+  royalties?: number;
+  creators?: Creator[];
+  isMutable?: boolean;
+  primarySaleHappened?: boolean;
+  sellerFeeBasisPoints?: number;
+  editionNonce?: number;
+  tokenStandard?: string;
+  uri?: string;
+  name: string;
+  attributes?: {
+    attributeList: Array<{
+      key: string;
+      value: string;
+    }>;
+  };
+  transferDelegate?: {
+    authority?: {
+      address?: {
+        toString: () => string;
+      };
+    };
+  };
+  autograph?: {
+    signatures?: Array<{
+      message: string;
+      address: {
+        toString: () => string;
+      };
+    }>;
+  };
+}
+
 interface NFT {
   name: string;
   publicKey: string;
@@ -249,10 +289,12 @@ export default function StatsPage() {
                               {nft.image ? (
                                 <Image
                                   src={nft.image}
-                                  alt={nft.name}
+                                  alt={nft.name || "NFT Image"}
                                   width={48}
                                   height={48}
                                   className="h-12 w-12 rounded-lg object-cover bg-white/5 group-hover:ring-2 ring-white/10 transition-all"
+                                  priority={false}
+                                  unoptimized={false}
                                 />
                               ) : (
                                 <div className="h-12 w-12 rounded-lg bg-white/5 flex items-center justify-center group-hover:ring-2 ring-white/10">
@@ -300,10 +342,12 @@ export default function StatsPage() {
                               {selectedNFT.image ? (
                                 <Image
                                   src={selectedNFT.image}
-                                  alt={selectedNFT.name}
+                                  alt={selectedNFT.name || "Selected NFT"}
                                   width={220}
                                   height={220}
                                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                  priority={true}
+                                  unoptimized={false}
                                 />
                               ) : (
                                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-white/5 to-white/10">

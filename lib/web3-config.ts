@@ -1,14 +1,23 @@
-import { Keypair } from '@solana/web3.js';
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import { PhantomWalletAdapter } from "@solana/wallet-adapter-phantom";
 import { ConnectionConfig } from "@solana/web3.js";
+
+interface NetworkConfig {
+  name: WalletAdapterNetwork;
+  endpoint: string;
+  config?: ConnectionConfig;
+}
+
+interface Config {
+  keypairPath: string;
+  rpcUrl: string;
+}
 
 // Browser-compatible implementation of required functionality
 export const getKeypair = () => {
-  return Keypair.generate();
+  return null; // Since Keypair is not used, we'll return null
 };
 
-export const getConfig = () => {
+export const getConfig = (): Config => {
   // Return default config for browser environment
   return {
     keypairPath: '',
@@ -16,23 +25,17 @@ export const getConfig = () => {
   };
 };
 
-export const readConfig = () => {
+export const readConfig = (): Config => {
   // In browser, we'll use localStorage if needed
   const storedConfig = typeof window !== 'undefined' ? localStorage.getItem('solana-config') : null;
   return storedConfig ? JSON.parse(storedConfig) : getConfig();
 };
 
-export const writeConfig = (config: any) => {
+export const writeConfig = (config: Config): void => {
   if (typeof window !== 'undefined') {
     localStorage.setItem('solana-config', JSON.stringify(config));
   }
 };
-
-interface NetworkConfig {
-  name: WalletAdapterNetwork;
-  endpoint: string;
-  config?: ConnectionConfig;
-}
 
 export const NETWORKS: NetworkConfig[] = [
   {
