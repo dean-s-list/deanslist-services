@@ -3,13 +3,14 @@
 import { useEffect, useState } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { Metaplex } from '@metaplex-foundation/js';
-import type { Nft, NftWithToken, Metadata } from '@metaplex-foundation/js';
+import type { Nft, NftWithToken } from '@metaplex-foundation/js';
+import { Connection, PublicKey } from '@solana/web3.js';
 
 interface NFTFetcherProps {
   onNFTsFetched: (nfts: (Nft | NftWithToken)[]) => void;
 }
 
-export async function fetchNFTs(connection: any, publicKey: any) {
+export async function fetchNFTs(connection: Connection, publicKey: PublicKey): Promise<(Nft | NftWithToken)[]> {
   if (!publicKey) return [];
   try {
     const metaplex = new Metaplex(connection);
