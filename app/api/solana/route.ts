@@ -1,16 +1,26 @@
 import { NextResponse } from 'next/server';
 import { Keypair } from '@solana/web3.js';
+import { Connection } from '@solana/web3.js';
+import { fetchNFTs } from '@/app/components/NFTFetcher';
 
-export async function GET() {
-  // Generate a new keypair on the server side
-  const keypair = Keypair.generate();
-  
-  return NextResponse.json({
-    publicKey: keypair.publicKey.toString(),
-    config: {
-      rpcUrl: 'https://api.mainnet-beta.solana.com',
+const connection = new Connection(process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com');
+
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const wallet = searchParams.get('wallet');
+
+    if (!wallet) {
+      return NextResponse.json({ error: 'Wallet address is required' }, { status: 400 });
     }
-  });
+
+    const nfts = await fetchNFTs(connection, wallet);
+    return NextResponse.json({ nfts });
+    
+  } catch (err) {
+    console.error('Error fetching NFTs:', err);
+    return NextResponse.json({ error: 'Failed to fetch NFTs' }, { status: 500 });
+  }
 }
 
 export async function POST(request: Request) {
