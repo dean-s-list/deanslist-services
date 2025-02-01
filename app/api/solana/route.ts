@@ -28,13 +28,14 @@ export async function POST(request: Request) {
   return NextResponse.json({ success: true, data: requestData });
 }
 
-export async function FETCH(url: string) {
+// Helper function for fetching data (not exported as a route handler)
+async function fetchData(url: string) {
   try {
     const response = await fetch(url);
     const responseData = await response.json();
-    return NextResponse.json(responseData);
+    return responseData;
   } catch (err) {
     console.error('Error fetching data:', err);
-    return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
+    throw new Error('Failed to fetch data');
   }
 } 
