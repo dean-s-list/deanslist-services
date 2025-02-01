@@ -8,6 +8,7 @@ import { das } from "@metaplex-foundation/mpl-core-das";
 import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { publicKey } from "@metaplex-foundation/umi";
 import useUmiStore from "@/store/useUmiStore";
+import Image from 'next/image';
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
@@ -29,6 +30,11 @@ interface NFT {
   sellerFeeBasisPoints?: number;
   editionNonce?: number;
   tokenStandard?: string;
+}
+
+interface MetadataAttribute {
+  trait_type: string;
+  value: string;
 }
 
 export default function StatsPage() {
@@ -74,7 +80,10 @@ export default function StatsPage() {
                   const metadataResponse = await fetch(assetDetails.uri);
                   const metadata = await metadataResponse.json();
                   imageUrl = metadata.image || null;
-                  metadataAttributes = metadata.attributes || null;
+                  metadataAttributes = metadata.attributes?.map((attr: MetadataAttribute) => ({
+                    trait_type: attr.trait_type || "Unknown",
+                    value: attr.value || "Unknown",
+                  })) || null;
                 } catch (metaErr) {
                   console.error(`Failed to fetch metadata for ${nft.name}`, metaErr);
                 }
@@ -90,10 +99,7 @@ export default function StatsPage() {
                       value: attr.value || "Unknown",
                     }))
                   : null,
-                metadataAttributes: metadataAttributes?.map((attr: any) => ({
-                  trait_type: attr.trait_type || "Unknown",
-                  value: attr.value || "Unknown",
-                })) || null,
+                metadataAttributes: metadataAttributes,
                 transferDelegate: assetDetails.transferDelegate?.authority?.address?.toString() || null,
                 autograph: assetDetails.autograph?.signatures?.[0]
                   ? {
@@ -241,9 +247,11 @@ export default function StatsPage() {
                               }`}
                             >
                               {nft.image ? (
-                                <img
+                                <Image
                                   src={nft.image}
                                   alt={nft.name}
+                                  width={48}
+                                  height={48}
                                   className="h-12 w-12 rounded-lg object-cover bg-white/5 group-hover:ring-2 ring-white/10 transition-all"
                                 />
                               ) : (
@@ -290,9 +298,11 @@ export default function StatsPage() {
                           <div>
                             <div className="max-w-[220px] aspect-square rounded-xl overflow-hidden border border-white/10 bg-white/5 ring-1 ring-white/10">
                               {selectedNFT.image ? (
-                                <img
+                                <Image
                                   src={selectedNFT.image}
                                   alt={selectedNFT.name}
+                                  width={220}
+                                  height={220}
                                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                 />
                               ) : (
