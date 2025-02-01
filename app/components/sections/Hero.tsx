@@ -47,7 +47,7 @@ function Hero() {
 				</a>
 
 				<a href="https://github.com/dean-s-list" target="blank"  rel="noopener noreferrer">	
-				<button className="text-white hidden py-2  px-6 rounded-lg font-medium hover:bg-white hover:text-purple-900 transition md:flex gap-2 items-center">
+				<button className="text-white hidden py-4  px-6 rounded-lg font-medium hover:bg-white hover:text-purple-900 transition md:flex gap-2 items-center">
 					Learn more <ArrowDown />
 				</button>
 				</a>

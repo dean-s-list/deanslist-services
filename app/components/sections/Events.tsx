@@ -96,7 +96,7 @@ const Events = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-[1fr,auto] md:gap-5 text-sm items-center">
             <p className="text-base md:mb-6 mb-2">
-              A one-month co-working event on the Island, Experience the highlights of IslandDAOx lives event! Presented by DeanslistDAO
+              A one-month co-working event on the Island, Experience the highlights of IslandDAOx lives event! Presented by DeanslistDAO.
             </p>
            	<a href="https://island-dao.com/" target="blank" rel="noopener noreferrer" className="w-full"><button className="shadow2-2xl bg-[#081E20] px-3 py-2 rounded-full w-full md:w-fit h-fit hover:bg-gray-600 transition">
 							Explore the fun!
