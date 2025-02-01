@@ -18,4 +18,14 @@ export async function POST(request: Request) {
   
   // Handle any server-side operations here
   return NextResponse.json({ success: true });
+}
+
+export async function FETCH(url: string) {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to fetch data' }, { status: 500 });
+  }
 } 
