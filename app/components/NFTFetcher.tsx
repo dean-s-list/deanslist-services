@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { Metaplex } from '@metaplex-foundation/js';
-import type { Nft, NftWithToken } from '@metaplex-foundation/js';
+import type { Nft, NftWithToken, Metadata, Sft } from '@metaplex-foundation/js';
 import { Connection, PublicKey } from '@solana/web3.js';
 
 interface NFTFetcherProps {
@@ -15,7 +15,7 @@ export async function fetchNFTs(connection: Connection, publicKey: PublicKey): P
   try {
     const metaplex = new Metaplex(connection);
     const myNfts = await metaplex.nfts().findAllByOwner({ owner: publicKey });
-    return myNfts.filter((nft): nft is Nft | NftWithToken => 
+    return myNfts.filter((nft: Metadata | Nft | Sft): nft is Nft | NftWithToken => 
       nft.model === "nft" || nft.model === "metadata"
     );
   } catch (error: unknown) {

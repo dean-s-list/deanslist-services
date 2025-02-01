@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useWallet } from "@solana/wallet-adapter-react";
-import { CheckCircleIcon, ClipboardIcon } from '@heroicons/react/24/outline';
+import { ClipboardIcon } from '@heroicons/react/24/outline';
 import { das } from "@metaplex-foundation/mpl-core-das";
 import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { publicKey } from "@metaplex-foundation/umi";
