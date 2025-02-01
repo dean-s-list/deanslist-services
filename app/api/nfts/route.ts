@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
+import { Connection, PublicKey } from '@solana/web3.js';
 import { fetchNFTs } from '@/app/components/NFTFetcher';
+
+const connection = new Connection(process.env.NEXT_PUBLIC_SOLANA_RPC_URL || 'https://api.mainnet-beta.solana.com');
 
 export async function GET(request: Request) {
   try {
@@ -16,7 +19,8 @@ export async function GET(request: Request) {
     }
 
     console.log('Fetching NFTs for:', { walletAddress, collectionAddress });
-    const nfts = await fetchNFTs(walletAddress, collectionAddress);
+    const publicKey = new PublicKey(walletAddress);
+    const nfts = await fetchNFTs(connection, publicKey);
     console.log(`Found ${nfts.length} NFTs`);
 
     return NextResponse.json({ nfts });
