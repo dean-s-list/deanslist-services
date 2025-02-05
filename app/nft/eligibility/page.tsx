@@ -55,7 +55,7 @@ export default function EligibilityPage() {
                     </div>
                     <h2 className="text-2xl font-semibold text-white mb-3">Eligibility Check</h2>
                     <p className="text-white/60 max-w-md mx-auto">
-                      The eligibility checking system is currently under development. Soon you'll be able to verify your eligibility for exclusive NFT mints!
+                      The eligibility checking system is currently under development. Soon you&apos;ll be able to verify your eligibility for exclusive NFT mints!
                     </p>
                   </div>
                 </div>
