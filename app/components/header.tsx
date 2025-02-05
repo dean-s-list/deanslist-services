@@ -37,27 +37,36 @@ export default function Header({ className = '' }: HeaderProps) {
           <div className="hidden lg:flex flex-1 justify-center">
             <nav className="flex items-center gap-8 text-base font-medium text-white">
               <Link 
+                href="/nft/eligibility" 
+                className={`group relative px-4 py-2 transition-all duration-300 hover:text-purple-300 ${
+                  pathname === '/nft/eligibility' 
+                    ? 'text-purple-300 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-purple-500 after:to-purple-300 after:rounded-full after:shadow-glow-sm'
+                    : 'hover:text-purple-300'
+                }`}
+              >
+                Eligibility
+                <span className="absolute inset-x-0 -bottom-px h-px w-0 bg-gradient-to-r from-purple-500/0 via-purple-500 to-purple-500/0 transition-all duration-500 group-hover:w-full"></span>
+              </Link>
+              <Link 
+                href="/nft/mint" 
+                className={`group relative px-4 py-2 transition-all duration-300 hover:text-purple-300 ${
+                  pathname === '/nft/mint' 
+                    ? 'text-purple-300 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-purple-500 after:to-purple-300 after:rounded-full after:shadow-glow-sm'
+                    : 'hover:text-purple-300'
+                }`}
+              >
+                Mint
+                <span className="absolute inset-x-0 -bottom-px h-px w-0 bg-gradient-to-r from-purple-500/0 via-purple-500 to-purple-500/0 transition-all duration-500 group-hover:w-full"></span>
+              </Link>
+              <Link 
                 href="/nft/stats" 
-                className={`relative px-4 py-2 transition-all duration-300 hover:text-purple-300 ${
+                className={`group relative px-4 py-2 transition-all duration-300 hover:text-purple-300 ${
                   pathname === '/nft/stats' 
                     ? 'text-purple-300 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-purple-500 after:to-purple-300 after:rounded-full after:shadow-glow-sm'
                     : 'hover:text-purple-300'
                 }`}
               >
                 Stats
-              </Link>
-              <Link 
-                href="/#features" 
-                className="group relative px-4 py-2 transition-all duration-300 hover:text-purple-300"
-              >
-                Features
-                <span className="absolute inset-x-0 -bottom-px h-px w-0 bg-gradient-to-r from-purple-500/0 via-purple-500 to-purple-500/0 transition-all duration-500 group-hover:w-full"></span>
-              </Link>
-              <Link 
-                href="/#contact" 
-                className="group relative px-4 py-2 transition-all duration-300 hover:text-purple-300"
-              >
-                Contact
                 <span className="absolute inset-x-0 -bottom-px h-px w-0 bg-gradient-to-r from-purple-500/0 via-purple-500 to-purple-500/0 transition-all duration-500 group-hover:w-full"></span>
               </Link>
             </nav>
@@ -107,6 +116,26 @@ export default function Header({ className = '' }: HeaderProps) {
         >
           <nav className="flex flex-col items-center gap-4 py-6">
             <Link 
+              href="/nft/eligibility" 
+              className={`px-4 py-2 transition-all duration-300 ${
+                pathname === '/nft/eligibility' 
+                  ? 'text-purple-300' 
+                  : 'text-white hover:text-purple-300'
+              }`}
+            >
+              Eligibility
+            </Link>
+            <Link 
+              href="/nft/mint" 
+              className={`px-4 py-2 transition-all duration-300 ${
+                pathname === '/nft/mint' 
+                  ? 'text-purple-300' 
+                  : 'text-white hover:text-purple-300'
+              }`}
+            >
+              Mint
+            </Link>
+            <Link 
               href="/nft/stats" 
               className={`px-4 py-2 transition-all duration-300 ${
                 pathname === '/nft/stats' 
@@ -115,18 +144,6 @@ export default function Header({ className = '' }: HeaderProps) {
               }`}
             >
               Stats
-            </Link>
-            <Link 
-              href="/#features" 
-              className="px-4 py-2 text-white transition-all duration-300 hover:text-purple-300"
-            >
-              Features
-            </Link>
-            <Link 
-              href="/#contact" 
-              className="px-4 py-2 text-white transition-all duration-300 hover:text-purple-300"
-            >
-              Contact
             </Link>
           </nav>
         </div>
