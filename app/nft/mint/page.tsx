@@ -6,6 +6,36 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import Confetti from "react-confetti";
 import useUmiStore from "@/store/useUmiStore";
 import { mintV1 } from "@metaplex-foundation/mpl-core-candy-machine";
+import { publicKey as createPublicKey, some, sol, generateSigner, PublicKey } from "@metaplex-foundation/umi";
+import { fetchAsset } from "@metaplex-foundation/mpl-core";
+import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
+import { WalletError, WalletNotConnectedError } from "@solana/wallet-adapter-base";
+import Image from "next/image";
+
+const Header = dynamic(() => import("../../components/NFTHeader"));
+
+const candyMachineId = createPublicKey("FXSHzmwLw4LMyNCz52Q9K4wgyLvYbYPXtYTuSPvze3D5");
+const coreCollection = createPublicKey("FfAAFtqAnCwdVWxfKx3mx5gEU1JpJPPhWcp1MGB5x7pR");
+const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f");
+
+export default function MintPage() {
+  const wallet = useWallet();
+  const umi = useUmiStore.getState().umi;
+  
+  const [loading, setLoading] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [nftData, setNftData] = useState({ image: null, name: null });
+  const [error, setError] = useState<string | null>(null);
+
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import dynamic from "next/dynamic";
+import { useWallet } from "@solana/wallet-adapter-react";
+import Confetti from "react-confetti";
+import useUmiStore from "@/store/useUmiStore";
+import { mintV1 } from "@metaplex-foundation/mpl-core-candy-machine";
 import { publicKey as createPublicKey, some, sol, generateSigner, PublicKey, signerIdentity } from "@metaplex-foundation/umi";
 import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
