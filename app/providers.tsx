@@ -59,11 +59,11 @@ type Props = {
 };
 
 export const WalletAdapterProvider: FC<Props> = ({ children }) => {
-  const network = WalletAdapterNetwork.Mainnet;
+  const network = WalletAdapterNetwork.Devnet;
   
   const endpoint = useMemo(
-    () => clusterApiUrl(network),
-    []
+    () => process.env.NEXT_PUBLIC_SOLANA_RPC_URL || clusterApiUrl(network),
+    [network]
   );
 
   // @solana/wallet-adapter-wallets includes all the adapters but supports tree shaking and lazy loading --
