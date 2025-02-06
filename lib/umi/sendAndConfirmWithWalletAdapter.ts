@@ -1,7 +1,6 @@
 import { TransactionBuilder, Umi, base58 } from "@metaplex-foundation/umi";
 import { WalletContextState } from "@solana/wallet-adapter-react";
 import { createSignerFromWalletAdapter } from "@metaplex-foundation/umi-signer-wallet-adapters";
-import { signerIdentity } from "@metaplex-foundation/umi";
 import { setComputeUnitPrice } from "@metaplex-foundation/mpl-toolbox";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { TransactionError } from "@solana/web3.js";
@@ -33,7 +32,6 @@ export async function sendAndConfirmWithWalletAdapter(
     
     // Create signer from wallet adapter and add to UMI
     const signer = createSignerFromWalletAdapter(wallet);
-    umi.use(signerIdentity(signer));
 
     // Get latest blockhash with commitment
     const blockhash = await umi.rpc.getLatestBlockhash({
