@@ -27,36 +27,6 @@ export default function MintPage() {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [nftData, setNftData] = useState({ image: null, name: null });
   const [error, setError] = useState<string | null>(null);
-
-"use client";
-
-import { useState, useEffect, useCallback } from "react";
-import dynamic from "next/dynamic";
-import { useWallet } from "@solana/wallet-adapter-react";
-import Confetti from "react-confetti";
-import useUmiStore from "@/store/useUmiStore";
-import { mintV1 } from "@metaplex-foundation/mpl-core-candy-machine";
-import { publicKey as createPublicKey, some, sol, generateSigner, PublicKey, signerIdentity } from "@metaplex-foundation/umi";
-import { fetchAsset } from "@metaplex-foundation/mpl-core";
-import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
-import { WalletError, WalletNotConnectedError } from "@solana/wallet-adapter-base";
-import Image from "next/image";
-
-const Header = dynamic(() => import("../../components/NFTHeader"));
-
-const candyMachineId = createPublicKey("FXSHzmwLw4LMyNCz52Q9K4wgyLvYbYPXtYTuSPvze3D5");
-const coreCollection = createPublicKey("FfAAFtqAnCwdVWxfKx3mx5gEU1JpJPPhWcp1MGB5x7pR");
-const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f");
-
-export default function MintPage() {
-  const wallet = useWallet();
-  const umi = useUmiStore.getState().umi;
-  
-  const [loading, setLoading] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
-  const [nftData, setNftData] = useState({ image: null, name: null });
-  const [error, setError] = useState<string | null>(null);
   const [mintingStage, setMintingStage] = useState<'idle' | 'preparing' | 'minting' | 'confirming' | 'success'>('idle');
 
   useEffect(() => {
@@ -119,13 +89,19 @@ export default function MintPage() {
         },
       });
 
-      const signature = await sendAndConfirmWithWalletAdapter(transactionBuilder, umi, wallet);
+      const { signature } = await sendAndConfirmWithWalletAdapter(
+        transactionBuilder,
+        umi,
+        wallet,
+        { commitment: "confirmed" }
+      );
       
       console.log("Minting successful with signature:", signature);
       setMintingStage('confirming');
       await new Promise(resolve => setTimeout(resolve, 2000));
       fetchNFTMetadata(asset.publicKey);
     } catch (txError) {
+      console.error("Minting error:", txError);
       let errorMessage = "Failed to mint NFT. Please try again.";
       if (txError instanceof WalletNotConnectedError) errorMessage = "Wallet is not connected.";
       if (txError instanceof WalletError) errorMessage = `Wallet error: ${txError.message}`;
@@ -174,7 +150,7 @@ export default function MintPage() {
                 <div className="h-1 w-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full transform scale-x-0 animate-scale-x-full"></div>
               </div>
               <p className="text-lg text-white/60 mt-6 animate-fade-in-up delay-200">
-                Join the exclusive Dean's List collection by minting your unique NFT
+                Join the exclusive Dean&apos;s List collection by minting your unique NFT
               </p>
             </div>
 
@@ -208,9 +184,29 @@ export default function MintPage() {
                     <h2 className="text-3xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors duration-500">
                       {loading ? "Minting in Progress..." : "Ready to Mint?"}
                     </h2>
-                    <p className="text-lg text-white/60 mb-8 group-hover:text-white/80 transition-colors duration-500">
-                      {loading ? "Please wait while we create your NFT" : "Create your unique NFT and join the Dean's List collection"}
+                    <p className="text-lg text-white/60 mb-4 group-hover:text-white/80 transition-colors duration-500">
+                      {loading ? "Please wait while we create your NFT" : "Create your unique NFT and join the Dean&apos;s List collection"}
                     </p>
+
+                    {/* Minting Stage Indicator */}
+                    {loading && (
+                      <div className="flex justify-center items-center gap-4 mb-6">
+                        <div className={`flex items-center gap-2 ${mintingStage === 'preparing' ? 'text-purple-400' : 'text-white/40'}`}>
+                          <div className={`w-2 h-2 rounded-full ${mintingStage === 'preparing' ? 'bg-purple-400 animate-pulse' : 'bg-white/40'}`} />
+                          <span className="text-sm">Preparing</span>
+                        </div>
+                        <div className="w-8 h-px bg-white/20" />
+                        <div className={`flex items-center gap-2 ${mintingStage === 'minting' ? 'text-purple-400' : 'text-white/40'}`}>
+                          <div className={`w-2 h-2 rounded-full ${mintingStage === 'minting' ? 'bg-purple-400 animate-pulse' : 'bg-white/40'}`} />
+                          <span className="text-sm">Minting</span>
+                        </div>
+                        <div className="w-8 h-px bg-white/20" />
+                        <div className={`flex items-center gap-2 ${mintingStage === 'confirming' ? 'text-purple-400' : 'text-white/40'}`}>
+                          <div className={`w-2 h-2 rounded-full ${mintingStage === 'confirming' ? 'bg-purple-400 animate-pulse' : 'bg-white/40'}`} />
+                          <span className="text-sm">Confirming</span>
+                        </div>
+                      </div>
+                    )}
                     
                     <button
                       onClick={handleMint}

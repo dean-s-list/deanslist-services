@@ -1,4 +1,4 @@
-import { TransactionBuilder, Umi, base58 } from "@metaplex-foundation/umi";
+import { TransactionBuilder, Umi, base58, signerIdentity } from "@metaplex-foundation/umi";
 import { WalletContextState } from "@solana/wallet-adapter-react";
 import { createSignerFromWalletAdapter } from "@metaplex-foundation/umi-signer-wallet-adapters";
 import { setComputeUnitPrice } from "@metaplex-foundation/mpl-toolbox";
@@ -26,39 +26,29 @@ export async function sendAndConfirmWithWalletAdapter(
       throw new Error('Wallet public key is required');
     }
 
-    // Set network to devnet by default
-    const network = settings?.network || WalletAdapterNetwork.Devnet;
-    console.log(`Building transaction for ${network}...`);
-    
-    // Create signer from wallet adapter and add to UMI
+    // Create signer from wallet adapter
     const signer = createSignerFromWalletAdapter(wallet);
+    const umiWithSigner = umi.use(signerIdentity(signer));
 
-    // Get latest blockhash with commitment
-    const blockhash = await umi.rpc.getLatestBlockhash({
-      commitment: settings?.commitment || "confirmed",
-    });
+    // Get latest blockhash
+    const blockhash = await umiWithSigner.rpc.getLatestBlockhash();
     
-    // Build and sign transaction
-    const transactions = tx
-      .prepend(setComputeUnitPrice(umi, { microLamports: BigInt(100000) }))
+    // Build transaction with compute unit price and blockhash
+    const transaction = tx
+      .prepend(setComputeUnitPrice(umiWithSigner, { microLamports: BigInt(100000) }))
       .setBlockhash(blockhash);
 
-    const signedTx = await transactions.buildAndSign(umi);
+    // Build and sign transaction
+    const signedTx = await transaction.buildAndSign(umiWithSigner);
 
-    // Send transaction with settings
-    console.log('Sending transaction...');
-    const signature = await umi.rpc.sendTransaction(signedTx, {
-      preflightCommitment: settings?.commitment || "confirmed",
+    // Send transaction
+    const signature = await umiWithSigner.rpc.sendTransaction(signedTx, {
       commitment: settings?.commitment || "confirmed",
       skipPreflight: settings?.skipPreflight || false,
-    }).catch((error: Error) => {
-      throw new Error(`Transaction failed: ${error.message}`);
     });
-    
-    console.log('Confirming transaction...');
-    
-    // Confirm transaction with settings
-    const confirmation = await umi.rpc.confirmTransaction(signature, {
+
+    // Confirm transaction
+    const confirmation = await umiWithSigner.rpc.confirmTransaction(signature, {
       strategy: { type: "blockhash", ...blockhash },
       commitment: settings?.commitment || "confirmed",
     });
@@ -67,9 +57,8 @@ export async function sendAndConfirmWithWalletAdapter(
       throw new Error(`Transaction failed: ${confirmation.value.err}`);
     }
 
-    console.log('Transaction confirmed');
     return {
-      signature: Uint8Array.from(base58.deserialize(signature)),
+      signature: Uint8Array.from(base58.deserialize(signature)[0]),
       confirmation,
     };
   } catch (error) {
