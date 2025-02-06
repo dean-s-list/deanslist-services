@@ -76,6 +76,17 @@ const NFTHeader = () => {
                 <span className="absolute inset-x-0 -bottom-px h-px w-0 bg-gradient-to-r from-purple-500/0 via-purple-500 to-purple-500/0 transition-all duration-500 group-hover:w-full"></span>
               </Link>
               <Link 
+                href="/nft/perks" 
+                className={`group relative px-4 py-2 transition-all duration-300 hover:text-purple-300 ${
+                  pathname === '/nft/perks' 
+                    ? 'text-purple-300 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-purple-500 after:to-purple-300 after:rounded-full after:shadow-glow-sm'
+                    : 'hover:text-purple-300'
+                }`}
+              >
+                Perks
+                <span className="absolute inset-x-0 -bottom-px h-px w-0 bg-gradient-to-r from-purple-500/0 via-purple-500 to-purple-500/0 transition-all duration-500 group-hover:w-full"></span>
+              </Link>
+              <Link 
                 href="/nft/stats" 
                 className={`group relative px-4 py-2 transition-all duration-300 hover:text-purple-300 ${
                   pathname === '/nft/stats' 
@@ -154,6 +165,16 @@ const NFTHeader = () => {
               }`}
             >
               Mint
+            </Link>
+            <Link 
+              href="/nft/perks" 
+              className={`px-4 py-2 transition-all duration-300 ${
+                pathname === '/nft/perks' 
+                  ? 'text-purple-300' 
+                  : 'text-white hover:text-purple-300'
+              }`}
+            >
+              Perks
             </Link>
             <Link 
               href="/nft/stats" 

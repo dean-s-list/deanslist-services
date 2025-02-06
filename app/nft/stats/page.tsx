@@ -2,183 +2,118 @@
 
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { ClipboardIcon } from '@heroicons/react/24/outline';
-import { das } from "@metaplex-foundation/mpl-core-das";
-import { fetchAsset } from "@metaplex-foundation/mpl-core";
+import { fetchCandyMachine } from "@metaplex-foundation/mpl-core-candy-machine";
+import { fetchCollection } from "@metaplex-foundation/mpl-core";
 import { publicKey } from "@metaplex-foundation/umi";
 import useUmiStore from "@/store/useUmiStore";
-import Image from 'next/image';
+import { ClipboardIcon } from '@heroicons/react/24/outline';
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
-interface Creator {
-  address: { toString: () => string };
-  share: number;
-}
+const candyMachineId = publicKey("FXSHzmwLw4LMyNCz52Q9K4wgyLvYbYPXtYTuSPvze3D5");
+const collectionId = publicKey("FfAAFtqAnCwdVWxfKx3mx5gEU1JpJPPhWcp1MGB5x7pR");
 
-interface AssetData {
-  name: string;
-  symbol?: string;
-  description?: string;
-  royalties?: number;
-  creators?: Creator[];
-  isMutable?: boolean;
-  primarySaleHappened?: boolean;
-  sellerFeeBasisPoints?: number;
-  editionNonce?: number;
-  tokenStandard?: string;
-  uri: string;
-  attributes?: {
-    attributeList: Array<{
-      key: string;
-      value: string;
+interface CandyMachineStats {
+  itemsAvailable: number;
+  itemsMinted: number;
+  itemsRemaining: number;
+  itemsRedeemed: number;
+  price: number;
+  goLiveDate: string;
+  isActive: boolean;
+  authority: string;
+  mintAuthority: string;
+  collectionName: string;
+  isMutable: boolean;
+  configLineSettings: {
+    prefixName: string;
+    nameLength: number;
+    prefixUri: string;
+    uriLength: number;
+    isSequential: boolean;
+  } | null;
+  royalties: {
+    basisPoints: number;
+    creators: Array<{
+      address: string;
+      percentage: number;
     }>;
   };
-  transferDelegate?: {
-    authority?: {
-      address?: {
-        toString: () => string;
-      };
-    };
-  };
-  autograph?: {
-    signatures?: Array<{
-      message: string;
-      address: {
-        toString: () => string;
-      };
-    }>;
-  };
-}
-
-interface NFT {
-  name: string;
-  publicKey: string;
-  image: string | null;
-  attributes: { trait_type: string; value: string }[] | null;
-  pluginAttributes: { trait_type: string; value: string }[] | null;
-  metadataAttributes: { trait_type: string; value: string }[] | null;
-  transferDelegate: string | null;
-  autograph: { message: string; address: string } | null;
-  symbol?: string;
-  description?: string;
-  royalties?: number;
-  creators?: { address: string; share: number }[];
-  isMutable?: boolean;
-  primarySaleHappened?: boolean;
-  sellerFeeBasisPoints?: number;
-  editionNonce?: number;
-  tokenStandard?: string;
-}
-
-interface MetadataAttribute {
-  trait_type: string;
-  value: string;
 }
 
 export default function StatsPage() {
-  const { publicKey: walletPublicKey } = useWallet();
-  const [nfts, setNfts] = useState<NFT[]>([]);
-  const [selectedNFT, setSelectedNFT] = useState<NFT | null>(null);
+  const [stats, setStats] = useState<CandyMachineStats | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const targetCollection = "FfAAFtqAnCwdVWxfKx3mx5gEU1JpJPPhWcp1MGB5x7pR";
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
   useEffect(() => {
-    async function getNFTs() {
-      if (!walletPublicKey) {
-        console.log("%c ❌ No Wallet Connected", "color: red; font-weight: bold;");
-        setLoading(false);
-        return;
-      }
+    async function fetchStats() {
       try {
         const umi = useUmiStore.getState().umi;
-        const owner = publicKey(walletPublicKey.toString());
-        const assets = await das.getAssetsByOwner(umi, { owner });
+        
+        const [candyMachine, collection] = await Promise.all([
+          fetchCandyMachine(umi, candyMachineId),
+          fetchCollection(umi, collectionId)
+        ]);
 
-        const filteredNFTs = assets.filter(
-          (asset) => asset.updateAuthority?.address === targetCollection
-        );
+        // Custom replacer function to handle BigInt
+        const replacer = (key: string, value: any) => {
+          if (typeof value === 'bigint') {
+            return value.toString();
+          }
+          return value;
+        };
 
-        if (filteredNFTs.length === 0) {
-          console.log("%c ⚠️ No NFTs found in this collection.", "color: yellow; font-weight: bold;");
-          setLoading(false);
-          return;
+        console.log('Raw Candy Machine Data:', JSON.stringify(candyMachine, replacer, 2));
+        console.log('Raw Collection Data:', JSON.stringify(collection, replacer, 2));
+
+        if (!candyMachine) {
+          throw new Error("Failed to fetch candy machine data");
         }
 
-        const nftDetails = await Promise.all(
-          filteredNFTs.map(async (nft) => {
-            try {
-              const assetDetails = await fetchAsset(umi, publicKey(nft.publicKey));
-              const assetData = assetDetails as unknown as AssetData;
-              let imageUrl = null;
-              let metadataAttributes = null;
-              
-              if (assetData.uri) {
-                try {
-                  const metadataResponse = await fetch(assetData.uri);
-                  const metadata = await metadataResponse.json();
-                  imageUrl = metadata.image || null;
-                  metadataAttributes = metadata.attributes?.map((attr: MetadataAttribute) => ({
-                    trait_type: attr.trait_type || "Unknown",
-                    value: attr.value || "Unknown",
-                  })) || null;
-                } catch (metaErr) {
-                  console.error(`Failed to fetch metadata for ${nft.name}`, metaErr);
-                }
+        // Map the data to our interface
+        const mappedStats: CandyMachineStats = {
+          itemsAvailable: Number(candyMachine.data.itemsAvailable),
+          itemsMinted: Number(candyMachine.itemsRedeemed),
+          itemsRemaining: Number(candyMachine.data.itemsAvailable) - Number(candyMachine.itemsRedeemed),
+          itemsRedeemed: Number(candyMachine.itemsRedeemed),
+          price: 0.1 * 1e9, // Price in lamports (0.1 SOL)
+          goLiveDate: new Date().toISOString(),
+          isActive: true,
+          authority: candyMachine.authority.toString(),
+          mintAuthority: candyMachine.mintAuthority.toString(),
+          collectionName: collection.name,
+          isMutable: candyMachine.data.isMutable,
+          configLineSettings: candyMachine.data.configLineSettings.__option === "Some" 
+            ? {
+                prefixName: candyMachine.data.configLineSettings.value.prefixName,
+                nameLength: candyMachine.data.configLineSettings.value.nameLength,
+                prefixUri: candyMachine.data.configLineSettings.value.prefixUri,
+                uriLength: candyMachine.data.configLineSettings.value.uriLength,
+                isSequential: candyMachine.data.configLineSettings.value.isSequential,
               }
+            : null,
+          royalties: {
+            basisPoints: collection.royalties?.basisPoints ?? 0,
+            creators: collection.royalties?.creators?.map(creator => ({
+              address: creator.address.toString(),
+              percentage: creator.percentage
+            })) ?? []
+          }
+        };
 
-              return {
-                name: nft.name,
-                publicKey: nft.publicKey.toString(),
-                image: imageUrl,
-                pluginAttributes: assetData.attributes?.attributeList
-                  ? assetData.attributes.attributeList.map((attr) => ({
-                      trait_type: attr.key || "Unknown",
-                      value: attr.value || "Unknown",
-                    }))
-                  : null,
-                metadataAttributes: metadataAttributes,
-                transferDelegate: assetData.transferDelegate?.authority?.address?.toString() || null,
-                autograph: assetData.autograph?.signatures?.[0]
-                  ? {
-                      message: assetData.autograph.signatures[0].message,
-                      address: assetData.autograph.signatures[0].address.toString(),
-                    }
-                  : null,
-                symbol: assetData.symbol,
-                description: assetData.description,
-                royalties: assetData.royalties,
-                creators: assetData.creators?.map((creator: Creator) => ({
-                  address: creator.address.toString(),
-                  share: creator.share,
-                })),
-                isMutable: assetData.isMutable,
-                primarySaleHappened: assetData.primarySaleHappened,
-                sellerFeeBasisPoints: assetData.sellerFeeBasisPoints,
-                editionNonce: assetData.editionNonce,
-                tokenStandard: assetData.tokenStandard,
-              } as NFT;
-            } catch (err) {
-              console.error(`Failed to fetch asset details for ${nft.name}`, err);
-              return null;
-            }
-          })
-        );
-
-        setNfts(nftDetails.filter((nft): nft is NFT => nft !== null));
+        setStats(mappedStats);
         setLoading(false);
       } catch (err) {
-        console.error("Failed to fetch NFTs:", err);
-        setError("Failed to fetch NFTs. Please try again later.");
+        console.error("Failed to fetch stats:", err);
+        setError("Failed to fetch collection statistics. Please try again later.");
         setLoading(false);
       }
     }
 
-    getNFTs();
-  }, [walletPublicKey]);
+    fetchStats();
+  }, []);
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -186,48 +121,43 @@ export default function StatsPage() {
     setTimeout(() => setCopiedText(null), 2000);
   };
 
+  const formatNumber = (value: number): string => {
+    return value.toLocaleString();
+  };
+
+  const formatSOL = (lamports: number): string => {
+    return (lamports / 1e9).toFixed(2);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0A0118] via-[#0C0223] to-[#0A0118] text-white">
       {/* Background effects */}
       <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-30 bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-        <div className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full filter blur-3xl"></div>
-        <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full filter blur-3xl"></div>
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20 bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+        <div className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full filter blur-3xl animate-pulse-slow"></div>
+        <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-full filter blur-3xl animate-pulse-slow delay-1000"></div>
       </div>
 
       {/* Content */}
       <div className="relative">
         <Header />
         
-        <main className="relative mx-auto max-w-6xl px-4 sm:px-6 pt-24 pb-4">
-          <div className="flex flex-col gap-3">
+        <main className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-24 pb-4">
+          <div className="flex flex-col gap-6">
             {/* Page Header */}
-            <div className="flex justify-between items-center pb-3 mb-2 border-b border-white/10">
-              <div>
-                <h1 className="text-xl font-medium text-white">Your NFTs</h1>
-                <p className="text-sm text-white/60 mt-1">View and manage your NFT collection</p>
+            <div className="text-center max-w-2xl mx-auto mb-12">
+              <div className="inline-block">
+                <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient-x pb-2">
+                  Collection Stats
+                </h1>
+                <div className="h-1 w-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full transform scale-x-0 animate-scale-x-full"></div>
               </div>
-              {walletPublicKey && !error && nfts.length > 0 && (
-                <div className="text-sm text-white/60">
-                  {nfts.length} {nfts.length === 1 ? 'NFT' : 'NFTs'} found
-                </div>
-              )}
+              <p className="text-lg text-white/60 mt-6">
+                View detailed statistics about the Dean's List NFT collection
+              </p>
             </div>
 
-            {!walletPublicKey ? (
-              <div className="flex items-center justify-center h-[300px] rounded-xl border border-white/5 bg-white/5 backdrop-blur-sm">
-                <div className="max-w-md text-center px-6">
-                  <div className="mb-4 p-4 rounded-full bg-white/5 w-fit mx-auto ring-1 ring-white/10">
-                    <svg className="w-8 h-8 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 10a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
-                    </svg>
-                  </div>
-                  <h2 className="text-2xl font-semibold text-white mb-3">Connect Your Wallet</h2>
-                  <p className="text-white/60">Connect your wallet using the button in the navigation bar to view your NFTs</p>
-                </div>
-              </div>
-            ) : error ? (
+            {error ? (
               <div className="flex items-center justify-center h-[300px] rounded-xl border border-red-500/10 bg-white/5 backdrop-blur-sm">
                 <div className="max-w-md text-center px-6">
                   <div className="mb-4 p-4 rounded-full bg-red-500/10 w-fit mx-auto">
@@ -239,374 +169,238 @@ export default function StatsPage() {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-[260px,1fr] gap-6">
-                {/* Sidebar */}
-                <div className="h-[calc(100vh-16rem)] sticky top-24">
-                  <div className="h-full rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden flex flex-col">
-                    <div className="p-3 border-b border-white/10 backdrop-blur-sm sticky top-0 z-10 bg-white/5">
-                      <div className="flex justify-between items-center">
-                        <h2 className="text-sm font-medium text-white/90">Collection NFTs</h2>
-                        {!loading && nfts.length > 0 && (
-                          <span className="text-xs text-white/60">{nfts.length} found</span>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex-1 overflow-hidden">
-                      <div className="h-full overflow-y-auto p-2 space-y-1.5 hide-scrollbar">
-                        <style jsx global>{`
-                          .hide-scrollbar::-webkit-scrollbar {
-                            display: none !important;
-                          }
-                          .hide-scrollbar {
-                            -ms-overflow-style: none !important;
-                            scrollbar-width: none !important;
-                          }
-                        `}</style>
-                        {loading ? (
-                          [...Array(4)].map((_, i) => (
-                            <div key={i} className="animate-pulse flex items-center gap-3 p-2 rounded-lg bg-white/5">
-                              <div className="w-12 h-12 rounded-lg bg-white/10" />
-                              <div className="space-y-2 flex-1">
-                                <div className="h-3 w-24 bg-white/10 rounded" />
-                                <div className="h-2 w-16 bg-white/10 rounded" />
-                              </div>
-                            </div>
-                          ))
-                        ) : nfts.length === 0 ? (
-                          <div className="flex items-center justify-center h-full">
-                            <p className="text-sm text-white/60">No NFTs found</p>
-                          </div>
-                        ) : (
-                          nfts.map((nft) => (
-                            <div
-                              key={nft.publicKey}
-                              onClick={() => setSelectedNFT(nft)}
-                              className={`group flex items-center gap-3 p-2 rounded-lg border transition-all duration-200 cursor-pointer ${
-                                selectedNFT?.publicKey === nft.publicKey
-                                  ? "border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20"
-                                  : "border-transparent bg-white/5 hover:bg-white/10"
-                              }`}
-                            >
-                              {nft.image ? (
-                                <Image
-                                  src={nft.image}
-                                  alt={nft.name || "NFT Image"}
-                                  width={48}
-                                  height={48}
-                                  className="h-12 w-12 rounded-lg object-cover bg-white/5 group-hover:ring-2 ring-white/10 transition-all"
-                                  priority={false}
-                                  unoptimized={false}
-                                />
-                              ) : (
-                                <div className="h-12 w-12 rounded-lg bg-white/5 flex items-center justify-center group-hover:ring-2 ring-white/10">
-                                  <span className="text-xl">🖼️</span>
-                                </div>
-                              )}
-                              <div className="flex-1 min-w-0">
-                                <h3 className="text-sm font-medium text-white truncate group-hover:text-white/90 transition-colors">
-                                  {nft.name}
-                                </h3>
-                                {nft.autograph && (
-                                  <div className="flex items-center gap-1 text-xs">
-                                    <span className="text-emerald-400/90">Signed</span>
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          ))
-                        )}
-                      </div>
-                    </div>
+              <div className="grid grid-cols-1 gap-6">
+                {/* Minting Progress Section */}
+                <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-xl font-semibold text-white">Minting Progress</h2>
+                    {stats?.isActive ? (
+                      <span className="px-3 py-1 text-xs font-medium text-green-400 bg-green-400/10 rounded-full">
+                        Active
+                      </span>
+                    ) : (
+                      <span className="px-3 py-1 text-xs font-medium text-yellow-400 bg-yellow-400/10 rounded-full">
+                        Inactive
+                      </span>
+                    )}
                   </div>
+
+                  {loading ? (
+                    <div className="space-y-4 animate-pulse">
+                      <div className="h-4 bg-white/10 rounded w-3/4"></div>
+                      <div className="h-8 bg-white/10 rounded"></div>
+                      <div className="h-4 bg-white/10 rounded w-1/2"></div>
+                    </div>
+                  ) : stats && (
+                    <>
+                      <div className="relative pt-1 mb-6">
+                        <div className="flex mb-2 items-center justify-between">
+                          <div>
+                            <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-purple-400 bg-purple-400/10">
+                              Minting Progress
+                            </span>
+                          </div>
+                          <div className="text-right">
+                            <span className="text-xs font-semibold inline-block text-purple-400">
+                              {((stats.itemsMinted / stats.itemsAvailable) * 100).toFixed(1)}%
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex h-3 mb-4 overflow-hidden rounded-full bg-purple-400/10">
+                          <div
+                            style={{ width: `${(stats.itemsMinted / stats.itemsAvailable) * 100}%` }}
+                            className="flex flex-col justify-center rounded-full bg-gradient-to-r from-purple-400 to-pink-400 shadow-lg transition-all duration-500"
+                          ></div>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                          <p className="text-sm text-white/60 mb-1">Items Minted</p>
+                          <p className="text-2xl font-bold text-white">{formatNumber(stats.itemsMinted)}</p>
+                        </div>
+                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                          <p className="text-sm text-white/60 mb-1">Items Remaining</p>
+                          <p className="text-2xl font-bold text-white">{formatNumber(stats.itemsRemaining)}</p>
+                        </div>
+                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                          <p className="text-sm text-white/60 mb-1">Total Supply</p>
+                          <p className="text-2xl font-bold text-white">{formatNumber(stats.itemsAvailable)}</p>
+                        </div>
+                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                          <p className="text-sm text-white/60 mb-1">Price</p>
+                          <p className="text-2xl font-bold text-white">{formatSOL(stats.price)} SOL</p>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
 
-                {/* Main Content */}
-                <div className="h-[calc(100vh-16rem)] rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm overflow-hidden">
-                  {selectedNFT ? (
-                    <div className="h-full overflow-y-auto hide-scrollbar">
-                      <div className="p-4 space-y-3 max-w-2xl mx-auto">
-                        {/* Header with name */}
-                        <div className="pb-2 border-b border-white/10">
-                          <h2 className="text-lg font-medium text-white">
-                            {selectedNFT.name}
-                          </h2>
-                          {selectedNFT.description && (
-                            <p className="text-sm text-white/60 mt-1">{selectedNFT.description}</p>
-                          )}
+                {/* Collection Details Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 space-y-6">
+                    <h2 className="text-xl font-semibold text-white">Collection Details</h2>
+                    {loading ? (
+                      <div className="space-y-4 animate-pulse">
+                        <div className="h-4 bg-white/10 rounded w-3/4"></div>
+                        <div className="h-8 bg-white/10 rounded"></div>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                          <p className="text-sm text-white/60 mb-2">Collection Name</p>
+                          <p className="text-lg font-medium text-white">{stats?.collectionName}</p>
                         </div>
 
-                        {/* Image and Details+Attributes side by side */}
-                        <div className="grid grid-cols-1 lg:grid-cols-[220px,1fr] gap-3">
-                          {/* Image Column */}
-                          <div>
-                            <div className="max-w-[220px] aspect-square rounded-xl overflow-hidden border border-white/10 bg-white/5 ring-1 ring-white/10">
-                              {selectedNFT.image ? (
-                                <Image
-                                  src={selectedNFT.image}
-                                  alt={selectedNFT.name || "Selected NFT"}
-                                  width={220}
-                                  height={220}
-                                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                                  priority={true}
-                                  unoptimized={false}
-                                />
-                              ) : (
-                                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-white/5 to-white/10">
-                                  <span className="text-4xl">🖼️</span>
-                                </div>
-                              )}
+                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                          <p className="text-sm text-white/60 mb-2">Royalties</p>
+                          <div className="space-y-2">
+                            <div className="flex justify-between items-center">
+                              <span className="text-sm text-white/60">Rate</span>
+                              <span className="text-sm text-white">{(stats?.royalties.basisPoints ?? 0) / 100}%</span>
                             </div>
-                          </div>
-
-                          {/* Details and Attributes Column */}
-                          <div className="space-y-3 overflow-y-auto hide-scrollbar">
-                            {/* NFT Details */}
-                            <div className="space-y-1.5">
-                              <h3 className="text-sm font-semibold text-white/90 flex items-center gap-2">
-                                <span>Details</span>
-                                <div className="h-px flex-1 bg-white/10"></div>
-                              </h3>
-                              <div className="rounded-lg border border-white/10 bg-white/5 divide-y divide-white/5">
-                                <div className="p-2">
-                                  <p className="text-xs font-medium text-white/70 mb-1">Public Key</p>
-                                  <div className="flex items-center justify-between group">
+                            <div className="space-y-2">
+                              {stats?.royalties.creators.map((creator, index) => (
+                                <div key={index} className="rounded-lg border border-white/5 bg-white/5 p-2">
+                                  <div className="flex items-center justify-between">
+                                    <span className="text-xs text-white/60">Creator {index + 1}</span>
+                                    <span className="text-xs text-white">{creator.percentage}%</span>
+                                  </div>
+                                  <div className="flex items-center justify-between mt-1">
                                     <p className="font-mono text-xs text-white/90 break-all">
-                                      {selectedNFT.publicKey}
+                                      {creator.address}
                                     </p>
                                     <button
-                                      onClick={() => copyToClipboard(selectedNFT.publicKey)}
-                                      className="ml-2 p-1.5 hover:bg-white/10 rounded-md transition-colors"
+                                      onClick={() => copyToClipboard(creator.address)}
+                                      className="ml-2 p-1 hover:bg-white/10 rounded-md transition-colors"
                                     >
-                                      <ClipboardIcon className={`w-4 h-4 ${copiedText === selectedNFT.publicKey ? 'text-green-400' : 'text-white/60 group-hover:text-white/90'}`} />
+                                      <ClipboardIcon className={`w-3 h-3 ${copiedText === creator.address ? 'text-green-400' : 'text-white/60'}`} />
                                     </button>
                                   </div>
                                 </div>
-
-                                {selectedNFT.description && (
-                                  <div className="p-2">
-                                    <p className="text-xs font-medium text-white/70 mb-1">Description</p>
-                                    <p className="text-sm text-white/90 leading-relaxed">{selectedNFT.description}</p>
-                                  </div>
-                                )}
-
-                                {selectedNFT.symbol && (
-                                  <div className="p-2">
-                                    <p className="text-xs font-medium text-white/70 mb-1">Symbol</p>
-                                    <p className="text-sm text-white/90">{selectedNFT.symbol}</p>
-                                  </div>
-                                )}
-
-                                {selectedNFT.sellerFeeBasisPoints !== undefined && (
-                                  <div className="p-2">
-                                    <p className="text-xs font-medium text-white/70 mb-1">Royalties</p>
-                                    <p className="text-sm text-white/90">
-                                      {(selectedNFT.sellerFeeBasisPoints / 100).toFixed(2)}%
-                                    </p>
-                                  </div>
-                                )}
-
-                                {selectedNFT.tokenStandard && (
-                                  <div className="p-2">
-                                    <p className="text-xs font-medium text-white/70 mb-1">Token Standard</p>
-                                    <p className="text-sm text-white/90">{selectedNFT.tokenStandard}</p>
-                                  </div>
-                                )}
-
-                                <div className="p-2 grid grid-cols-2 gap-2">
-                                  {selectedNFT.isMutable !== undefined && (
-                                    <div>
-                                      <p className="text-xs font-medium text-white/70 mb-1">Mutable</p>
-                                      <div className="flex items-center gap-2">
-                                        <div className={`w-2 h-2 rounded-full ${selectedNFT.isMutable ? 'bg-green-400' : 'bg-red-400'}`}></div>
-                                        <p className="text-sm text-white/90">
-                                          {selectedNFT.isMutable ? 'Yes' : 'No'}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  )}
-
-                                  {selectedNFT.primarySaleHappened !== undefined && (
-                                    <div>
-                                      <p className="text-xs font-medium text-white/70 mb-1">Primary Sale</p>
-                                      <div className="flex items-center gap-2">
-                                        <div className={`w-2 h-2 rounded-full ${selectedNFT.primarySaleHappened ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
-                                        <p className="text-sm text-white/90">
-                                          {selectedNFT.primarySaleHappened ? 'Completed' : 'Not Completed'}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-
-                            {/* Metadata Attributes */}
-                            <div className="space-y-1.5">
-                              <h3 className="text-sm font-semibold text-white/90 flex items-center gap-2">
-                                <span>Attributes</span>
-                                <div className="h-px flex-1 bg-white/10"></div>
-                              </h3>
-                              {selectedNFT.metadataAttributes && selectedNFT.metadataAttributes.length > 0 ? (
-                                <div className="grid grid-cols-2 gap-1">
-                                  {selectedNFT.metadataAttributes.map((attr, i) => (
-                                    <div
-                                      key={i}
-                                      className="rounded-lg border border-white/10 bg-white/5 p-1.5 hover:bg-white/10 transition-colors"
-                                    >
-                                      <p className="text-xs font-medium text-white/70">{attr.trait_type}</p>
-                                      <p className="text-sm font-medium text-white">
-                                        {attr.value}
-                                      </p>
-                                    </div>
-                                  ))}
-                                </div>
-                              ) : (
-                                <p className="text-sm text-white/60 italic">No attributes available</p>
-                              )}
+                              ))}
                             </div>
                           </div>
                         </div>
 
-                        {/* Plugin Data and Creators - Full Width */}
-                        <div className="space-y-3 overflow-y-auto hide-scrollbar">
-                          {/* Plugin Data */}
-                          <div className="space-y-3">
-                            <h3 className="text-sm font-semibold text-white/90 flex items-center gap-2">
-                              <span>Plugin Data</span>
-                              <div className="h-px flex-1 bg-white/10"></div>
-                            </h3>
-                            <div className="rounded-lg border border-white/10 bg-white/5 divide-y divide-white/5">
-                              {/* Plugin Attributes */}
-                              {selectedNFT.pluginAttributes && selectedNFT.pluginAttributes.length > 0 && (
-                                <div className="p-2 space-y-2">
-                                  <h4 className="text-xs font-medium text-white/70">Plugin Attributes</h4>
-                                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-                                    {selectedNFT.pluginAttributes.map((attr, i) => (
-                                      <div
-                                        key={i}
-                                        className="rounded-lg border border-white/10 bg-white/5 p-2 hover:bg-white/10 transition-colors"
-                                      >
-                                        <p className="text-xs font-medium text-white/70">{attr.trait_type}</p>
-                                        <p className="text-sm font-medium text-white">
-                                          {attr.value}
-                                        </p>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-                              )}
-
-                              {/* Transfer Delegate */}
-                              {selectedNFT.transferDelegate && (
-                                <div className="p-1.5">
-                                  <h4 className="text-xs font-medium text-white/70 mb-2">Transfer Delegate</h4>
-                                  <div className="flex items-center justify-between group">
-                                    <p className="font-mono text-xs text-white/90 break-all">
-                                      {selectedNFT.transferDelegate}
-                                    </p>
-                                    <button
-                                      onClick={() => copyToClipboard(selectedNFT.transferDelegate!)}
-                                      className="ml-2 p-1.5 hover:bg-white/10 rounded-md transition-colors"
-                                    >
-                                      <ClipboardIcon className={`w-4 h-4 ${copiedText === selectedNFT.transferDelegate ? 'text-green-400' : 'text-white/60 group-hover:text-white/90'}`} />
-                                    </button>
-                                  </div>
-                                </div>
-                              )}
-
-                              {/* Autograph */}
-                              {selectedNFT.autograph && (
-                                <div className="p-1.5 space-y-1.5">
-                                  <h4 className="text-xs font-medium text-white/70">Autograph</h4>
-                                  <div className="space-y-1.5">
-                                    <div>
-                                      <p className="text-xs font-medium text-white/70 mb-1">Message</p>
-                                      <p className="text-sm text-white/90 bg-white/5 p-1.5 rounded-md">
-                                        {selectedNFT.autograph.message}
-                                      </p>
-                                    </div>
-                                    <div>
-                                      <p className="text-xs font-medium text-white/70 mb-1">Signed by</p>
-                                      <div className="flex items-center justify-between group">
-                                        <p className="font-mono text-xs text-white/90 break-all">
-                                          {selectedNFT.autograph.address}
-                                        </p>
-                                        <button
-                                          onClick={() => copyToClipboard(selectedNFT.autograph!.address)}
-                                          className="ml-2 p-1.5 hover:bg-white/10 rounded-md transition-colors"
-                                        >
-                                          <ClipboardIcon className={`w-4 h-4 ${copiedText === selectedNFT.autograph.address ? 'text-green-400' : 'text-white/60 group-hover:text-white/90'}`} />
-                                        </button>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                            <p className="text-sm text-white/60 mb-2">Mutability</p>
+                            <div className="flex items-center gap-2">
+                              <div className={`w-2 h-2 rounded-full ${stats?.isMutable ? 'bg-green-400' : 'bg-red-400'}`}></div>
+                              <p className="text-sm text-white">
+                                {stats?.isMutable ? 'Mutable' : 'Immutable'}
+                              </p>
                             </div>
                           </div>
 
-                          {/* Creators */}
-                          {selectedNFT.creators && selectedNFT.creators.length > 0 && (
-                            <div className="space-y-3">
-                              <h3 className="text-sm font-semibold text-white/90 flex items-center gap-2">
-                                <span>Creators</span>
-                                <div className="h-px flex-1 bg-white/10"></div>
-                              </h3>
-                              <div className="grid grid-cols-1 gap-2">
-                                {selectedNFT.creators.map((creator, index) => (
-                                  <div
-                                    key={index}
-                                    className="rounded-lg border border-white/10 bg-white/5 p-1 space-y-1 hover:bg-white/10 transition-colors"
-                                  >
-                                    <div>
-                                      <p className="text-xs font-medium text-white/70 mb-1">Creator Address</p>
-                                      <div className="flex items-center justify-between group">
-                                        <p className="font-mono text-xs text-white/90 break-all">
-                                          {creator.address}
-                                        </p>
-                                        <button
-                                          onClick={() => copyToClipboard(creator.address)}
-                                          className="ml-2 p-1 hover:bg-white/10 rounded-md transition-colors"
-                                        >
-                                          <ClipboardIcon className={`w-4 h-4 ${copiedText === creator.address ? 'text-green-400' : 'text-white/60 group-hover:text-white/90'}`} />
-                                        </button>
-                                      </div>
-                                    </div>
-                                    <div className="flex justify-between items-center bg-white/5 rounded-md p-1">
-                                      <p className="text-xs font-medium text-white/70">Share</p>
-                                      <p className="text-sm font-medium text-white">{creator.share}%</p>
-                                    </div>
-                                  </div>
-                                ))}
+                          <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                            <p className="text-sm text-white/60 mb-2">Status</p>
+                            <div className="flex items-center gap-2">
+                              <div className={`w-2 h-2 rounded-full ${stats?.isActive ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
+                              <p className="text-sm text-white">
+                                {stats?.isActive ? 'Active' : 'Inactive'}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Technical Details Section */}
+                  <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 space-y-6">
+                    <h2 className="text-xl font-semibold text-white">Technical Details</h2>
+                    {loading ? (
+                      <div className="space-y-4 animate-pulse">
+                        <div className="h-4 bg-white/10 rounded w-3/4"></div>
+                        <div className="h-8 bg-white/10 rounded"></div>
+                      </div>
+                    ) : (
+                      <div className="space-y-4">
+                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                          <p className="text-sm text-white/60 mb-2">Candy Machine ID</p>
+                          <div className="flex items-center justify-between group">
+                            <p className="font-mono text-sm text-white/90 break-all">
+                              {candyMachineId.toString()}
+                            </p>
+                            <button
+                              onClick={() => copyToClipboard(candyMachineId.toString())}
+                              className="ml-2 p-1.5 hover:bg-white/10 rounded-md transition-colors"
+                            >
+                              <ClipboardIcon className={`w-4 h-4 ${copiedText === candyMachineId.toString() ? 'text-green-400' : 'text-white/60 group-hover:text-white/90'}`} />
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                          <p className="text-sm text-white/60 mb-2">Authority</p>
+                          <div className="flex items-center justify-between group">
+                            <p className="font-mono text-sm text-white/90 break-all">
+                              {stats?.authority}
+                            </p>
+                            <button
+                              onClick={() => copyToClipboard(stats?.authority || '')}
+                              className="ml-2 p-1.5 hover:bg-white/10 rounded-md transition-colors"
+                            >
+                              <ClipboardIcon className={`w-4 h-4 ${copiedText === stats?.authority ? 'text-green-400' : 'text-white/60 group-hover:text-white/90'}`} />
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                          <p className="text-sm text-white/60 mb-2">Mint Authority</p>
+                          <div className="flex items-center justify-between group">
+                            <p className="font-mono text-sm text-white/90 break-all">
+                              {stats?.mintAuthority}
+                            </p>
+                            <button
+                              onClick={() => copyToClipboard(stats?.mintAuthority || '')}
+                              className="ml-2 p-1.5 hover:bg-white/10 rounded-md transition-colors"
+                            >
+                              <ClipboardIcon className={`w-4 h-4 ${copiedText === stats?.mintAuthority ? 'text-green-400' : 'text-white/60 group-hover:text-white/90'}`} />
+                            </button>
+                          </div>
+                        </div>
+
+                        {stats?.configLineSettings && (
+                          <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                            <p className="text-sm text-white/60 mb-3">Configuration Settings</p>
+                            <div className="space-y-2">
+                              <div className="flex justify-between items-center text-sm">
+                                <span className="text-white/60">Prefix Name:</span>
+                                <span className="text-white">{stats.configLineSettings.prefixName}</span>
+                              </div>
+                              <div className="flex justify-between items-center text-sm">
+                                <span className="text-white/60">Name Length:</span>
+                                <span className="text-white">{stats.configLineSettings.nameLength}</span>
+                              </div>
+                              <div className="flex justify-between items-center text-sm">
+                                <span className="text-white/60">URI Prefix:</span>
+                                <span className="text-white">{stats.configLineSettings.prefixUri}</span>
+                              </div>
+                              <div className="flex justify-between items-center text-sm">
+                                <span className="text-white/60">URI Length:</span>
+                                <span className="text-white">{stats.configLineSettings.uriLength}</span>
+                              </div>
+                              <div className="flex justify-between items-center text-sm">
+                                <span className="text-white/60">Sequential Minting:</span>
+                                <span className="text-white">{stats.configLineSettings.isSequential ? 'Yes' : 'No'}</span>
                               </div>
                             </div>
-                          )}
-                        </div>
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  ) : (
-                    <div className="flex h-full items-center justify-center">
-                      <div className="text-center px-4">
-                        <div className="mb-4 p-4 rounded-full bg-white/5 w-fit mx-auto ring-1 ring-white/10">
-                          <svg className="w-7 h-7 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
-                        </div>
-                        <h3 className="text-lg font-medium text-white mb-2">Select an NFT</h3>
-                        <p className="text-sm text-white/60">
-                          Choose an NFT from the list to view its details
-                        </p>
-                      </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
             )}
           </div>
         </main>
 
-        <footer className="relative py-2 text-center text-xs text-white/40">
-          <p>© 2024 DeanslistDAO. All rights reserved.</p>
+        <footer className="relative py-6 text-center text-sm text-white/40">
+          <p className="hover:text-white/60 transition-colors duration-300">© 2024 DeanslistDAO. All rights reserved.</p>
         </footer>
       </div>
     </div>
