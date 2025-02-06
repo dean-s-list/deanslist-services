@@ -1,9 +1,16 @@
-import { TransactionBuilder, Umi, base58, TransactionSignature } from "@metaplex-foundation/umi";
+import { TransactionBuilder, Umi, base58 } from "@metaplex-foundation/umi";
 import { WalletContextState } from "@solana/wallet-adapter-react";
 import { createSignerFromWalletAdapter } from "@metaplex-foundation/umi-signer-wallet-adapters";
 import { signerIdentity } from "@metaplex-foundation/umi";
 import { setComputeUnitPrice } from "@metaplex-foundation/mpl-toolbox";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { TransactionError } from "@solana/web3.js";
+
+type ConfirmationResponse = {
+  value: {
+    err: TransactionError | null;
+  };
+};
 
 export async function sendAndConfirmWithWalletAdapter(
   tx: TransactionBuilder,
@@ -14,7 +21,7 @@ export async function sendAndConfirmWithWalletAdapter(
     skipPreflight?: boolean;
     network?: WalletAdapterNetwork;
   }
-): Promise<{ signature: Uint8Array; confirmation: any }> {
+): Promise<{ signature: Uint8Array; confirmation: ConfirmationResponse }> {
   try {
     if (!wallet.publicKey) {
       throw new Error('Wallet public key is required');
@@ -46,8 +53,8 @@ export async function sendAndConfirmWithWalletAdapter(
       preflightCommitment: settings?.commitment || "confirmed",
       commitment: settings?.commitment || "confirmed",
       skipPreflight: settings?.skipPreflight || false,
-    }).catch((err: any) => {
-      throw new Error(`Transaction failed: ${err}`);
+    }).catch((error: Error) => {
+      throw new Error(`Transaction failed: ${error.message}`);
     });
     
     console.log('Confirming transaction...');

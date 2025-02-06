@@ -58,7 +58,7 @@ export default function StatsPage() {
         ]);
 
         // Custom replacer function to handle BigInt
-        const replacer = (key: string, value: any) => {
+        const replacer = (_key: string, value: unknown) => {
           if (typeof value === 'bigint') {
             return value.toString();
           }
@@ -153,7 +153,7 @@ export default function StatsPage() {
                 <div className="h-1 w-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full transform scale-x-0 animate-scale-x-full"></div>
               </div>
               <p className="text-lg text-white/60 mt-6">
-                View detailed statistics about the Dean's List NFT collection
+                View detailed statistics about the Dean&apos;s List NFT collection
               </p>
             </div>
 
