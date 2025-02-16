@@ -94,6 +94,14 @@ const NavBar: React.FC = () => {
                             >
                                 Leaderboard
                             </Link>
+                        </li>        <li className="hover:text-[#D896F7]">
+                            <Link
+                                href="/nft/eligibility"
+                                target="_blank"
+                                className="flex items-center gap-1"
+                            >
+                                Perks
+                            </Link>
                         </li>
                     </ul>
                 </nav>
@@ -154,6 +162,14 @@ const NavBar: React.FC = () => {
                                 onClick={toggleMenu}
                             >
                                 Leaderboard
+                            </Link>
+                            <Link
+                                href="/nft/eligibility"
+                                target="_blank"
+                                className="block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-200"
+                                onClick={toggleMenu}
+                            >
+                                Perks
                             </Link>
                         </div>
                     </div>
