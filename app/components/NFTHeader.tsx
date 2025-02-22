@@ -54,7 +54,7 @@ const NFTHeader = () => {
           <div className="hidden lg:flex flex-1 justify-center">
             <nav className="flex items-center gap-8 text-base font-medium text-white">
               <Link 
-                href="/nft/eligibility" 
+                href="https://eligibility.deanslist.services/" 
                 className={`group relative px-4 py-2 transition-all duration-300 hover:text-purple-300 ${
                   pathname === '/nft/eligibility' 
                     ? 'text-purple-300 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-purple-500 after:to-purple-300 after:rounded-full after:shadow-glow-sm'
