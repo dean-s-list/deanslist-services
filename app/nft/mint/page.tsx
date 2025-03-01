@@ -22,7 +22,7 @@ const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3
 // const END_DATE = new Date("2025-03-03T18:00:00Z");
 
 const START_DATE = new Date(Date.now() + 5000);
-const END_DATE = new Date(Date.now() + 10000);
+const END_DATE = new Date(Date.now() + 100000);
 
 export default function MintPage() {
   const wallet = useWallet();
@@ -129,7 +129,6 @@ export default function MintPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0A0118] via-[#0C0223] to-[#0A0118] text-white">
       {showConfetti && (
-        <>
           <Confetti
             width={windowSize.width}
             height={windowSize.height}
@@ -137,8 +136,6 @@ export default function MintPage() {
             recycle={false}
             colors={['#8B5CF6', '#EC4899', '#F472B6', '#A78BFA', '#C084FC']}
           />
-          <div className="fixed inset-0 bg-white/5 animate-fade-out pointer-events-none" />
-        </>
       )}
       
       {/* Background Effects */}
