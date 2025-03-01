@@ -18,6 +18,12 @@ const candyMachineId = createPublicKey("FXSHzmwLw4LMyNCz52Q9K4wgyLvYbYPXtYTuSPvz
 const coreCollection = createPublicKey("FfAAFtqAnCwdVWxfKx3mx5gEU1JpJPPhWcp1MGB5x7pR");
 const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f");
 
+// const START_DATE = new Date("2025-03-03T17:00:00Z");
+// const END_DATE = new Date("2025-03-03T18:00:00Z");
+
+const START_DATE = new Date(Date.now() + 5000);
+const END_DATE = new Date(Date.now() + 10000);
+
 export default function MintPage() {
   const wallet = useWallet();
   const umi = useUmiStore.getState().umi;
@@ -28,6 +34,7 @@ export default function MintPage() {
   const [nftData, setNftData] = useState({ image: null, name: null });
   const [error, setError] = useState<string | null>(null);
   const [mintingStage, setMintingStage] = useState<'idle' | 'preparing' | 'minting' | 'confirming' | 'success'>('idle');
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -37,6 +44,14 @@ export default function MintPage() {
       return () => window.removeEventListener("resize", updateSize);
     }
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => setCurrentTime(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const timeLeftToStart = Math.max(0, Math.floor((START_DATE.getTime() - currentTime.getTime()) / 1000));
+  const timeLeftToEnd = Math.max(0, Math.floor((END_DATE.getTime() - currentTime.getTime()) / 1000));
 
   const fetchNFTMetadata = useCallback(async (assetPublicKey: PublicKey, retries = 10) => {
     for (let i = 0; i < retries; i++) {
@@ -140,6 +155,20 @@ export default function MintPage() {
         <Header />
         
         <main className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-24 pb-4">
+          {timeLeftToStart > 0 ? (
+            <div>
+            <h1 className="text-5xl font-bold text-purple-400">Minting Starts In:</h1>
+            <p className="text-4xl font-semibold text-white mt-2">{START_DATE.toUTCString()}</p>
+            <p className="text-3xl font-semibold text-white bg-gray-800 px-4 py-2 rounded-lg inline-block mt-4">{Math.floor(timeLeftToStart / 86400)}d {new Date(timeLeftToStart * 1000).toISOString().substr(11, 8)}</p>
+          </div>
+          ) : timeLeftToEnd === 0 ? (
+            <div>
+            <h1 className="text-5xl font-bold">Minting Has Ended (Ended on: {END_DATE.toUTCString()})</h1>
+          </div>
+          ) : (
+            <div>
+              <p>Minting Ends In: {new Date(timeLeftToEnd * 1000).toISOString().substr(11, 8)}</p>
+
           <div className="flex flex-col gap-6">
             {/* Page Header */}
             <div className="text-center max-w-2xl mx-auto">
