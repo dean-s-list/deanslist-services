@@ -37,7 +37,6 @@ export default function MintPage() {
   const [nftData, setNftData] = useState({ image: null, name: null });
   const [error, setError] = useState<string | null>(null);
   const [mintingStage, setMintingStage] = useState<'idle' | 'preparing' | 'minting' | 'confirming' | 'success'>('idle');
-  const [currentTime, setCurrentTime] = useState(new Date());
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [countdownType, setCountdownType] = useState<'start' | 'end' | 'none'>('start');
 
@@ -53,7 +52,6 @@ export default function MintPage() {
   useEffect(() => {
     const updateCountdown = () => {
       const now = new Date();
-      setCurrentTime(now);
 
       // Determine if we should show start countdown, end countdown, or none
       if (now < START_DATE) {
