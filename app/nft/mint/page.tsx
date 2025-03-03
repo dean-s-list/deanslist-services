@@ -22,7 +22,7 @@ const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3
 // const END_DATE = new Date("2025-03-03T18:00:00Z");
 
 const START_DATE = new Date(Date.now() + 5000);
-const END_DATE = new Date(Date.now() + 100000);
+const END_DATE = new Date(Date.now() + 10000);
 
 export default function MintPage() {
   const wallet = useWallet();
@@ -46,7 +46,36 @@ export default function MintPage() {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => setCurrentTime(new Date()), 1000);
+    const updateCountdown = () => {
+      const now = new Date();
+      setCurrentTime(now);
+
+      // Determine if we should show start countdown, end countdown, or none
+      if (now < START_DATE) {
+        setCountdownType('start');
+        const timeLeft = Math.max(0, START_DATE.getTime() - now.getTime());
+        setCountdown({
+          days: Math.floor(timeLeft / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((timeLeft % (1000 * 60)) / 1000)
+        });
+      } else if (now < END_DATE) {
+        setCountdownType('end');
+        const timeLeft = Math.max(0, END_DATE.getTime() - now.getTime());
+        setCountdown({
+          days: Math.floor(timeLeft / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((timeLeft % (1000 * 60)) / 1000)
+        });
+      } else {
+        setCountdownType('none');
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -126,6 +155,31 @@ export default function MintPage() {
     }
   };
 
+  // Helper function to add leading zeros
+  const formatTimeUnit = (unit: number) => {
+    return unit < 10 ? `0${unit}` : unit;
+  };
+
+  const renderCountdownDigit = (value: number, label: string) => (
+    <div className="flex flex-col items-center">
+      <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-white/5 backdrop-blur-sm rounded-lg px-4 py-2 border border-white/10 w-16 sm:w-20 md:w-24 text-center">
+        {formatTimeUnit(value)}
+      </div>
+      <span className="text-xs sm:text-sm mt-1 text-white/60">{label}</span>
+    </div>
+  );
+
+  const renderCountdownTimer = () => (
+    <div className="animate-fade-in-up">
+      <div className="flex justify-center items-center gap-2 sm:gap-4 mt-6">
+        {countdown.days > 0 && renderCountdownDigit(countdown.days, "Days")}
+        {renderCountdownDigit(countdown.hours, "Hours")}
+        {renderCountdownDigit(countdown.minutes, "Minutes")}
+        {renderCountdownDigit(countdown.seconds, "Seconds")}
+      </div>
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0A0118] via-[#0C0223] to-[#0A0118] text-white">
       {showConfetti && (
@@ -152,11 +206,85 @@ export default function MintPage() {
         <Header />
         
         <main className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-24 pb-4">
-          {timeLeftToStart > 0 ? (
+          {countdownType === 'start' && (
+            <div className="backdrop-blur-sm bg-white/5 rounded-2xl border border-white/10 p-8 max-w-2xl mx-auto text-center transform hover:scale-[1.02] transition-all duration-500 hover:shadow-lg hover:shadow-purple-500/20">
+              <div className="inline-block">
+                <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient-x pb-2">
+                  Minting Starts Soon
+                </h1>
+                <div className="h-1 w-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full transform scale-x-0 animate-scale-x-full"></div>
+              </div>
+              <p className="text-lg text-white/60 mt-6 mb-2">Mark your calendar for:</p>
+              <p className="text-xl font-semibold text-white mb-6">{START_DATE.toLocaleString(undefined, {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZoneName: 'short'
+              })}</p>
+
+              {renderCountdownTimer()}
+
+              <div className="mt-8 flex justify-center">
+                <div className="px-6 py-3 rounded-lg bg-white/10 backdrop-blur-sm border border-white/10 text-white/80 inline-flex items-center gap-2">
+                  <svg className="w-5 h-5 text-purple-400 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span>Get ready to mint your exclusive NFT</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {countdownType === 'none' && (
+            <div className="backdrop-blur-sm bg-white/5 rounded-2xl border border-white/10 p-8 max-w-2xl mx-auto text-center">
+              <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">Minting Has Ended</h1>
+              <p className="text-xl text-white/60">Event closed on: {END_DATE.toLocaleString(undefined, {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZoneName: 'short'
+              })}</p>
+            </div>
+          )}
+
+          {countdownType === 'end' && (
             <div>
-            <h1 className="text-5xl font-bold text-purple-400">Minting Starts In:</h1>
-            <p className="text-4xl font-semibold text-white mt-2">{START_DATE.toUTCString()}</p>
-            <p className="text-3xl font-semibold text-white bg-gray-800 px-4 py-2 rounded-lg inline-block mt-4">{Math.floor(timeLeftToStart / 86400)}d {new Date(timeLeftToStart * 1000).toISOString().substr(11, 8)}</p>
+              {/* Improved Timer Widget - Left Side with better positioning */}
+              <div className="fixed left-4 top-24 z-50 lg:left-6">
+                <div className="backdrop-blur-sm bg-white/5 rounded-2xl border border-white/10 p-4 w-48 transform hover:scale-[1.02] transition-all duration-500 hover:shadow-lg hover:shadow-purple-500/20">
+                  <div className="inline-block w-full mb-2">
+                    <h2 className="text-lg font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient-x pb-1">
+                      Minting Ends In
+                    </h2>
+                    <div className="h-1 w-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full transform scale-x-0 animate-scale-x-full"></div>
+                  </div>
+
+                  <div className="my-3 grid grid-cols-4 gap-1">
+                    {countdown.days > 0 && (
+                      <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 border border-white/10 flex flex-col items-center">
+                        <span className="font-mono text-lg font-bold text-white">{countdown.days}</span>
+                        <span className="text-xs text-white/60">days</span>
+                      </div>
+                    )}
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 border border-white/10 flex flex-col items-center">
+                      <span className="font-mono text-lg font-bold text-white">{formatTimeUnit(countdown.hours)}</span>
+                      <span className="text-xs text-white/60">hrs</span>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 border border-white/10 flex flex-col items-center">
+                      <span className="font-mono text-lg font-bold text-white">{formatTimeUnit(countdown.minutes)}</span>
+                      <span className="text-xs text-white/60">min</span>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 border border-white/10 flex flex-col items-center">
+                      <span className="font-mono text-lg font-bold text-white">{formatTimeUnit(countdown.seconds)}</span>
+                      <span className="text-xs text-white/60">sec</span>
+                    </div>
+                  </div>
           </div>
           ) : timeLeftToEnd === 0 ? (
             <div>
@@ -166,7 +294,7 @@ export default function MintPage() {
             <div>
               <p>Minting Ends In: {new Date(timeLeftToEnd * 1000).toISOString().substr(11, 8)}</p>
 
-          <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-6 mt-10">
             {/* Page Header */}
             <div className="text-center max-w-2xl mx-auto">
               <div className="inline-block">
@@ -237,8 +365,7 @@ export default function MintPage() {
                     <button
                       onClick={handleMint}
                       disabled={loading}
-                      className={`group relative w-full max-w-sm mx-auto py-4 px-8 text-lg font-semibold rounded-xl transition-all duration-500 ${
-                        loading 
+                          className={`group relative w-full max-w-sm mx-auto py-4 px-8 text-lg font-semibold rounded-xl transition-all duration-500 ${loading
                           ? 'bg-white/5 cursor-not-allowed text-white/50' 
                           : 'bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white shadow-lg hover:shadow-purple-500/25 hover:scale-[1.02] hover:-translate-y-0.5'
                       }`}
@@ -307,6 +434,8 @@ export default function MintPage() {
               </div>
             )}
           </div>
+            </div>
+          )}
         </main>
 
         <footer className="relative py-6 text-center text-sm text-white/40">
