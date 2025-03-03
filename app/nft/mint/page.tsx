@@ -18,14 +18,12 @@ const candyMachineId = createPublicKey("FZhERBgmWu9fcmK4xtjEgkv9fW69AT3SxtmHfvF8
 const coreCollection = createPublicKey("5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e");
 const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f");
 
-// Utility function to create UTC date
-const createUTCDate = (hours: number, minutes: number) => {
-  const now = new Date();
-  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), hours, minutes, 0));
-};
+//const START_DATE = new Date(Date.now() + 5000);
+// const END_DATE = new Date("2025-03-03T18:00:00Z");
 
-const START_DATE = createUTCDate(21, 0); // 9 PM UTC today
-const END_DATE = createUTCDate(21, 30); // 9:30 PM UTC today
+const START_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 22, 0, 0)); // 9 PM UTC today
+
+const END_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 22, 30, 0)); // 9:30 PM UTC today
 
 export default function MintPage() {
   const wallet = useWallet();
