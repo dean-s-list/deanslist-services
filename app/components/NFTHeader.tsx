@@ -147,7 +147,7 @@ const NFTHeader = () => {
         >
           <nav className="flex flex-col items-center gap-4 py-6">
             <Link 
-              href="/nft/eligibility" 
+              href="https://eligibility.deanslist.services/" 
               className={`px-4 py-2 transition-all duration-300 ${
                 pathname === '/nft/eligibility' 
                   ? 'text-purple-300' 
