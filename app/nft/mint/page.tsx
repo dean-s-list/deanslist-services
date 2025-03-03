@@ -14,8 +14,8 @@ import Image from "next/image";
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
-const candyMachineId = createPublicKey("BTo8ruTAEKYPTodfckp2iuXptsuMCNL6u7kYXoQWuKMR");
-const coreCollection = createPublicKey("MooobiLBnTtF5wTrKyLaiLjCGTRUHpruFdic9umCYS2");
+const candyMachineId = createPublicKey("FZhERBgmWu9fcmK4xtjEgkv9fW69AT3SxtmHfvF8MFKc");
+const coreCollection = createPublicKey("5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e");
 const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f");
 
 // Utility function to create UTC date
