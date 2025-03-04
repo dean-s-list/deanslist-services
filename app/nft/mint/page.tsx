@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Confetti from "react-confetti";
 import useUmiStore from "@/store/useUmiStore";
-import { getMerkleRoot, mintV1 } from "@metaplex-foundation/mpl-core-candy-machine";
+import { mintV1 } from "@metaplex-foundation/mpl-core-candy-machine";
 import { publicKey as createPublicKey, some, sol, generateSigner, PublicKey } from "@metaplex-foundation/umi";
 import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
