@@ -14,7 +14,7 @@ import Image from "next/image";
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
-const candyMachineId = createPublicKey("FZhERBgmWu9fcmK4xtjEgkv9fW69AT3SxtmHfvF8MFKc");
+const candyMachineId = createPublicKey("87ZgB1urwua1V52c3ajB3bYz9j6LLYJdXCYWpHDCZHeP");
 const coreCollection = createPublicKey("5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e");
 const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f");
 
