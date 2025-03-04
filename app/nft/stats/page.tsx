@@ -10,7 +10,7 @@ import { ClipboardIcon } from '@heroicons/react/24/outline';
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
-const candyMachineId = publicKey("BrCP69upA9c7gpTMBvhR5f5Cx1YokaVQ11bcSbk61xk3");
+const candyMachineId = publicKey("ANmnwrUXCtUTxFN3rTxuqZMnC5s5yByhc1hbxCs3aECJ");
 const collectionId = publicKey("5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e");
 
 interface CandyMachineStats {

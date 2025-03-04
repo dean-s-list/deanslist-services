@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Confetti from "react-confetti";
 import useUmiStore from "@/store/useUmiStore";
-import { mintV1 } from "@metaplex-foundation/mpl-core-candy-machine";
+import { getMerkleRoot, mintV1 } from "@metaplex-foundation/mpl-core-candy-machine";
 import { publicKey as createPublicKey, some, sol, generateSigner, PublicKey } from "@metaplex-foundation/umi";
 import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
@@ -14,7 +14,7 @@ import Image from "next/image";
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
-const candyMachineId = createPublicKey("BrCP69upA9c7gpTMBvhR5f5Cx1YokaVQ11bcSbk61xk3");
+const candyMachineId = createPublicKey("ANmnwrUXCtUTxFN3rTxuqZMnC5s5yByhc1hbxCs3aECJ");
 const coreCollection = createPublicKey("5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e");
 const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f");
 
@@ -120,15 +120,21 @@ export default function MintPage() {
     }
 
     try {
+      const allowList = [
+        "BEEMANPx2jdmfR7jpn1hRdMuM2Vj4E3azBLb6RUBrCDY",
+        "BeEMuaaQCQPodQdaA7W6Rmsu7761vCabN4Tth6jA4VCP",
+        "FeeSoLT7WdoZVXsBPSZc7WKEuhVDVA1TKrNQoHacvxYm",
+        "4pT6ESaMQTgpMs2ZZ81pFF8BieGtY9x4CCK2z6aoYoe4",
+        "CinHb6Xt2PnqKUkmhRo9hwUkixCcsH1uviuQqaTxwT9i",
+        "9WW4oiMyW6A9oP4R8jvxJLMZ3RUss18qsM4yBBHJPj94",
+        "9V9xnugDuEiHjcGjR3U1D2DhCHhJ8xMJorPXu7s7WqQj",
+        "Cj1jScR4V73qLmvWJiGiWs9jtcwCXEZsmS5cevWt9jNc",
+        "E7MBv2FMBjAUnBHaS45RepAWroKUwsgjTmNwxSzZa352",
+        "JCpyouqGcPjw9eCqakcv15AeT8wwgjce92nJk7A545K5",
+        "Abau9uqcP5RgAj2wpHXDqXKRGKpXNYRVR8VbqdnfX2uF"]
       const asset = generateSigner(umi);
       setMintingStage('minting');
       // Use the correct property name "merkleRoot"
-      const merkleroot = new Uint8Array([
-        51, 89, 9, 215, 35, 120, 117, 87,
-        229, 100, 112, 221, 156, 30, 36, 253,
-        91, 112, 68, 74, 21, 147, 215, 2,
-        126, 3, 85, 162, 156, 26, 89, 169
-     ]);
 
       // Retry logic for the first time simulation error
       let attempt = 0;
@@ -145,7 +151,7 @@ export default function MintPage() {
                 destination
               }),
               allowList: some({
-                merkleRoot: merkleroot
+                merkleRoot: getMerkleRoot(allowList)
               })
             },
           });
