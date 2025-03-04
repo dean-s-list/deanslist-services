@@ -11,8 +11,9 @@ import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
 import { WalletError, WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import Image from "next/image";
+import data from "../candy.json"
 
-const candyJson = await fetch('/data/candy.json').then(res => res.json());
+const candyJson = data;
 
 // Assuming AllowList is defined with merkleRoot (uppercase R)
 interface AllowList {
