@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Confetti from "react-confetti";
 import useUmiStore from "@/store/useUmiStore";
-import { mintV1 } from "@metaplex-foundation/mpl-core-candy-machine";
+import { getMerkleRoot, mintV1 } from "@metaplex-foundation/mpl-core-candy-machine";
 import { publicKey as createPublicKey, some, sol, generateSigner, PublicKey } from "@metaplex-foundation/umi";
 import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
@@ -21,7 +21,7 @@ const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3
 //const START_DATE = new Date(Date.now() + 5000);
 // const END_DATE = new Date("2025-03-03T18:00:00Z");
 
-const START_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 22, 0, 0)); // 9 PM UTC today
+const START_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 19, 0, 0)); 
 
 const END_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 22, 30, 0)); // 9:30 PM UTC today
 
@@ -37,6 +37,7 @@ export default function MintPage() {
   const [mintingStage, setMintingStage] = useState<'idle' | 'preparing' | 'minting' | 'confirming' | 'success'>('idle');
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [countdownType, setCountdownType] = useState<'start' | 'end' | 'none'>('start');
+  const allowList = "../../../../public/data/candy.json"
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -137,6 +138,9 @@ export default function MintPage() {
                 lamports: sol(0.1),
                 destination
               }),
+              allowList: some({
+                merkleroot: getMerkleRoot(allowList)
+              })
             },
           });
 
