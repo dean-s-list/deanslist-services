@@ -124,10 +124,10 @@ export default function MintPage() {
       setMintingStage('minting');
       // Use the correct property name "merkleRoot"
       const merkleroot = new Uint8Array([
-        51,  89,   9, 215,  35, 120, 117,  87,
-       229, 100, 112, 221, 156,  30,  36, 253,
-        91, 112,  68,  74,  21, 147, 215,   2,
-       126,   3,  85, 162, 156,  26,  89, 169
+        51, 89, 9, 215, 35, 120, 117, 87,
+        229, 100, 112, 221, 156, 30, 36, 253,
+        91, 112, 68, 74, 21, 147, 215, 2,
+        126, 3, 85, 162, 156, 26, 89, 169
      ]);
 
       // Retry logic for the first time simulation error
