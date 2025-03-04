@@ -11,15 +11,6 @@ import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
 import { WalletError, WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import Image from "next/image";
-import data from "../candy.json"
-
-const candyJson = data;
-
-// Assuming AllowList is defined with merkleRoot (uppercase R)
-interface AllowList {
-  merkleRoot: Uint8Array;
-  // other properties as needed
-}
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
@@ -46,8 +37,6 @@ export default function MintPage() {
   const [mintingStage, setMintingStage] = useState<'idle' | 'preparing' | 'minting' | 'confirming' | 'success'>('idle');
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [countdownType, setCountdownType] = useState<'start' | 'end' | 'none'>('start');
-  const allowList = candyJson.map((item: string) => JSON.parse(item));
-  
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -134,8 +123,12 @@ export default function MintPage() {
       const asset = generateSigner(umi);
       setMintingStage('minting');
       // Use the correct property name "merkleRoot"
-      const merkleroot = getMerkleRoot(allowList)
-
+      const merkleroot = new Uint8Array([
+        51,  89,   9, 215,  35, 120, 117,  87,
+       229, 100, 112, 221, 156,  30,  36, 253,
+        91, 112,  68,  74,  21, 147, 215,   2,
+       126,   3,  85, 162, 156,  26,  89, 169
+     ]);
 
       // Retry logic for the first time simulation error
       let attempt = 0;
@@ -151,7 +144,7 @@ export default function MintPage() {
                 lamports: sol(0.1),
                 destination
               }),
-              allowList: some<AllowList>({
+              allowList: some({
                 merkleRoot: merkleroot
               })
             },
