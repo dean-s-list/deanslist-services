@@ -45,7 +45,7 @@ export default function MintPage() {
   const [mintingStage, setMintingStage] = useState<'idle' | 'preparing' | 'minting' | 'confirming' | 'success'>('idle');
   const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [countdownType, setCountdownType] = useState<'start' | 'end' | 'none'>('start');
-  const allowList = candyJson.map(item => JSON.parse(item));
+  const allowList = candyJson.map((item: string) => JSON.parse(item));
   
 
   useEffect(() => {
