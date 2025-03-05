@@ -5,25 +5,27 @@ import dynamic from "next/dynamic";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Confetti from "react-confetti";
 import useUmiStore from "@/store/useUmiStore";
-import { getMerkleRoot, mintV1 } from "@metaplex-foundation/mpl-core-candy-machine";
+import { getMerkleProof, getMerkleRoot, mintV1, route } from "@metaplex-foundation/mpl-core-candy-machine";
 import { publicKey as createPublicKey, some, sol, generateSigner, PublicKey } from "@metaplex-foundation/umi";
 import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
 import { WalletError, WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import Image from "next/image";
 
+// const candyjson = import("../candy.json")
+
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
-const candyMachineId = createPublicKey("ANmnwrUXCtUTxFN3rTxuqZMnC5s5yByhc1hbxCs3aECJ");
+const candyMachineId = createPublicKey("AFJKAP1xsHCrbmxS5SU948jroKL9qAwjbHEL4CrH1Wqm");
 const coreCollection = createPublicKey("5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e");
 const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f");
 
 //const START_DATE = new Date(Date.now() + 5000);
 // const END_DATE = new Date("2025-03-03T18:00:00Z");
 
-const START_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 19, 0, 0)); 
+const START_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 9, 0, 0));
 
-const END_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 22, 30, 0)); // 9:30 PM UTC today
+const END_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 15, 30, 0)); // 9:30 PM UTC today
 
 export default function MintPage() {
   const wallet = useWallet();
@@ -131,7 +133,8 @@ export default function MintPage() {
         "Cj1jScR4V73qLmvWJiGiWs9jtcwCXEZsmS5cevWt9jNc",
         "E7MBv2FMBjAUnBHaS45RepAWroKUwsgjTmNwxSzZa352",
         "JCpyouqGcPjw9eCqakcv15AeT8wwgjce92nJk7A545K5",
-        "Abau9uqcP5RgAj2wpHXDqXKRGKpXNYRVR8VbqdnfX2uF"]
+        "Abau9uqcP5RgAj2wpHXDqXKRGKpXNYRVR8VbqdnfX2uF",
+        "FECV7f5heoUjrY2uMMfs5xCVSe8AtNJRVwR1VjQNKExq"]
       const asset = generateSigner(umi);
       setMintingStage('minting');
       // Use the correct property name "merkleRoot"
