@@ -11,21 +11,22 @@ import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
 import { WalletError, WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import Image from "next/image";
-
-// const candyjson = import("../candy.json")
+import base58 from "bs58";
+import candyjson from "../candy.json"
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
-const candyMachineId = createPublicKey("AFJKAP1xsHCrbmxS5SU948jroKL9qAwjbHEL4CrH1Wqm");
+const candyMachineId = createPublicKey("Ghb6n1qxSm6ym1bNG3Vtfrnj6yGPwgRSFGUFxikJdaL");
 const coreCollection = createPublicKey("5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e");
 const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f");
+const candyGuardId = createPublicKey("FMf9wFM4cDPcyCN9bvsMBS9JzgkXV4m4B1EVSReeBLAp")
 
 //const START_DATE = new Date(Date.now() + 5000);
 // const END_DATE = new Date("2025-03-03T18:00:00Z");
 
-const START_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 9, 0, 0));
+const START_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 20, 0, 0));
 
-const END_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 15, 30, 0)); // 9:30 PM UTC today
+const END_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 21, 0, 0)); // 9:30 PM UTC today
 
 export default function MintPage() {
   const wallet = useWallet();
@@ -122,19 +123,7 @@ export default function MintPage() {
     }
 
     try {
-      const allowList = [
-        "BEEMANPx2jdmfR7jpn1hRdMuM2Vj4E3azBLb6RUBrCDY",
-        "BeEMuaaQCQPodQdaA7W6Rmsu7761vCabN4Tth6jA4VCP",
-        "FeeSoLT7WdoZVXsBPSZc7WKEuhVDVA1TKrNQoHacvxYm",
-        "4pT6ESaMQTgpMs2ZZ81pFF8BieGtY9x4CCK2z6aoYoe4",
-        "CinHb6Xt2PnqKUkmhRo9hwUkixCcsH1uviuQqaTxwT9i",
-        "9WW4oiMyW6A9oP4R8jvxJLMZ3RUss18qsM4yBBHJPj94",
-        "9V9xnugDuEiHjcGjR3U1D2DhCHhJ8xMJorPXu7s7WqQj",
-        "Cj1jScR4V73qLmvWJiGiWs9jtcwCXEZsmS5cevWt9jNc",
-        "E7MBv2FMBjAUnBHaS45RepAWroKUwsgjTmNwxSzZa352",
-        "JCpyouqGcPjw9eCqakcv15AeT8wwgjce92nJk7A545K5",
-        "Abau9uqcP5RgAj2wpHXDqXKRGKpXNYRVR8VbqdnfX2uF",
-        "FECV7f5heoUjrY2uMMfs5xCVSe8AtNJRVwR1VjQNKExq"]
+      const allowList: string[] = candyjson;
       const asset = generateSigner(umi);
       setMintingStage('minting');
       // Use the correct property name "merkleRoot"
@@ -144,6 +133,44 @@ export default function MintPage() {
       let success = false;
       while (attempt < 2 && !success) {
         try {
+          const merkleroot = getMerkleRoot(allowList)
+          // Verify the Merkle Proof using the route instruction.
+          // First, execute the route transaction
+          // Verify wallet is in allowlist
+          const isWalletAllowed = allowList.includes(wallet.publicKey.toBase58())
+          if (!isWalletAllowed) {
+            throw new Error('Wallet not in allowlist')
+          }
+          else {
+            console.log("Wallet is allowed: ", wallet.publicKey.toBase58())
+          }
+
+          const merkleProof = getMerkleProof(allowList, umi.identity.publicKey)
+
+          console.log('Merkle Root:',base58.encode(merkleroot))
+          console.log('Merkle Proof Length:', merkleProof.length)
+
+          // Detailed route transaction
+          const routeTransaction = route(umi, {
+            candyMachine: candyMachineId,
+            candyGuard: candyGuardId,
+            guard: 'allowList',
+            routeArgs: {
+              path: 'proof',
+              merkleRoot: merkleroot,
+              merkleProof: merkleProof,
+            },
+          })
+
+          // Send and log route transaction
+          const routeResult = await sendAndConfirmWithWalletAdapter(
+            routeTransaction,
+            umi,
+            wallet,
+            {commitment: "confirmed"}
+          )
+          console.log('Route Transaction Signature:', routeResult)
+
           const transactionBuilder = mintV1(umi, {
             candyMachine: candyMachineId,
             asset,
@@ -154,7 +181,7 @@ export default function MintPage() {
                 destination
               }),
               allowList: some({
-                merkleRoot: getMerkleRoot(allowList)
+                merkleRoot: merkleroot
               })
             },
           });
