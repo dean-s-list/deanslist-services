@@ -2,11 +2,12 @@
 
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
-import { fetchCandyMachine } from "@metaplex-foundation/mpl-core-candy-machine";
+import { fetchCandyMachine, safeFetchCandyGuard } from "@metaplex-foundation/mpl-core-candy-machine";
 import { fetchCollection } from "@metaplex-foundation/mpl-core";
 import { publicKey } from "@metaplex-foundation/umi";
 import useUmiStore from "@/store/useUmiStore";
 import { ClipboardIcon } from '@heroicons/react/24/outline';
+import base58 from "bs58";
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
@@ -39,6 +40,13 @@ interface CandyMachineStats {
       percentage: number;
     }>;
   };
+  guardSettings?: {
+    botTax?: string;
+    solPayment?: string;
+    startDate?: string;
+    endDate?: string;
+    allowlistMerkleRoot?: string;
+  };
 }
 
 export default function StatsPage() {
@@ -51,10 +59,10 @@ export default function StatsPage() {
     async function fetchStats() {
       try {
         const umi = useUmiStore.getState().umi;
-        
+
         const [candyMachine, collection] = await Promise.all([
           fetchCandyMachine(umi, candyMachineId),
-          fetchCollection(umi, collectionId)
+          fetchCollection(umi, collectionId),
         ]);
 
         // Custom replacer function to handle BigInt
@@ -65,12 +73,34 @@ export default function StatsPage() {
           return value;
         };
 
+        const candyGuard = await safeFetchCandyGuard(umi, candyMachine.mintAuthority)
+
         console.log('Raw Candy Machine Data:', JSON.stringify(candyMachine, replacer, 2));
         console.log('Raw Collection Data:', JSON.stringify(collection, replacer, 2));
+        console.log('Raw CandyGuard Data: ', JSON.stringify(candyGuard, replacer, 2))
 
         if (!candyMachine) {
           throw new Error("Failed to fetch candy machine data");
         }
+
+        // Process Guard Settings
+        const guardSettings: CandyMachineStats['guardSettings'] = candyGuard ? {
+          botTax: candyGuard.guards.botTax?.__option === 'Some'
+            ? `${Number(candyGuard.guards.botTax.value.lamports.basisPoints) / 1_000_000_000} SOL`
+            : undefined,
+          solPayment: candyGuard.guards.solPayment?.__option === 'Some'
+            ? `${Number(candyGuard.guards.solPayment.value.lamports.basisPoints) / 1_000_000_000} SOL`
+            : undefined,
+          startDate: candyGuard.guards.startDate?.__option === 'Some'
+            ? new Date(Number(candyGuard.guards.startDate.value.date) * 1000).toUTCString()
+            : undefined,
+          endDate: candyGuard.guards.endDate?.__option === 'Some'
+            ? new Date(Number(candyGuard.guards.endDate.value.date) * 1000).toUTCString()
+            : undefined,
+          allowlistMerkleRoot: candyGuard.guards.allowList?.__option === 'Some'
+            ? base58.encode(candyGuard.guards.allowList.value.merkleRoot)
+            : undefined
+        } : undefined;
 
         // Map the data to our interface
         const mappedStats: CandyMachineStats = {
@@ -85,14 +115,14 @@ export default function StatsPage() {
           mintAuthority: candyMachine.mintAuthority.toString(),
           collectionName: collection.name,
           isMutable: candyMachine.data.isMutable,
-          configLineSettings: candyMachine.data.configLineSettings.__option === "Some" 
+          configLineSettings: candyMachine.data.configLineSettings.__option === "Some"
             ? {
-                prefixName: candyMachine.data.configLineSettings.value.prefixName,
-                nameLength: candyMachine.data.configLineSettings.value.nameLength,
-                prefixUri: candyMachine.data.configLineSettings.value.prefixUri,
-                uriLength: candyMachine.data.configLineSettings.value.uriLength,
-                isSequential: candyMachine.data.configLineSettings.value.isSequential,
-              }
+              prefixName: candyMachine.data.configLineSettings.value.prefixName,
+              nameLength: candyMachine.data.configLineSettings.value.nameLength,
+              prefixUri: candyMachine.data.configLineSettings.value.prefixUri,
+              uriLength: candyMachine.data.configLineSettings.value.uriLength,
+              isSequential: candyMachine.data.configLineSettings.value.isSequential,
+            }
             : null,
           royalties: {
             basisPoints: collection.royalties?.basisPoints ?? 0,
@@ -100,7 +130,8 @@ export default function StatsPage() {
               address: creator.address.toString(),
               percentage: creator.percentage
             })) ?? []
-          }
+          },
+          guardSettings
         };
 
         setStats(mappedStats);
@@ -141,7 +172,7 @@ export default function StatsPage() {
       {/* Content */}
       <div className="relative">
         <Header />
-        
+
         <main className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-24 pb-4">
           <div className="flex flex-col gap-6">
             {/* Page Header */}
@@ -390,6 +421,69 @@ export default function StatsPage() {
                             </div>
                           </div>
                         )}
+                      
+                        { stats?.guardSettings && (
+                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                            <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 space-y-6">
+                              <h2 className="text-xl font-semibold text-white">Candy Guard Settings</h2>
+                              <div className="space-y-4">
+                                {stats.guardSettings.botTax && (
+                                  <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                                    <p className="text-sm text-white/60 mb-2">Bot Tax</p>
+                                    <p className="text-lg font-medium text-white">{stats.guardSettings.botTax} SOL</p>
+                                  </div>
+                                )}
+
+                                {stats.guardSettings.solPayment && (
+                                  <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                                    <p className="text-sm text-white/60 mb-2">SOL Payment</p>
+                                    <p className="text-lg font-medium text-white">{stats.guardSettings.solPayment} SOL</p>
+                                  </div>
+                                )}
+
+                                {stats.guardSettings.startDate && (
+                                  <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                                    <p className="text-sm text-white/60 mb-2">Start Date (UTC)</p>
+                                    <p className="text-lg font-medium text-white">{stats.guardSettings.startDate}</p>
+                                  </div>
+                                )}
+
+                                {stats.guardSettings.endDate && (
+                                  <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                                    <p className="text-sm text-white/60 mb-2">End Date (UTC)</p>
+                                    <p className="text-lg font-medium text-white">{stats.guardSettings.endDate}</p>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+
+                            {stats.guardSettings.allowlistMerkleRoot && (
+                              <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 space-y-6">
+                                <h2 className="text-xl font-semibold text-white">Allowlist Details</h2>
+                                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
+                                  <p className="text-sm text-white/60 mb-2">Merkle Root</p>
+                                  <div className="flex items-center justify-between group">
+                                    <p className="font-mono text-sm text-white/90 break-all">
+                                      {stats.guardSettings.allowlistMerkleRoot}
+                                    </p>
+                                    <button
+                                      onClick={() => copyToClipboard(stats.guardSettings?.allowlistMerkleRoot || '')}
+                                      className="ml-2 p-1.5 hover:bg-white/10 rounded-md transition-colors"
+                                    >
+                                      <ClipboardIcon
+                                        className={`w-4 h-4 ${copiedText === stats.guardSettings.allowlistMerkleRoot
+                                            ? 'text-green-400'
+                                            : 'text-white/60 group-hover:text-white/90'
+                                          }`}
+                                      />
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        )}
+
                       </div>
                     )}
                   </div>
