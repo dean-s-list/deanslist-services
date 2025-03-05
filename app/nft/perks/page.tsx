@@ -83,7 +83,7 @@ export default function PerksPage() {
   const [selectedNFT, setSelectedNFT] = useState<NFT | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const targetCollection = "FfAAFtqAnCwdVWxfKx3mx5gEU1JpJPPhWcp1MGB5x7pR";
+  const targetCollection = "5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e";
   const [copiedText, setCopiedText] = useState<string | null>(null);
 
   useEffect(() => {
