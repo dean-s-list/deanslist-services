@@ -11,7 +11,7 @@ import base58 from "bs58";
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
-const candyMachineId = publicKey("Ghb6n1qxSm6ym1bNG3Vtfrnj6yGPwgRSFGUFxikJdaL");
+const candyMachineId = publicKey("5QAvMBEKtY4CoxLDJzFUdcusZWNjTeQ2AES1tZ2cc5LU");
 const collectionId = publicKey("5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e");
 
 interface CandyMachineStats {

@@ -16,17 +16,17 @@ import candyjson from "../candy.json"
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
-const candyMachineId = createPublicKey("Ghb6n1qxSm6ym1bNG3Vtfrnj6yGPwgRSFGUFxikJdaL");
+const candyMachineId = createPublicKey("5QAvMBEKtY4CoxLDJzFUdcusZWNjTeQ2AES1tZ2cc5LU");
 const coreCollection = createPublicKey("5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e");
 const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f");
-const candyGuardId = createPublicKey("FMf9wFM4cDPcyCN9bvsMBS9JzgkXV4m4B1EVSReeBLAp")
+const candyGuardId = createPublicKey("5QAvMBEKtY4CoxLDJzFUdcusZWNjTeQ2AES1tZ2cc5LU")
 
 //const START_DATE = new Date(Date.now() + 5000);
 // const END_DATE = new Date("2025-03-03T18:00:00Z");
 
-const START_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 20, 0, 0));
+const START_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 13, 0, 0));
 
-const END_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 21, 0, 0)); // 9:30 PM UTC today
+const END_DATE = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate(), 23, 0, 0)); // 9:30 PM UTC today
 
 export default function MintPage() {
   const wallet = useWallet();
