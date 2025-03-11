@@ -19,7 +19,7 @@ const Header = dynamic(() => import("../../components/NFTHeader"));
 const candyMachineId = createPublicKey("5QAvMBEKtY4CoxLDJzFUdcusZWNjTeQ2AES1tZ2cc5LU");
 const coreCollection = createPublicKey("5n3ECmNEzfsLq25F4Ls3Api83FRWtbpBfhFeGKDzkN5e");
 const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3f");
-const candyGuardId = createPublicKey("5QAvMBEKtY4CoxLDJzFUdcusZWNjTeQ2AES1tZ2cc5LU")
+const candyGuardId = createPublicKey("AqaR7wdw4NeSwr92HN5bYyqjsxgSsmeVmVpSZoBQGRCk")
 
 //const START_DATE = new Date(Date.now() + 5000);
 // const END_DATE = new Date("2025-03-03T18:00:00Z");
