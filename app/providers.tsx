@@ -1,22 +1,15 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { ConnectionProvider, WalletProvider } from "@solana/wallet-adapter-react";
-import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
-import React, { FC, useMemo } from "react";
-import dynamic from 'next/dynamic';
+import React, { FC, useMemo } from 'react';
 import styled from 'styled-components';
 
-// Default styles that can be overridden by your app
-import "@solana/wallet-adapter-react-ui/styles.css";
-
-// Dynamically import the wallet button to prevent SSR issues
-const WalletModalProvider_ClientSide = dynamic(
-  () => Promise.resolve(WalletModalProvider),
-  { ssr: false }
-);
+// Dynamically import the wallet modal provider to prevent SSR issues
+const WalletModalProvider = dynamic(() => import('@solana/wallet-adapter-react-ui').then(mod => mod.WalletModalProvider), { ssr: false });
 
 // Styled components for the wallet UI
 export const StyledWalletButton = styled.button`
@@ -60,30 +53,20 @@ type Props = {
 
 export const WalletAdapterProvider: FC<Props> = ({ children }) => {
   const network = WalletAdapterNetwork.Devnet;
-  
-  const endpoint = useMemo(
-    () => process.env.NEXT_PUBLIC_SOLANA_RPC_URL || clusterApiUrl(network),
-    [network]
-  );
+  const endpoint = useMemo(() => process.env.NEXT_PUBLIC_SOLANA_RPC_URL || clusterApiUrl(network), [network]);
 
-  // @solana/wallet-adapter-wallets includes all the adapters but supports tree shaking and lazy loading --
-  // Only the wallets you configure here will be compiled into your application, and only the dependencies
-  // of wallets that your users connect to will be loaded.
-  const wallets = useMemo(
-    () => [
-      new PhantomWalletAdapter(),
-      new SolflareWalletAdapter(),
-    ],
-    []
-  );
+  const wallets = useMemo(() => [
+    new PhantomWalletAdapter(),
+    new SolflareWalletAdapter(),
+  ], []);
 
   return (
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
-        <WalletModalProvider_ClientSide>
+        <WalletModalProvider>
           {children}
-        </WalletModalProvider_ClientSide>
+        </WalletModalProvider>
       </WalletProvider>
     </ConnectionProvider>
   );
-}; 
+};
