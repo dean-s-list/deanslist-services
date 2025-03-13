@@ -13,21 +13,31 @@ interface TestimonialCardProps {
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
     return (
-        <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200" />
-            <div className="relative p-6 bg-black rounded-lg leading-none flex items-center space-x-6">
-                <Image
-                    src={testimonial.logo}
-                    alt={`${testimonial.company} logo`}
-                    width={96}
-                    height={96}
-                    className="w-24 h-24 bg-purple-600 rounded-full ring-2 ring-purple-500/20"
-                />
-                <div className="space-y-2">
-                    <p className="text-slate-300">{testimonial.quote}</p>
-                    <p className="text-purple-400">
-                        <span className="font-semibold">{testimonial.company}</span> — {testimonial.description}
-                    </p>
+        <div
+            className="bg-gradient-to-tr from-[#2B153B] to-[#130821] text-white rounded-2xl shadow-md p-6 min-w-[300px] max-w-[450px] md:max-w-[300px] md:min-w-[500px] grid grid-rows-[1fr,fit] space-y-4"
+        >
+            <p className="text-lg">“{testimonial.quote}”</p>
+            <div className="flex items-center space-x-4">
+                <div className="w-10 h-10">
+                    <Image
+                        src={testimonial.logo}
+                        alt={`${testimonial.company} logo`}
+                        width={40}
+                        height={40}
+                        className="rounded-full"
+                    />
+                </div>
+                <div>
+                    <div className="flex gap-2 items-center">
+                        <h3 className="font-semibold">{testimonial.company}</h3>
+                        <Image 
+                          src="/images/checkbadge.svg" 
+                          alt="Verified Badge"
+                          width={20} 
+                          height={20} 
+                        />
+                    </div>
+                    <p className="text-sm text-gray-300">{testimonial.description}</p>
                 </div>
             </div>
         </div>
