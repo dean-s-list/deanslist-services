@@ -3,7 +3,7 @@ import { WalletContextState } from "@solana/wallet-adapter-react";
 import { createSignerFromWalletAdapter } from "@metaplex-foundation/umi-signer-wallet-adapters";
 import { setComputeUnitPrice } from "@metaplex-foundation/mpl-toolbox";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import { TransactionError } from "@solana/web3.js";
+import { TransactionError, SendTransactionError, Connection } from "@solana/web3.js";
 
 type ConfirmationResponse = {
   value: {
@@ -17,14 +17,17 @@ export async function sendAndConfirmWithWalletAdapter(
   wallet: WalletContextState,
   settings?: {
     commitment?: "processed" | "confirmed" | "finalized";
-    skipPreflight?: boolean;
     network?: WalletAdapterNetwork;
+    skipPreflight?: boolean;
   }
 ): Promise<{ signature: Uint8Array; confirmation: ConfirmationResponse }> {
   try {
     if (!wallet.publicKey) {
       throw new Error('Wallet public key is required');
     }
+
+    // Log the wallet address (public key) before doing any functionality
+    console.log("Wallet Address:", wallet.publicKey.toString());
 
     // Create signer from wallet adapter
     const signer = createSignerFromWalletAdapter(wallet);
@@ -41,11 +44,14 @@ export async function sendAndConfirmWithWalletAdapter(
     // Build and sign transaction
     const signedTx = await transaction.buildAndSign(umiWithSigner);
 
-    // Send transaction
+    // Send transaction with skipPreflight: false (default)
     const signature = await umiWithSigner.rpc.sendTransaction(signedTx, {
       commitment: settings?.commitment || "confirmed",
-      skipPreflight: settings?.skipPreflight || false,
+      skipPreflight: true, // Ensure this is false for preflight check
     });
+
+    // Log the transaction signature (Transaction ID)
+    console.log("Transaction sent. Signature:", signature);
 
     // Confirm transaction
     const confirmation = await umiWithSigner.rpc.confirmTransaction(signature, {
@@ -62,7 +68,15 @@ export async function sendAndConfirmWithWalletAdapter(
       confirmation,
     };
   } catch (error) {
-    console.error('Transaction failed:', error);
+    const connection = new Connection("https://api.mainnet-beta.solana.com");
+
+    if (error instanceof SendTransactionError) {
+      // Catch SendTransactionError and retrieve logs
+      const logs = await error.getLogs(connection);
+      console.error('Transaction failed with logs:', logs);
+    } else {
+      console.error('Transaction failed:', error);
+    }
     throw error;
   }
 }
