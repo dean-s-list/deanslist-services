@@ -9,7 +9,7 @@ export const WalletButtonStyles = createGlobalStyle`
     background: rgba(255, 255, 255, var(--tw-bg-opacity)) !important;
     border: 1px solid rgba(255, 255, 255, 0.05) !important;
     border-radius: 12px !important;
-    color: white !important;
+    color: black !important;
     font-family: inherit !important;
     font-size: 14px !important;
     font-weight: 500 !important;
@@ -22,30 +22,30 @@ export const WalletButtonStyles = createGlobalStyle`
   .wallet-adapter-button:not([disabled]):hover {
     --tw-bg-opacity: 0.1;
     background: rgba(255, 255, 255, var(--tw-bg-opacity)) !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(0, 0, 0, 0.1) !important;
   }
 
   .wallet-adapter-button[disabled] {
     background: rgba(255, 255, 255, 0.05) !important;
     border-color: rgba(255, 255, 255, 0.05) !important;
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: rgba(74, 74, 74, 0.5) !important;
     cursor: not-allowed !important;
   }
 
   .wallet-adapter-button-trigger {
-    background: linear-gradient(270deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1)) !important;
-    border: 1px solid rgba(168, 85, 247, 0.1) !important;
+    background: linear-gradient(270deg, rgba(85, 247, 169, 0.38), rgba(72, 236, 173, 0.38)) !important;
+    border: 1px solid rgba(85, 247, 163, 0.1) !important;
   }
 
   .wallet-adapter-button-trigger:not([disabled]):hover {
-    background: linear-gradient(270deg, rgba(168, 85, 247, 0.15), rgba(236, 72, 153, 0.15)) !important;
-    border-color: rgba(168, 85, 247, 0.2) !important;
+    background: linear-gradient(270deg, rgba(85, 247, 153, 0.34), rgba(72, 236, 165, 0.36)) !important;
+    border-color: rgba(85, 247, 158, 0.2) !important;
   }
 
   .wallet-adapter-modal-wrapper {
-    background: rgba(10, 1, 24, 0.95) !important;
+    background: rgba(49, 165, 98, 0.47) !important;
     backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
     border-radius: 16px !important;
   }
 

@@ -38,7 +38,7 @@
   border: 1px solid transparent;
   border-radius: 20px;
   border-image-slice: 1;
-  border-image-source: linear-gradient(90deg, #70328F1F, #70328F1F, #70328F1F, #70328F1F);
+  border-image-source: linear-gradient(90deg, #70328F1F, #70328F1F, #70328F1F, #8606061f);
   animation: rotate-border 4s linear infinite;
   z-index: 1;
   pointer-events: none;
@@ -121,6 +121,7 @@
     height: 100vh;
     margin: 0;
     padding: 0;
+    color: #1e1e1e;
   }
 
   html,body, #__next{

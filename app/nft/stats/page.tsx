@@ -6,7 +6,7 @@ import { fetchCandyMachine, safeFetchCandyGuard } from "@metaplex-foundation/mpl
 import { fetchCollection } from "@metaplex-foundation/mpl-core";
 import { publicKey } from "@metaplex-foundation/umi";
 import useUmiStore from "@/store/useUmiStore";
-import { ClipboardIcon } from '@heroicons/react/24/outline';
+import { ClipboardIcon, CheckIcon } from '@heroicons/react/24/outline';
 import base58 from "bs58";
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
@@ -161,10 +161,10 @@ export default function StatsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0A0118] via-[#0C0223] to-[#0A0118] text-white">
+    <div className="min-h-screen bg-gradient-to-b from-white via-green-100 to-white">
       {/* Background effects */}
       <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20 bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-20 bg-center [mask-image:linear-gradient(180deg,black,rgba(255,255,255,0))]"></div>
         <div className="absolute top-1/4 -left-1/4 w-[500px] h-[500px] bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full filter blur-3xl animate-pulse-slow"></div>
         <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-gradient-to-r from-pink-500/20 to-purple-500/20 rounded-full filter blur-3xl animate-pulse-slow delay-1000"></div>
       </div>
@@ -178,18 +178,18 @@ export default function StatsPage() {
             {/* Page Header */}
             <div className="text-center max-w-2xl mx-auto mb-12">
               <div className="inline-block">
-                <h1 className="text-5xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-gradient-x pb-2">
+                <h1 className="text-4xl bg-clip-text pb-2">
                   Collection Stats
                 </h1>
-                <div className="h-1 w-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full transform scale-x-0 animate-scale-x-full"></div>
+                <div className="h-1 w-full rounded-full transform scale-x-0 animate-scale-x-full"></div>
               </div>
-              <p className="text-lg text-white/60 mt-6">
-                View detailed statistics about the Dean&apos;s List NFT collection
+              <p className="text-lg text-black/60 mt-6">
+                View detailed statistics about the PERKs NFT collection
               </p>
             </div>
 
             {error ? (
-              <div className="flex items-center justify-center h-[300px] rounded-xl border border-red-500/10 bg-white/5 backdrop-blur-sm">
+              <div className="flex items-center justify-center h-[300px] rounded-xl border border-red-500/10 bg-black/5 backdrop-blur-sm">
                 <div className="max-w-md text-center px-6">
                   <div className="mb-4 p-4 rounded-full bg-red-500/10 w-fit mx-auto">
                     <svg className="w-8 h-8 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -202,11 +202,11 @@ export default function StatsPage() {
             ) : (
               <div className="grid grid-cols-1 gap-6">
                 {/* Minting Progress Section */}
-                <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6">
+                <div className="rounded-xl border border-black/10 bg-black/5 backdrop-blur-sm p-6">
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-xl font-semibold text-white">Minting Progress</h2>
+                    <h2 className="text-xl text-black">Minting Progress</h2>
                     {stats?.isActive ? (
-                      <span className="px-3 py-1 text-xs font-medium text-green-400 bg-green-400/10 rounded-full">
+                      <span className="px-3 py-1 text-xs font-medium text-green-500 bg-green-700/10 rounded-full">
                         Active
                       </span>
                     ) : (
@@ -218,21 +218,21 @@ export default function StatsPage() {
 
                   {loading ? (
                     <div className="space-y-4 animate-pulse">
-                      <div className="h-4 bg-white/10 rounded w-3/4"></div>
-                      <div className="h-8 bg-white/10 rounded"></div>
-                      <div className="h-4 bg-white/10 rounded w-1/2"></div>
+                      <div className="h-4 bg-black/10 rounded w-3/4"></div>
+                      <div className="h-8 bg-black/10 rounded"></div>
+                      <div className="h-4 bg-black/10 rounded w-1/2"></div>
                     </div>
                   ) : stats && (
                     <>
                       <div className="relative pt-1 mb-6">
                         <div className="flex mb-2 items-center justify-between">
                           <div>
-                            <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-purple-400 bg-purple-400/10">
+                            <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full bg-black-400/10">
                               Minting Progress
                             </span>
                           </div>
                           <div className="text-right">
-                            <span className="text-xs font-semibold inline-block text-purple-400">
+                            <span className="text-xs font-semibold inline-block">
                               {((stats.itemsMinted / stats.itemsAvailable) * 100).toFixed(1)}%
                             </span>
                           </div>
@@ -246,21 +246,21 @@ export default function StatsPage() {
                       </div>
 
                       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                          <p className="text-sm text-white/60 mb-1">Items Minted</p>
-                          <p className="text-2xl font-bold text-white">{formatNumber(stats.itemsMinted)}</p>
+                        <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                          <p className="text-sm text-black/60 mb-1">Items Minted</p>
+                          <p className="text-2xl font-bold text-black">{formatNumber(stats.itemsMinted)}</p>
                         </div>
-                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                          <p className="text-sm text-white/60 mb-1">Items Remaining</p>
-                          <p className="text-2xl font-bold text-white">{formatNumber(stats.itemsRemaining)}</p>
+                        <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                          <p className="text-sm text-black/60 mb-1">Items Remaining</p>
+                          <p className="text-2xl font-bold text-black">{formatNumber(stats.itemsRemaining)}</p>
                         </div>
-                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                          <p className="text-sm text-white/60 mb-1">Total Supply</p>
-                          <p className="text-2xl font-bold text-white">{formatNumber(stats.itemsAvailable)}</p>
+                        <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                          <p className="text-sm text-black/60 mb-1">Total Supply</p>
+                          <p className="text-2xl font-bold text-black">{formatNumber(stats.itemsAvailable)}</p>
                         </div>
-                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                          <p className="text-sm text-white/60 mb-1">Price</p>
-                          <p className="text-2xl font-bold text-white">{formatSOL(stats.price)} SOL</p>
+                        <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                          <p className="text-sm text-black/60 mb-1">Price</p>
+                          <p className="text-2xl font-bold text-black">{formatSOL(stats.price)} SOL</p>
                         </div>
                       </div>
                     </>
@@ -269,43 +269,47 @@ export default function StatsPage() {
 
                 {/* Collection Details Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 space-y-6">
-                    <h2 className="text-xl font-semibold text-white">Collection Details</h2>
+                  <div className="rounded-xl border border-black/10 bg-black/5 backdrop-blur-sm p-6 space-y-6">
+                    <h2 className="text-xl font-semibold text-black">Collection Details</h2>
                     {loading ? (
                       <div className="space-y-4 animate-pulse">
-                        <div className="h-4 bg-white/10 rounded w-3/4"></div>
-                        <div className="h-8 bg-white/10 rounded"></div>
+                        <div className="h-4 bg-black/10 rounded w-3/4"></div>
+                        <div className="h-8 bg-black/10 rounded"></div>
                       </div>
                     ) : (
                       <div className="space-y-4">
-                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                          <p className="text-sm text-white/60 mb-2">Collection Name</p>
-                          <p className="text-lg font-medium text-white">{stats?.collectionName}</p>
+                        <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                          <p className="text-sm text-black/60 mb-2">Collection Name</p>
+                          <p className="text-lg font-medium text-black">{stats?.collectionName}</p>
                         </div>
 
-                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                          <p className="text-sm text-white/60 mb-2">Royalties</p>
+                        <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                          <p className="text-sm text-black/60 mb-2">Royalties</p>
                           <div className="space-y-2">
                             <div className="flex justify-between items-center">
-                              <span className="text-sm text-white/60">Rate</span>
-                              <span className="text-sm text-white">{(stats?.royalties.basisPoints ?? 0) / 100}%</span>
+                              <span className="text-sm text-black/60">Rate</span>
+                              <span className="text-sm text-black">{(stats?.royalties.basisPoints ?? 0) / 100}%</span>
                             </div>
                             <div className="space-y-2">
                               {stats?.royalties.creators.map((creator, index) => (
-                                <div key={index} className="rounded-lg border border-white/5 bg-white/5 p-2">
+                                <div key={index} className="rounded-lg border border-black/5 bg-black/5 p-2">
                                   <div className="flex items-center justify-between">
-                                    <span className="text-xs text-white/60">Creator {index + 1}</span>
-                                    <span className="text-xs text-white">{creator.percentage}%</span>
+                                    <span className="text-xs text-black/60">Creator {index + 1}</span>
+                                    <span className="text-xs text-black">{creator.percentage}%</span>
                                   </div>
                                   <div className="flex items-center justify-between mt-1">
-                                    <p className="font-mono text-xs text-white/90 break-all">
+                                    <p className="font-mono text-xs text-black/90 break-all">
                                       {creator.address}
                                     </p>
                                     <button
                                       onClick={() => copyToClipboard(creator.address)}
-                                      className="ml-2 p-1 hover:bg-white/10 rounded-md transition-colors"
+                                      className="ml-2 p-1 hover:bg-black/10 rounded-md transition-colors"
                                     >
-                                      <ClipboardIcon className={`w-3 h-3 ${copiedText === creator.address ? 'text-green-400' : 'text-white/60'}`} />
+                                      {copiedText === creator.address ? (
+                                        <CheckIcon className="w-4 h-4 text-black/30" />
+                                      ) : (
+                                        <ClipboardIcon className="w-4 h-4 text-black/60 group-hover:text-black/90" />
+                                      )}
                                     </button>
                                   </div>
                                 </div>
@@ -315,21 +319,21 @@ export default function StatsPage() {
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                          <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                            <p className="text-sm text-white/60 mb-2">Mutability</p>
+                          <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                            <p className="text-sm text-black/60 mb-2">Mutability</p>
                             <div className="flex items-center gap-2">
                               <div className={`w-2 h-2 rounded-full ${stats?.isMutable ? 'bg-green-400' : 'bg-red-400'}`}></div>
-                              <p className="text-sm text-white">
+                              <p className="text-sm text-black">
                                 {stats?.isMutable ? 'Mutable' : 'Immutable'}
                               </p>
                             </div>
                           </div>
 
-                          <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                            <p className="text-sm text-white/60 mb-2">Status</p>
+                          <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                            <p className="text-sm text-black/60 mb-2">Status</p>
                             <div className="flex items-center gap-2">
                               <div className={`w-2 h-2 rounded-full ${stats?.isActive ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
-                              <p className="text-sm text-white">
+                              <p className="text-sm text-black">
                                 {stats?.isActive ? 'Active' : 'Inactive'}
                               </p>
                             </div>
@@ -340,147 +344,157 @@ export default function StatsPage() {
                   </div>
 
                   {/* Technical Details Section */}
-                  <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 space-y-6">
-                    <h2 className="text-xl font-semibold text-white">Technical Details</h2>
+                  <div className="rounded-xl border border-black/10 bg-black/5 backdrop-blur-sm p-6 space-y-6">
+                    <h2 className="text-xl font-semibold text-black">Technical Details</h2>
                     {loading ? (
                       <div className="space-y-4 animate-pulse">
-                        <div className="h-4 bg-white/10 rounded w-3/4"></div>
-                        <div className="h-8 bg-white/10 rounded"></div>
+                        <div className="h-4 bg-black/10 rounded w-3/4"></div>
+                        <div className="h-8 bg-black/10 rounded"></div>
                       </div>
                     ) : (
                       <div className="space-y-4">
-                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                          <p className="text-sm text-white/60 mb-2">Candy Machine ID</p>
+                        <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                          <p className="text-sm text-black/60 mb-2">Candy Machine ID</p>
                           <div className="flex items-center justify-between group">
-                            <p className="font-mono text-sm text-white/90 break-all">
+                            <p className="font-mono text-sm text-black/90 break-all">
                               {candyMachineId.toString()}
                             </p>
                             <button
                               onClick={() => copyToClipboard(candyMachineId.toString())}
-                              className="ml-2 p-1.5 hover:bg-white/10 rounded-md transition-colors"
+                              className="ml-2 p-1.5 hover:bg-black/10 rounded-md transition-colors"
                             >
-                              <ClipboardIcon className={`w-4 h-4 ${copiedText === candyMachineId.toString() ? 'text-green-400' : 'text-white/60 group-hover:text-white/90'}`} />
+                              {copiedText === candyMachineId.toString() ? (
+                                <CheckIcon className="w-4 h-4 text-black/30" />
+                              ) : (
+                                <ClipboardIcon className="w-4 h-4 text-black/60 group-hover:text-black/90" />
+                              )}
                             </button>
                           </div>
                         </div>
 
-                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                          <p className="text-sm text-white/60 mb-2">Authority</p>
+                        <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                          <p className="text-sm text-black/60 mb-2">Authority</p>
                           <div className="flex items-center justify-between group">
-                            <p className="font-mono text-sm text-white/90 break-all">
+                            <p className="font-mono text-sm text-black/90 break-all">
                               {stats?.authority}
                             </p>
                             <button
                               onClick={() => copyToClipboard(stats?.authority || '')}
-                              className="ml-2 p-1.5 hover:bg-white/10 rounded-md transition-colors"
+                              className="ml-2 p-1.5 hover:bg-black/10 rounded-md transition-colors"
                             >
-                              <ClipboardIcon className={`w-4 h-4 ${copiedText === stats?.authority ? 'text-green-400' : 'text-white/60 group-hover:text-white/90'}`} />
+                              {copiedText === stats?.authority ? (
+                                <CheckIcon className="w-4 h-4 text-black/30" />
+                              ) : (
+                                <ClipboardIcon className="w-4 h-4 text-black/60 group-hover:text-black/90" />
+                              )}
                             </button>
                           </div>
                         </div>
 
-                        <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                          <p className="text-sm text-white/60 mb-2">Mint Authority</p>
+                        <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                          <p className="text-sm text-black/60 mb-2">Mint Authority</p>
                           <div className="flex items-center justify-between group">
-                            <p className="font-mono text-sm text-white/90 break-all">
+                            <p className="font-mono text-sm text-black/90 break-all">
                               {stats?.mintAuthority}
                             </p>
                             <button
                               onClick={() => copyToClipboard(stats?.mintAuthority || '')}
-                              className="ml-2 p-1.5 hover:bg-white/10 rounded-md transition-colors"
+                              className="ml-2 p-1.5 hover:bg-black/10 rounded-md transition-colors"
                             >
-                              <ClipboardIcon className={`w-4 h-4 ${copiedText === stats?.mintAuthority ? 'text-green-400' : 'text-white/60 group-hover:text-white/90'}`} />
+                              {copiedText === stats?.mintAuthority ? (
+                                <CheckIcon className="w-4 h-4 text-black/30" />
+                              ) : (
+                                <ClipboardIcon className="w-4 h-4 text-black/60 group-hover:text-black/90" />
+                              )}
                             </button>
                           </div>
                         </div>
 
                         {stats?.configLineSettings && (
-                          <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                            <p className="text-sm text-white/60 mb-3">Configuration Settings</p>
+                          <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                            <p className="text-sm text-black/60 mb-3">Configuration Settings</p>
                             <div className="space-y-2">
                               <div className="flex justify-between items-center text-sm">
-                                <span className="text-white/60">Prefix Name:</span>
-                                <span className="text-white">{stats.configLineSettings.prefixName}</span>
+                                <span className="text-black/60">Prefix Name:</span>
+                                <span className="text-black">{stats.configLineSettings.prefixName}</span>
                               </div>
                               <div className="flex justify-between items-center text-sm">
-                                <span className="text-white/60">Name Length:</span>
-                                <span className="text-white">{stats.configLineSettings.nameLength}</span>
+                                <span className="text-black/60">Name Length:</span>
+                                <span className="text-black">{stats.configLineSettings.nameLength}</span>
                               </div>
                               <div className="flex justify-between items-center text-sm">
-                                <span className="text-white/60">URI Prefix:</span>
-                                <span className="text-white">{stats.configLineSettings.prefixUri}</span>
+                                <span className="text-black/60">URI Prefix:</span>
+                                <span className="text-black">{stats.configLineSettings.prefixUri}</span>
                               </div>
                               <div className="flex justify-between items-center text-sm">
-                                <span className="text-white/60">URI Length:</span>
-                                <span className="text-white">{stats.configLineSettings.uriLength}</span>
+                                <span className="text-black/60">URI Length:</span>
+                                <span className="text-black">{stats.configLineSettings.uriLength}</span>
                               </div>
                               <div className="flex justify-between items-center text-sm">
-                                <span className="text-white/60">Sequential Minting:</span>
-                                <span className="text-white">{stats.configLineSettings.isSequential ? 'Yes' : 'No'}</span>
+                                <span className="text-black/60">Sequential Minting:</span>
+                                <span className="text-black">{stats.configLineSettings.isSequential ? 'Yes' : 'No'}</span>
                               </div>
                             </div>
                           </div>
                         )}
-                      
-                        { stats?.guardSettings && (
-                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-                            <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 space-y-6">
-                              <h2 className="text-xl font-semibold text-white">Candy Guard Settings</h2>
+
+                        {stats?.guardSettings && (
+
+                          <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 mt-6">
+                            <div className="rounded-xl border border-black/10 bg-black/5 backdrop-blur-sm p-6 space-y-6">
+                              <h2 className="text-md text-black">Candy Guard Settings</h2>
                               <div className="space-y-4">
                                 {stats.guardSettings.botTax && (
-                                  <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                                    <p className="text-sm text-white/60 mb-2">Bot Tax</p>
-                                    <p className="text-lg font-medium text-white">{stats.guardSettings.botTax} SOL</p>
+                                  <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                                    <p className="text-sm text-black/60 mb-2">Bot Tax</p>
+                                    <p className="">{stats.guardSettings.botTax}</p>
                                   </div>
                                 )}
 
                                 {stats.guardSettings.solPayment && (
-                                  <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                                    <p className="text-sm text-white/60 mb-2">SOL Payment</p>
-                                    <p className="text-lg font-medium text-white">{stats.guardSettings.solPayment} SOL</p>
+                                  <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                                    <p className="text-sm text-black/60 mb-2">SOL Payment</p>
+                                    <p className="">{stats.guardSettings.solPayment}</p>
                                   </div>
                                 )}
 
                                 {stats.guardSettings.startDate && (
-                                  <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                                    <p className="text-sm text-white/60 mb-2">Start Date (UTC)</p>
-                                    <p className="text-lg font-medium text-white">{stats.guardSettings.startDate}</p>
+                                  <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                                    <p className="text-sm text-black/60 mb-2">Start Date (UTC)</p>
+                                    <p className="">{stats.guardSettings.startDate}</p>
                                   </div>
                                 )}
 
                                 {stats.guardSettings.endDate && (
-                                  <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                                    <p className="text-sm text-white/60 mb-2">End Date (UTC)</p>
-                                    <p className="text-lg font-medium text-white">{stats.guardSettings.endDate}</p>
+                                  <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                                    <p className="text-sm text-black/60 mb-2">End Date (UTC)</p>
+                                    <p className="">{stats.guardSettings.endDate}</p>
                                   </div>
                                 )}
                               </div>
-                            </div>
-
-                            {stats.guardSettings.allowlistMerkleRoot && (
-                              <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 space-y-6">
-                                <h2 className="text-xl font-semibold text-white">Allowlist Details</h2>
-                                <div className="rounded-lg border border-white/10 bg-white/5 p-4">
-                                  <p className="text-sm text-white/60 mb-2">Merkle Root</p>
+                              {stats.guardSettings.allowlistMerkleRoot && (
+                                <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                                  <p className="text-sm text-black/60 mb-2">Allowlist Merkleroot</p>
                                   <div className="flex items-center justify-between group">
-                                    <p className="font-mono text-sm text-white/90 break-all">
+                                    <p className="font-mono text-sm text-black/90 break-all">
                                       {stats.guardSettings.allowlistMerkleRoot}
                                     </p>
                                     <button
                                       onClick={() => copyToClipboard(stats.guardSettings?.allowlistMerkleRoot || '')}
-                                      className="ml-2 p-1.5 hover:bg-white/10 rounded-md transition-colors"
+                                      className="ml-2 p-1.5 hover:bg-black/10 rounded-md transition-colors"
                                     >
-                                      <ClipboardIcon
-                                        className={`w-4 h-4 ${copiedText === stats.guardSettings.allowlistMerkleRoot
-                                            ? 'text-green-400'
-                                            : 'text-white/60 group-hover:text-white/90'
-                                          }`}
-                                      />
+                                      {copiedText === stats.guardSettings?.allowlistMerkleRoot ? (
+                                        <CheckIcon className="w-4 h-4 text-black/30" />
+                                      ) : (
+                                        <ClipboardIcon className="w-4 h-4 text-black/60 group-hover:text-black/90" />
+                                      )}
                                     </button>
                                   </div>
                                 </div>
-                              </div>
-                            )}
+                              )}
+                            </div>
+
+
                           </div>
                         )}
 
@@ -493,8 +507,8 @@ export default function StatsPage() {
           </div>
         </main>
 
-        <footer className="relative py-6 text-center text-sm text-white/40">
-          <p className="hover:text-white/60 transition-colors duration-300">© 2024 DeanslistDAO. All rights reserved.</p>
+        <footer className="relative py-6 text-center text-sm text-black/40">
+          <p className="hover:text-black/60 transition-colors duration-300">© 2025 IslandDAO. All rights reserved.</p>
         </footer>
       </div>
     </div>

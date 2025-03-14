@@ -10,8 +10,8 @@ export const WalletMultiButtonDynamic = dynamic(
 );
 
 export const StyledWalletButton = styled(WalletMultiButtonDynamic)`
-  background: linear-gradient(135deg, rgba(130, 71, 229, 0.2), rgba(130, 71, 229, 0.4));
-  border: 1px solid rgba(130, 71, 229, 0.4);
+  background: linear-gradient(135deg, rgba(71, 229, 139, 0.2), rgba(71, 229, 139, 0.4));
+  border: 1px solid rgba(71, 229, 142, 0.4);
   border-radius: 12px;
   color: #fff;
   font-family: "Inter", sans-serif;
@@ -21,13 +21,13 @@ export const StyledWalletButton = styled(WalletMultiButtonDynamic)`
   transition: all 0.2s ease-in-out;
   backdrop-filter: blur(4px);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 4px 12px rgba(130, 71, 229, 0.1);
+  box-shadow: 0 4px 12px rgba(71, 229, 139, 0.1);
 
   &:hover {
-    background: linear-gradient(135deg, rgba(130, 71, 229, 0.3), rgba(130, 71, 229, 0.5));
-    border-color: rgba(130, 71, 229, 0.6);
+    background: linear-gradient(135deg, rgba(71, 229, 142, 0.3), rgba(71, 229, 95, 0.5));
+    border-color: rgba(71, 229, 158, 0.6);
     transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(130, 71, 229, 0.15);
+    box-shadow: 0 6px 16px rgba(71, 229, 124, 0.15);
   }
 
   &:active {
@@ -35,8 +35,8 @@ export const StyledWalletButton = styled(WalletMultiButtonDynamic)`
   }
 
   &:disabled {
-    background: rgba(130, 71, 229, 0.1);
-    border-color: rgba(130, 71, 229, 0.2);
+    background: rgba(71, 229, 150, 0.1);
+    border-color: rgba(71, 229, 182, 0.2);
     color: rgba(255, 255, 255, 0.5);
     cursor: not-allowed;
     transform: none;
@@ -62,7 +62,7 @@ export const WalletButtonContainer = styled.div`
     z-index: -1;
     background: radial-gradient(
       circle at center,
-      rgba(130, 71, 229, 0.15) 0%,
+      rgba(71, 229, 129, 0.15) 0%,
       transparent 70%
     );
     filter: blur(10px);
