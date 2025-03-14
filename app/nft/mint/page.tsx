@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, JSXElementConstructor, ReactElement, ReactNode, ReactPortal } from "react";
+import { useState, useEffect, useCallback } from "react";
 import dynamic from "next/dynamic";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Confetti from "react-confetti";
