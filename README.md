@@ -13,6 +13,7 @@ yarn dev
 ## Todos:
 - [ ] Fix metadata
 - [ ] Simulation error when minting
+  - [ ] Add if no whitelist on candy, don't to check
   - [ ] Jito transaction bundeling
 - [ ] Add attributes on mint
 - [x] Update guards (removing whitelist)
