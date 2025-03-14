@@ -9,7 +9,6 @@ import { getMerkleProof, getMerkleRoot, mintV1, route } from "@metaplex-foundati
 import { publicKey as createPublicKey, some, sol, generateSigner, PublicKey } from "@metaplex-foundation/umi";
 import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
-import { WalletError, WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import Image from "next/image";
 import base58 from "bs58";
 import candyjson from "../candy.json"
