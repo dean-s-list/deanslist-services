@@ -231,9 +231,6 @@ export default function MintPage() {
             // Retry logic: wait a few seconds before trying again
             await new Promise(resolve => setTimeout(resolve, 5000));
           } else {
-            let errorMessage = "Failed to mint NFT after multiple attempts. Please try again.";
-            if (error instanceof WalletNotConnectedError) errorMessage = "Wallet is not connected.";
-            if (error instanceof WalletError) errorMessage = `Wallet error: ${error.message}`;
             setLoading(false);
             setMintingStage('idle');
           }
@@ -242,9 +239,6 @@ export default function MintPage() {
 
     } catch (txError) {
       console.error("Minting error:", txError);
-      let errorMessage = "Failed to mint NFT. Please try again.";
-      if (txError instanceof WalletNotConnectedError) errorMessage = "Wallet is not connected.";
-      if (txError instanceof WalletError) errorMessage = `Wallet error: ${txError.message}`;
       setLoading(false);
       setMintingStage('idle');
     }
