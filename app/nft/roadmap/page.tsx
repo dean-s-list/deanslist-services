@@ -117,7 +117,7 @@ export default function RoadmapPage() {
 
               {/* Timeline Items */}
               <div className="relative grid grid-cols-4 gap-4 pt-3">
-                {roadmapData.map((item, index) => (
+                {roadmapData.map((item) => (
                   <div key={item.quarter} className="group pt-3">
                     {/* Island Milestone Marker */}
                     <div className="absolute -top-1 left-1/2 -translate-x-1/2">
