@@ -3,7 +3,6 @@
 import dynamic from 'next/dynamic';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
-import { PhantomWalletAdapter, SolflareWalletAdapter } from '@solana/wallet-adapter-wallets';
 import { clusterApiUrl } from '@solana/web3.js';
 import React, { FC, useMemo } from 'react';
 import styled from 'styled-components';
@@ -56,8 +55,7 @@ export const WalletAdapterProvider: FC<Props> = ({ children }) => {
   const endpoint = useMemo(() => process.env.NEXT_PUBLIC_SOLANA_RPC_URL || clusterApiUrl(network), [network]);
 
   const wallets = useMemo(() => [
-    new PhantomWalletAdapter(),
-    new SolflareWalletAdapter(),
+    
   ], []);
 
   return (
