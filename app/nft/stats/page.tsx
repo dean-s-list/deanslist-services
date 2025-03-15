@@ -282,6 +282,24 @@ export default function StatsPage() {
                           <p className="text-sm text-black/60 mb-2">Collection Name</p>
                           <p className="text-lg font-medium text-black">{stats?.collectionName}</p>
                         </div>
+                        <div className="rounded-lg border border-black/10 bg-black/5 p-4">
+                          <p className="text-sm text-black/60 mb-2">Collection ID</p>
+                          <div className="flex items-center justify-between mt-1">
+                                    <p className="font-mono text-xs text-black/90 break-all">
+                                      {collectionId}
+                                    </p>
+                                    <button
+                                      onClick={() => copyToClipboard(collectionId)}
+                                      className="ml-2 p-1 hover:bg-black/10 rounded-md transition-colors"
+                                    >
+                                      {copiedText === collectionId ? (
+                                        <CheckIcon className="w-4 h-4 text-black/30" />
+                                      ) : (
+                                        <ClipboardIcon className="w-4 h-4 text-black/60 group-hover:text-black/90" />
+                                      )}
+                                    </button>
+                                  </div>
+                        </div>
 
                         <div className="rounded-lg border border-black/10 bg-black/5 p-4">
                           <p className="text-sm text-black/60 mb-2">Royalties</p>
