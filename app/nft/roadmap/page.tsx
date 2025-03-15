@@ -94,12 +94,12 @@ export default function RoadmapPage() {
             {/* Roadmap Content */}
             <div className="relative px-4">
               {/* Adventure Path */}
-              <div className="absolute top-8 left-0 right-0">
+              <div className="absolute top-8 left-0 right-0 hidden lg:block">
                 {/* Base Path - Wavy line effect */}
                 <svg className="w-full h-8 absolute top-0" preserveAspectRatio="none">
                   <path
                     d="M0,8 C150,8 150,24 300,24 C450,24 450,8 600,8 C750,8 750,24 900,24 C1050,24 1050,8 1200,8"
-                    className="stroke-gray-200"
+                    className="stroke-purple-200"
                     fill="none"
                     strokeWidth="2"
                     strokeDasharray="4,4"
@@ -117,13 +117,36 @@ export default function RoadmapPage() {
                 </svg>
               </div>
 
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bottom-0 lg:hidden">
+                {/* Vertical Path - Wavy line effect */}
+                <svg className="w-8 h-full absolute left-1/2 transform -translate-x-1/2" preserveAspectRatio="none">
+                  <path
+                    d="M8,0 C8,150 24,150 24,300 C24,450 8,450 8,600 C8,750 24,750 24,900 C24,1050 8,1050 8,1200"
+                    className="stroke-purple-300"
+                    fill="none"
+                    strokeWidth="2"
+                    strokeDasharray="6,6" /* Adjust this for better visibility */
+                  />
+                  {/* Progress overlay */}
+                  <path
+                    d="M8,0 C8,150 24,150 24,300 C24,450 8,450 8,600 C8,750 24,750 24,900 C24,1050 8,1050 8,1200"
+                    className="stroke-purple-500"
+                    fill="none"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeDasharray="1200"
+                    strokeDashoffset={1000} // Adjust this to move progress 900, 600, 300
+                  />
+                </svg>
+              </div>
+
               {/* Timeline Items */}
               <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-3">
                 {roadmapData.map((item) => (
                   <div key={item.quarter} className="group pt-3">
                     {/* Island Milestone Marker */}
-                    <div className="absolute -top-1 left-1/2 -translate-x-1/2">
-                      <div className={`w-8 h-8 rounded-full relative
+                    <div className={`absolute -top-1 left-1/2 transform -translate-x-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:top-0`}>
+                      <div className={`w-10 h-10 rounded-full relative
                         ${item.status === 'completed'
                           ? 'bg-gradient-to-br from-green-400 to-green-500'
                           : item.status === 'in-progress'
@@ -133,7 +156,7 @@ export default function RoadmapPage() {
                         shadow-lg ring-4 ring-white`}
                       >
                         {/* Island Icon */}
-                        <span className="absolute inset-0 flex items-center justify-center text-lg">
+                        <span className="absolute inset-0 flex items-center justify-center text-xl">
                           {item.icon}
                         </span>
                         {/* Glow Effect */}
