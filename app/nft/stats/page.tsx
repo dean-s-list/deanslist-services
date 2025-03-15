@@ -205,13 +205,13 @@ export default function StatsPage() {
                 <div className="rounded-xl border border-black/10 bg-black/5 backdrop-blur-sm p-6">
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="text-xl text-black">Minting Progress</h2>
-                    {stats?.isActive ? (
+                    {stats?.itemsMinted != stats?.itemsAvailable ? (
                       <span className="px-3 py-1 text-xs font-medium text-green-500 bg-green-700/10 rounded-full">
                         Active
                       </span>
                     ) : (
-                      <span className="px-3 py-1 text-xs font-medium text-yellow-400 bg-yellow-400/10 rounded-full">
-                        Inactive
+                      <span className="px-3 py-1 text-xs font-medium text-red-400 bg-red-400/10 rounded-full">
+                        Ended
                       </span>
                     )}
                   </div>
