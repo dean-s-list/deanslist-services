@@ -65,7 +65,7 @@ export default function RoadmapPage() {
 
       <div className="relative">
         <Header />
-        
+
         <main className="relative mx-auto max-w-7xl px-4 sm:px-6 pt-20 pb-4">
           <div className="flex flex-col gap-4">
             {/* Page Header */}
@@ -74,7 +74,7 @@ export default function RoadmapPage() {
               <p className="text-base text-gray-600 max-w-2xl mx-auto mb-6">
                 Our journey towards building the future of digital collectibles
               </p>
-              
+
               {/* Whitepaper Link */}
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/50 backdrop-blur-sm rounded-full border border-purple-100 hover:border-purple-200 transition-colors">
                 <svg className="w-4 h-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -106,27 +106,29 @@ export default function RoadmapPage() {
                   />
                   {/* Progress overlay */}
                   <path
-                    d="M0,8 C150,8 150,24 300,24"
+                    d="M0,8 C150,8 150,24 300,24 C450,24 450,8 600,8 C750,8 750,24 900,24 C1050,24 1050,8 1200,8"
                     className="stroke-purple-500"
                     fill="none"
                     strokeWidth="2.5"
                     strokeLinecap="round"
+                    strokeDasharray="1200"
+                    strokeDashoffset="900" /* Adjust this to move progress 600, 300 */
                   />
                 </svg>
               </div>
 
               {/* Timeline Items */}
-              <div className="relative grid grid-cols-4 gap-4 pt-3">
+              <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-3">
                 {roadmapData.map((item) => (
                   <div key={item.quarter} className="group pt-3">
                     {/* Island Milestone Marker */}
                     <div className="absolute -top-1 left-1/2 -translate-x-1/2">
                       <div className={`w-8 h-8 rounded-full relative
-                        ${item.status === 'completed' 
-                          ? 'bg-gradient-to-br from-green-400 to-green-500' 
+                        ${item.status === 'completed'
+                          ? 'bg-gradient-to-br from-green-400 to-green-500'
                           : item.status === 'in-progress'
-                          ? 'bg-gradient-to-br from-purple-400 to-purple-500' 
-                          : 'bg-gradient-to-br from-gray-200 to-gray-300'}
+                            ? 'bg-gradient-to-br from-purple-400 to-purple-500'
+                            : 'bg-gradient-to-br from-gray-200 to-gray-300'}
                         transform transition-transform duration-300 group-hover:scale-110
                         shadow-lg ring-4 ring-white`}
                       >
@@ -145,19 +147,19 @@ export default function RoadmapPage() {
                     {/* Content Card */}
                     <div className={`mt-10 bg-white rounded-xl overflow-hidden
                       transform transition-all duration-300 group-hover:-translate-y-1
-                      ${item.status === 'in-progress' 
-                        ? 'shadow-[0_0_0_1px_rgba(168,85,247,0.1),0_4px_20px_rgba(168,85,247,0.1)]' 
+                      ${item.status === 'in-progress'
+                        ? 'shadow-[0_0_0_1px_rgba(168,85,247,0.1),0_4px_20px_rgba(168,85,247,0.1)]'
                         : 'shadow-md'}`}
                     >
                       {/* Card Header */}
                       <div className={`px-4 py-3 border-b relative overflow-hidden
                         ${item.status === 'completed' ? 'bg-green-50' :
                           item.status === 'in-progress' ? 'bg-purple-50' :
-                          'bg-gray-50'}`}
+                            'bg-gray-50'}`}
                       >
                         {/* Decorative Pattern */}
-                        <div className="absolute inset-0 opacity-[0.03]" 
-                          style={{ 
+                        <div className="absolute inset-0 opacity-[0.03]"
+                          style={{
                             backgroundImage: 'url("data:image/svg+xml,%3Csvg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M0 0h20v20H0V0zm10 10h10v10H10V10zM0 10h10v10H0V10z" fill="%23000000" fill-opacity="0.5" fill-rule="evenodd"/%3E%3C/svg%3E")',
                             backgroundSize: '12px 12px'
                           }}
@@ -168,7 +170,7 @@ export default function RoadmapPage() {
                             <span className={`text-[10px] font-bold tracking-wider px-2 py-0.5 rounded-full
                               ${item.status === 'completed' ? 'bg-green-100 text-green-700' :
                                 item.status === 'in-progress' ? 'bg-purple-100 text-purple-700' :
-                                'bg-gray-200 text-gray-600'}`}
+                                  'bg-gray-200 text-gray-600'}`}
                             >
                               {item.status.toUpperCase()}
                             </span>
@@ -185,7 +187,7 @@ export default function RoadmapPage() {
                               <div className={`w-2 h-2 rounded-full transform transition-transform
                                 ${progressItem.status === 'completed' ? 'bg-green-500 scale-110' :
                                   progressItem.status === 'in-progress' ? 'bg-purple-500 scale-110' :
-                                  'bg-gray-300'}`}
+                                    'bg-gray-300'}`}
                               />
                               <span className="text-sm text-gray-600">
                                 {Array.isArray(progressItem.text) ? progressItem.text : progressItem.text}
@@ -206,7 +208,7 @@ export default function RoadmapPage() {
                     <div className={`w-1.5 h-1.5 rounded-full
                       ${label === 'Completed' ? 'bg-green-500' :
                         label === 'In Progress' ? 'bg-purple-500' :
-                        'bg-gray-200'}`}
+                          'bg-gray-200'}`}
                     />
                     <span className="text-xs text-gray-500">{label}</span>
                   </div>
