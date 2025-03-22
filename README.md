@@ -13,23 +13,43 @@ yarn dev
 ## Todos:
 - [ ] Fix metadata
   - [x] Add 'animal' attribute
+  - [x] Add one of ones
   - [ ] Check collection data
+    - [ ] Change Image ID of collection
+  - [x] Randomizer choosing which assets to put in collection, and then check if they are already used
   - [ ] Change to mainnet
+- [ ] Minting
+  - [ ] When there is no whitelist, don't check for allowlist
+  - [ ] Transaction details
 - [ ] Simulation error when minting
-  - [ ] Add if no whitelist on candy, don't to check
   - [ ] Jito transaction bundeling
-- [ ] Add attributes on mint
+- [ ] Add attributes plugin
   - [ ] Make script
-  - [ ] OR make a guard
-- [x] Update guards (removing whitelist)
-- [ ] Seperate collection
-- [ ] Fix stats page
-  - [ ] If fully minted show ended
+  - [ ] Or make a guard that adds it on mint
+- [ ] Updates 
+  - [ ] Update guards (removing whitelist)
+    - [x] Removing whitelist
+    - [ ] Adding whitelist
+- [x] Seperate collection
+- [x] Fix stats page
+  - [x] If fully minted show ended
   - [x] Add guards data
-- [ ] Collection image
+- [x] Collection image
 - [ ] Add plugin page
   - [ ] Autograph
   - [ ] Delegate
+- [ ] Test mainnet
+  - [ ] Change mint price
+  - [ ] Check total spendings
+
+## Focus
+- Check if no whitelist, don't check for allowlist
+- Transaction details
+- Adding whitelist, update guard
+- Collection image
+- Seperate Collection
+- Attribute script
+- Test mainnet
 
 ## License 📄
 
