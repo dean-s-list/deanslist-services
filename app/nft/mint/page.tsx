@@ -6,7 +6,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import Confetti from "react-confetti";
 import useUmiStore from "@/store/useUmiStore";
 import { DefaultGuardSetMintArgs, fetchCandyMachine, getMerkleProof, getMerkleRoot, mintV1, route, safeFetchCandyGuard } from "@metaplex-foundation/mpl-core-candy-machine";
-import { publicKey as createPublicKey, some, sol, generateSigner, PublicKey } from "@metaplex-foundation/umi";
+import { publicKey as createPublicKey, sol, generateSigner, PublicKey } from "@metaplex-foundation/umi";
 import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
 import Image from "next/image";
