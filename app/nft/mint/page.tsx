@@ -5,13 +5,14 @@ import dynamic from "next/dynamic";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Confetti from "react-confetti";
 import useUmiStore from "@/store/useUmiStore";
-import { fetchCandyMachine, getMerkleProof, getMerkleRoot, mintV1, route, safeFetchCandyGuard } from "@metaplex-foundation/mpl-core-candy-machine";
+import { DefaultGuardSetMintArgs, fetchCandyMachine, getMerkleProof, getMerkleRoot, mintV1, route, safeFetchCandyGuard } from "@metaplex-foundation/mpl-core-candy-machine";
 import { publicKey as createPublicKey, some, sol, generateSigner, PublicKey } from "@metaplex-foundation/umi";
 import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
 import Image from "next/image";
 import base58 from "bs58";
 import candyjson from "../candy.json"
+import { SolAmount } from "@metaplex-foundation/js";
 
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
@@ -208,24 +209,47 @@ export default function MintPage() {
               { commitment: "confirmed" }
             );
             console.log('Route Transaction Signature:', routeResult);
-          }
+          } else { console.log("Whitelist not enabled") }
 
           setMintingStage('minting');
 
+          // Define types for mintArgs to avoid using 'any'
+          interface SolPayment {
+            lamports: SolAmount;
+            destination: PublicKey;
+          }
+
+          interface AllowList {
+            merkleRoot: Uint8Array;
+          }
+
+          interface MintArgs {
+            solPayment: SolPayment;
+            allowList?: AllowList; // Optional field
+            group?: string | null; // Match the expected type for 'group'
+          }
+
+
           // Base mint arguments
-          const mintArgs: any = {
-            solPayment: some({
-              lamports: sol(0.1),
-              destination,
-            }),
+          const mintArgs: MintArgs = {
+            solPayment: {
+              lamports: {
+                basisPoints: sol(0.1).basisPoints,
+                currency: {
+                  symbol: "SOL",
+                  decimals: 9
+                }
+              },
+              destination: destination, // Ensure this is a PublicKey
+            },
           };
 
           // Conditionally add allowList if whitelist is enabled
           if (whitelist) {
             const merkleroot = getMerkleRoot(allowList); // make sure this is in scope or passed
-            mintArgs.allowList = some({
+            mintArgs.allowList = {
               merkleRoot: merkleroot,
-            });
+            };
           }
 
           // Mint transaction
@@ -233,7 +257,7 @@ export default function MintPage() {
             candyMachine: candyMachineId,
             asset,
             collection: coreCollection,
-            mintArgs,
+            mintArgs: mintArgs as unknown as Partial<DefaultGuardSetMintArgs>,
           });
 
           const { signature } = await sendAndConfirmWithWalletAdapter(
