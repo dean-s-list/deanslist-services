@@ -17,7 +17,7 @@ const NAV_LINKS = [
   { href: "/nft/mint", label: "Mint" },
   { href: "/nft/perks", label: "Perks" },
   { href: "/nft/roadmap", label: "Roadmap" },
-  { href: "/nft/stats", label: "Stats" },
+  //{ href: "/nft/stats", label: "Stats" },
 ];
 
 const NFTHeader = () => {
