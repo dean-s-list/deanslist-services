@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { useWallet } from "@solana/wallet-adapter-react";
 import Confetti from "react-confetti";
 import useUmiStore from "@/store/useUmiStore";
-import { getMerkleProof, getMerkleRoot, mintV1, route } from "@metaplex-foundation/mpl-core-candy-machine";
+import { fetchCandyMachine, getMerkleProof, getMerkleRoot, mintV1, route, safeFetchCandyGuard } from "@metaplex-foundation/mpl-core-candy-machine";
 import { publicKey as createPublicKey, some, sol, generateSigner, PublicKey } from "@metaplex-foundation/umi";
 import { fetchAsset } from "@metaplex-foundation/mpl-core";
 import { sendAndConfirmWithWalletAdapter } from "@/lib/umi/sendAndConfirmWithWalletAdapter";
@@ -155,12 +155,26 @@ export default function MintPage() {
       while (attempt < 2 && !success) {
         try {
           setMintingStage('whitelist');
-          const whitelist = true;
+          let whitelist = false;
 
-          
+          // ADD FUNCTOINALIT CHECK WHITELIST !!!!!!!!!!!!!!!!!!!!
+          const candyMachineData = await fetchCandyMachine(umi, candyMachineId)
+          const guard = await safeFetchCandyGuard(umi, candyMachineData.mintAuthority)
+
+          if (guard && guard.guards.allowList.__option === 'Some') {
+            // Extract the Merkle Root Uint8Array safely
+            const merkleRootUint8Array = guard.guards.allowList.value.merkleRoot;
+
+            // Convert to Base58 (Solana-style string)
+            const merkleRootBase58 = merkleRootUint8Array;
+
+            console.log("Allowlist Merkle Root (Base58):", merkleRootBase58);
+            whitelist = true;
+          } else { whitelist = false }
 
           if (whitelist) {
             const merkleroot = getMerkleRoot(allowList);
+
             // Verify wallet is in allowlist
             const isWalletAllowed = allowList.includes(wallet.publicKey.toBase58());
             if (!isWalletAllowed) {
@@ -173,9 +187,6 @@ export default function MintPage() {
 
             console.log('Merkle Root:', base58.encode(merkleroot));
             console.log('Merkle Proof Length:', merkleProof.length);
-
-            // ADD ONLY IF THERE IS WHITELIST DO ROUTE CHECK
-
 
             // Route transaction
             const routeTransaction = route(umi, {
@@ -201,19 +212,28 @@ export default function MintPage() {
 
           setMintingStage('minting');
 
+          // Base mint arguments
+          const mintArgs: any = {
+            solPayment: some({
+              lamports: sol(0.1),
+              destination,
+            }),
+          };
+
+          // Conditionally add allowList if whitelist is enabled
+          if (whitelist) {
+            const merkleroot = getMerkleRoot(allowList); // make sure this is in scope or passed
+            mintArgs.allowList = some({
+              merkleRoot: merkleroot,
+            });
+          }
+
+          // Mint transaction
           const transactionBuilder = mintV1(umi, {
             candyMachine: candyMachineId,
             asset,
             collection: coreCollection,
-            mintArgs: {
-              solPayment: some({
-                lamports: sol(0.1),
-                destination
-              }),
-              allowList: some({
-                merkleRoot: merkleroot
-              })
-            },
+            mintArgs,
           });
 
           const { signature } = await sendAndConfirmWithWalletAdapter(
@@ -359,15 +379,15 @@ export default function MintPage() {
                   return (
                     <div key={phase.id} className="flex items-center gap-4 p-4 rounded-lg border bg-white hover:shadow-md transition-all duration-200">
                       <div className={`w-2 h-2 rounded-full flex-shrink-0 ${phase.status === 'completed' ? 'bg-green-500' :
-                          phase.status === 'upcoming' ? 'bg-blue-500' : 'bg-gray-300'
+                        phase.status === 'upcoming' ? 'bg-blue-500' : 'bg-gray-300'
                         }`} />
 
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
                           <h3 className="text-sm font-semibold text-gray-900">{phase.name}</h3>
                           <span className={`px-2 py-0.5 text-[10px] font-medium rounded-full ${phase.status === 'completed' ? 'bg-green-50 text-green-700' :
-                              phase.status === 'upcoming' ? 'bg-blue-50 text-blue-700' :
-                                'bg-gray-100 text-gray-600'
+                            phase.status === 'upcoming' ? 'bg-blue-50 text-blue-700' :
+                              'bg-gray-100 text-gray-600'
                             }`}>
                             {phase.status.toUpperCase()}
                           </span>
