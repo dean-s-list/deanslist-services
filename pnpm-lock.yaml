@@ -26,6 +26,9 @@ importers:
       '@metaplex-foundation/mpl-core-das':
         specifier: ^0.0.3
         version: 0.0.3(@metaplex-foundation/digital-asset-standard-api@1.0.6(@metaplex-foundation/umi@0.9.2))(@metaplex-foundation/mpl-core@1.2.0(@metaplex-foundation/umi@0.9.2)(@noble/hashes@1.7.1))(@metaplex-foundation/umi@0.9.2)
+      '@metaplex-foundation/mpl-toolbox':
+        specifier: ^0.10.0
+        version: 0.10.0(@metaplex-foundation/umi@0.9.2)
       '@metaplex-foundation/umi':
         specifier: ^0.9.2
         version: 0.9.2
@@ -1318,6 +1321,11 @@ packages:
     resolution: {integrity: sha512-MSERz5HB2XZ/K+FOMh0tPeqcZZEpGVzdy7e+Cy3MHg7x52JtbGBDtWIoxBJn1OBZayCBfX9gytEoqrXe2YRGqQ==}
     peerDependencies:
       '@metaplex-foundation/umi': ^0.8.2
+
+  '@metaplex-foundation/mpl-toolbox@0.10.0':
+    resolution: {integrity: sha512-84KD1L5cFyw5xnntHwL4uPwfcrkKSiwuDeypiVr92qCUFuF3ZENa2zlFVPu+pQcjTlod2LmEX3MhBmNjRMpdKg==}
+    peerDependencies:
+      '@metaplex-foundation/umi': '>= 0.8.2 <= 1'
 
   '@metaplex-foundation/mpl-toolbox@0.9.4':
     resolution: {integrity: sha512-fd6JxfoLbj/MM8FG2x91KYVy1U6AjBQw4qjt7+Da3trzQaWnSaYHDcYRG/53xqfvZ9qofY1T2t53GXPlD87lnQ==}
@@ -8645,6 +8653,10 @@ snapshots:
   '@metaplex-foundation/mpl-token-metadata@3.0.0-alpha.27(@metaplex-foundation/umi@0.9.2)':
     dependencies:
       '@metaplex-foundation/mpl-toolbox': 0.9.4(@metaplex-foundation/umi@0.9.2)
+      '@metaplex-foundation/umi': 0.9.2
+
+  '@metaplex-foundation/mpl-toolbox@0.10.0(@metaplex-foundation/umi@0.9.2)':
+    dependencies:
       '@metaplex-foundation/umi': 0.9.2
 
   '@metaplex-foundation/mpl-toolbox@0.9.4(@metaplex-foundation/umi@0.9.2)':
