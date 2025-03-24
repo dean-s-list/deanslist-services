@@ -14,6 +14,21 @@ import base58 from "bs58";
 import candyjson from "../candy.json"
 import { SolAmount } from "@metaplex-foundation/js";
 
+interface SolPayment {
+  lamports: SolAmount;
+  destination: PublicKey;
+}
+
+interface AllowList {
+  merkleRoot: Uint8Array;
+}
+
+interface MintArgs {
+  solPayment: SolPayment;
+  allowList?: AllowList; // Optional field
+  group?: string | null; // Optional field
+}
+
 const Header = dynamic(() => import("../../components/NFTHeader"));
 
 const candyMachineId = createPublicKey("5QAvMBEKtY4CoxLDJzFUdcusZWNjTeQ2AES1tZ2cc5LU");
@@ -158,7 +173,7 @@ export default function MintPage() {
           setMintingStage('whitelist');
           let whitelist = false;
 
-          // ADD FUNCTOINALIT CHECK WHITELIST !!!!!!!!!!!!!!!!!!!!
+          // Check if candymachine has whitelist
           const candyMachineData = await fetchCandyMachine(umi, candyMachineId)
           const guard = await safeFetchCandyGuard(umi, candyMachineData.mintAuthority)
 
@@ -189,7 +204,7 @@ export default function MintPage() {
             console.log('Merkle Root:', base58.encode(merkleroot));
             console.log('Merkle Proof Length:', merkleProof.length);
 
-            // Route transaction
+            // Route transaction to check whitelist
             const routeTransaction = route(umi, {
               candyMachine: candyMachineId,
               candyGuard: candyGuardId,
@@ -213,23 +228,6 @@ export default function MintPage() {
 
           setMintingStage('minting');
 
-          // Define types for mintArgs to avoid using 'any'
-          interface SolPayment {
-            lamports: SolAmount;
-            destination: PublicKey;
-          }
-
-          interface AllowList {
-            merkleRoot: Uint8Array;
-          }
-
-          interface MintArgs {
-            solPayment: SolPayment;
-            allowList?: AllowList; // Optional field
-            group?: string | null; // Match the expected type for 'group'
-          }
-
-
           // Base mint arguments
           const mintArgs: MintArgs = {
             solPayment: {
@@ -246,7 +244,7 @@ export default function MintPage() {
 
           // Conditionally add allowList if whitelist is enabled
           if (whitelist) {
-            const merkleroot = getMerkleRoot(allowList); // make sure this is in scope or passed
+            const merkleroot = getMerkleRoot(allowList);
             mintArgs.allowList = {
               merkleRoot: merkleroot,
             };
