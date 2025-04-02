@@ -3,8 +3,8 @@ import React from 'react';
 const Branches: React.FC = () => {
     return (
         <div className="lg:max-w-[1440px] pt-40 mx-auto ">
-            <div className="relative mx-auto w-fit">
-                <div className="hidden md:block absolute -left-[1610px] top-[10px] h-2 w-[100rem] bg-[#49255C]"></div>
+            <div className="relative mx-auto w-fit text-[#061E1E]">
+                <div className="hidden md:block absolute -left-[1610px] top-[10px] h-2 w-[100rem] bg-[#061E1E]"></div>
                 <div className="">Branches</div>
             </div>
         
@@ -14,11 +14,11 @@ const Branches: React.FC = () => {
                 <div className="absolute hidden md:block h-[952px] w-[207px] bg-[#9A59BA] rounded-[100%] -top-[0rem] -right-[10rem] rotate-[45deg] blur-[390px]"></div>
             
                 {/* Left Content */}
-                <div className="flex flex-col relative md:pt-[30px]">
-                    <div className="p-4">
+                <div className="flex flex-col relative md:pt-[30px] ">
+                    <div className="p-4 ">
                         {/* <SectionHeader title="Branches" /> */}
-                        <h4 className="text-white text-[36px] tracking-[1px] font-semibold mb-4">Our Regional <span className="font-light font-editorial-new">States</span></h4>
-                        <h5 className="text-[20px] text-[#C0C3CE]">Countries in which you can find us IRL and visit our <br /> branches.</h5>
+                        <h4 className="text-[#061E1E] text-[36px] tracking-[1px] font-semibold mb-4">Our Regional <span className="font-light font-editorial-new">States</span></h4>
+                        <h5 className="text-[20px] text-[#061E1E]">Countries in which you can find us IRL and visit our <br /> branches.</h5>
                     </div>
                 </div>
 

@@ -11,15 +11,15 @@ const Services = () => {
             <div className="absolute  md:h-[1052px] md:w-[277px] bg-[#9A59BA] rounded-[100%] -top-[10rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
             <div className="absolute  md:h-[1052px] md:w-[277px] bg-[#9A59BA] rounded-[100%] -top-[0rem] -right-[8rem] rotate-[45deg] blur-[390px] "></div>
 
-            <SectionHeader title="Services" />
+            <SectionHeader title="Services"  />
             {/* Header Section */}
             <div className="md:text-center px-5 mb-12">
-                <h2 className="text-4xl font-bold">
+                <h2 className="text-4xl font-bold text-[#061E1E] ">
                     Community of Web3 <span className="font-editorial-new font-light">power users</span>.
                 </h2>
-                <p className="text-gray-300 mt-4  mx-auto text-[20px]">
-                    As experienced Web3 users, we provide in-depth feedback sessions and a suite of consulting services to
-                    projects looking to thrive <br /> in the space. From product quality to user experience, we’re here to elevate
+                <p className="text-[#061E1E] mt-4  mx-auto text-[20px]">
+                    As experienced Web3 users, we provide in-depth feedback sessions and a suite of consulting <br/> services to
+                    projects looking to thrive in the space. From product quality to user experience, we’re <br /> here to elevate
                     your project to the next level.
                 </p>
             </div>
@@ -31,7 +31,7 @@ const Services = () => {
                 <div className="relative rounded-lg shadow-md flex flex-col space-y-4 overflow-hidden border-2 border-[#D47BFF]">
                     <div className="absolute hiiden md:block h-[152px]  w-[177px] bg-[#7e4898] rounded-[100%] top-[2rem] left-[5rem] -rotate-[45deg]  blur-[150px]"></div>
                     <div className="px-6 pt-6">
-                        <h3 className="text-2xl font-semibold">Feedback Review</h3>
+                        <h3 className="text-2xl font-semibold  ">Feedback Review</h3>
                         <p className="text-gray-300">
                             Our goal is to make your product user-friendly with top-notch functionality <br /> that meets industry standards.
                         </p>

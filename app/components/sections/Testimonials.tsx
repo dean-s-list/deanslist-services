@@ -52,15 +52,15 @@ const Testimonials = () => {
 	return (
 		<div className="max-w-[1440px] mx-auto  py-16 px-4 relative">
 			{/* <SectionHeader title="Testimonials" /> */}
-			<div className="-top-10 relative flex justify-center">
-                <div className=" hidden md:block absolute -left-[955px] top-[10px] h-2 w-[100rem] bg-[#49255C]"></div>
+			<div className="-top-10 relative flex justify-center text-[#061E1E] ">
+                <div className=" hidden md:block absolute -left-[955px] top-[10px] h-2 w-[100rem] bg-[#061E1E]"></div>
 				Testimonials
             </div>
 			<div className="md:text-center mb-12">
-				<h2 className="text-white text-4xl font-bold">
+				<h2 className="text-[#061E1E] text-4xl font-bold">
 					They say it <span className="font-light font-editorial-new">better</span> than we do!
 				</h2>
-				<p className="text-gray-300 mt-4">
+				<p className="text-[#061E1E] mt-4">
 					We&apos;re proud to be working with these incredible and outstanding
 					projects, and thankful for their <br /> feedback, suggestions, and support.
 				</p>

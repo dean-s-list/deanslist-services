@@ -16,7 +16,7 @@ const Events = () => {
     <section className="py-20 relative" id="events">
       <SectionHeader title="Events" isLeft={false} />
       {/* Title Section */}
-      <div className="md:text-center mb-12 px-5 md:px-0">
+      <div className="md:text-center mb-12 px-5 md:px-0 text-[#061E1E]">
         <h2 className="text-4xl font-bold mb-4">
           Community{" "}
           <span className="font-light font-editorial-new">events</span> and{" "}

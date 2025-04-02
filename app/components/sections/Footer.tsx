@@ -3,13 +3,13 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <footer className="max-w-[1440px] mx-auto hidden md:block text-white p-6 sm:p-16 ">
+    <footer className="max-w-[1440px] mx-auto hidden md:block text-[#061E1E] p-6 sm:p-16 ">
       {/* Top Footer */}
       <div className="flex flex-col sm:flex-row justify-between items-center pb-10 space-y-6 sm:space-y-0">
         {/* Top left content */}
         <div className="flex items-center justify-center sm:justify-start">
           <img src="dean.png" alt="DeansListDAO Logo" className="w-10 h-10 mr-2" />
-          <span className="text-xl font-bold">DeansListDAO</span>
+          <span className="text-xl font-bold">Island DAO</span>
         </div>
 
         {/* Top middle content */}
@@ -22,9 +22,9 @@ function Footer() {
         </nav>
 
         {/* Top right content */}
-        <div className="flex justify-center space-x-4">
-          <a href="https://x.com/deanslistDAO" target="blank" className="hover:text-gray-300">
-            <img src="twitter.png" alt="Twitter" className="w-6 h-6" />
+        <div className="flex justify-center space-x-4 ">
+          <a href="https://x.com/deanslistDAO" target="blank" className="hover:text-gray-300 ">
+            <img src="twitter.png" alt="Twitter" className="w-6 h-6 " />
           </a>
           <a href="https://discord.gg/deanslist" target="blank" className="hover:text-gray-300">
             <img src="discord.png" alt="Discord" className="w-6 h-6" />

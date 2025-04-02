@@ -2,9 +2,9 @@ import Image from 'next/image'
 
 export default function FooterMobile() {
     return (
-        <div className='md:hidden'>
+        <div className='md:hidden text-[#061E1E]'>
 
-            <div className="mb-10 flex items-center gap-2 px-10 ">
+            <div className="mb-10 flex items-center gap-2 px-10  ">
                 <Image src="logo.svg" alt="logo" width={28} height={28} />
                 <span className="text-xl font-semibold">DeansListDAO</span>
             </div>
