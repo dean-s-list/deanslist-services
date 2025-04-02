@@ -28,7 +28,7 @@ const Services = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4  2xl:w-[1440px] lg:max-txl:w-[1020px]  mx-auto">
 
                 {/* Feedback Review */}
-                <div className="relative rounded-lg shadow-md flex flex-col space-y-4 overflow-hidden border-2 border-[#D47BFF]">
+                <div className="relative rounded-lg shadow-md flex flex-col space-y-4 overflow-hidden border-2 border-[#BFF1C8]">
                     <div className="absolute hiiden md:block h-[152px]  w-[177px] bg-[#7e4898] rounded-[100%] top-[2rem] left-[5rem] -rotate-[45deg]  blur-[150px]"></div>
                     <div className="px-6 pt-6">
                         <h3 className="text-2xl font-semibold  ">Feedback Review</h3>
@@ -37,13 +37,13 @@ const Services = () => {
                         </p>
                     </div>
                     <div className="w-full max-h-[165px] items-baseline">
-                        <img src="/images/feedback-review.svg" alt="feedback review" className="w-full" />
+                        <img src="/images/feedback-review.png" alt="feedback review" className="w-full" />
                     </div>
 
                 </div>
 
                 {/* Decentragrants */}
-                <div className="relative rounded-lg shadow-md flex flex-col space-y-4 overflow-hidden border-2 border-[#D47BFF]">
+                <div className="relative rounded-lg shadow-md flex flex-col space-y-4 overflow-hidden border-2 border-[#BFF1C8]">
 
                     <div className="px-6 pt-6">
                         <div className="absolute hiiden md:block h-[252px] w-[207px] bg-[#D47BFF] rounded-[100%] -top-[2rem] left-[0rem] -rotate-[45deg]  blur-[150px]"></div>
@@ -59,7 +59,7 @@ const Services = () => {
 
                 <div className="grid grid-cols-1 md:col-span-2 gap-4 md:grid-cols-[40%,1fr]">
                     {/* Hackathon Judging */}
-                    <div className="relative border-2 overflow-hidden border-[#D47BFF] rounded-lg shadow-md p-6 flex flex-col space-y-4">
+                    <div className="relative border-2 overflow-hidden border-[#BFF1C8] rounded-lg shadow-md p-6 flex flex-col space-y-4">
 
                         <h3 className="text-2xl font-semibold">Hackathon Judging</h3>
                         <div className="hiiden md:block absolute  h-[152px] w-[127px] bg-[#D47BFF] rounded-[100%] -top-[2rem] left-[0rem] -rotate-[45deg]  blur-[110px]"></div>
@@ -75,7 +75,7 @@ const Services = () => {
                     </div>
 
                     {/* Feedback Bonanza */}
-                    <div className="relative overflow-hidden border-2 border-[#D47BFF] rounded-lg shadow-md p-6 pb-0 pr-0 flex flex-col space-y-4">
+                    <div className="relative overflow-hidden border-2 border-[#BFF1C8] rounded-lg shadow-md p-6 pb-0 pr-0 flex flex-col space-y-4">
                         <h3 className="text-2xl font-semibold">Feedback Bonanza: Live Feedback Session</h3>
                         <div className="hiiden md:block absolute  h-[252px] w-[107px] bg-[#D47BFF] rounded-[100%] bottom-[2rem] left-[1rem]   blur-[150px]"></div>
                         <div className="absolute hiiden md:block h-[152px] w-[407px] bg-[#D47BFF] rounded-[100%] bottom-[2rem] right-[4rem] -rotate-[45deg]  blur-[200px]"></div>
