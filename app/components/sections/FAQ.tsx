@@ -34,11 +34,11 @@ function FAQ() {
                 <div className="hidden md:block absolute -left-[1610px] top-[10px] h-2 w-[100rem] bg-[#061E1E]"></div>
                 <div className="">FAQ</div>
             </div>
-			<div className="bg-[#090118] h-auto grid grid-cols-1 md:grid-cols-2 my-8 mb-32 p-2 relative mx-auto max-w-[1440px]">
+			<div className="bg-[#] h-auto grid grid-cols-1 md:grid-cols-2 my-8 mb-32 p-2 relative mx-auto max-w-[1440px]">
 				
 					{/* Background blur effect */}
-					<div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#9A59BA] rounded-[100%] -top-[40rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
-				
+					<div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#DCFCE2] rounded-[100%] -top-[40rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
+					
 
 				<div className="md:pl-16 relative text-[#061E1E]">
 					<p className="text-[36px] font-semibold">

@@ -58,5 +58,21 @@
     "tailwindcss": "^3.4.1",
     "typescript": "^5",
     "wrangler": "^4.4.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "bigint-buffer",
+      "blake-hash",
+      "bufferutil",
+      "esbuild",
+      "keccak",
+      "protobufjs",
+      "secp256k1",
+      "sharp",
+      "tiny-secp256k1",
+      "usb",
+      "utf-8-validate",
+      "workerd"
+    ]
   }
 }

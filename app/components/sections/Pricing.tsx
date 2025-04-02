@@ -57,7 +57,7 @@ function Pricing() {
                     {/* Feedback Bonanza */}
                     <div className="bg-[#061E1E] relative text-white py-4 shadow-lg flex flex-col h-full card-animated-border max-w-[470px] gap-4">
                         <div className="px-4">
-                            <div className="hiiden md:block absolute  h-[552px] w-[127px] bg-[#D47BFF] rounded-[100%] -top-[2rem] -right-[4rem]   blur-[150px]"></div>
+                            <div className="hiiden md:block absolute  h-[552px] w-[127px] bg-[#DCFCE266] rounded-[100%] -top-[2rem] -right-[4rem]   blur-[150px]"></div>
                             <h2 className="md:text-xl text-lg font-bold mb-4">Feedback Bonanza</h2>
                             <p className="text-sm mb-4">
                                 Live expert feedback on X, YouTube, and Twitch to optimize your dApp.
@@ -81,7 +81,7 @@ function Pricing() {
                             </p>
 
                             <a href="https://discord.gg/deanslist" target="blank" rel="noopener noreferrer" className="w-full md:w-auto">
-                                <button className=" bg-[#175959] 2xl:-translate-y-[12px] w-full  md:px-6  overflow-hidden py-2 relative rounded-[10px] border border-[#156161] font-medium hover:bg-purple-400 transition flex gap-2 items-center  mt-5 md:mt-0">
+                                <button className=" bg-[#175959] 2xl:-translate-y-[12px] w-full  md:px-6  overflow-hidden py-2 relative rounded-[10px] border border-[#156161] font-medium hover:bg-[#DCFCE266] transition flex gap-2 items-center  mt-5 md:mt-0">
                                     <span className="hidden lg:block md:left-[1px] absolute xl:border-b-[2px] border-b-[#ffffff] h-[40px] blur-[2px] px-16 rounded-[2px] -z-2 mb-[78px]"></span>
 
                                     <div className="w-fit mx-auto">Get Started </div>
@@ -131,7 +131,7 @@ function Pricing() {
                     {/* Deep Dive Assessment */}
                     <div className="bg-[#061E1E] relative text-white py-6 shadow-lg flex flex-col gap-4 h-full card-animated-border max-w-[470px]">
                         <div className="px-4 lg:max-txl:relative ">
-                            <div className="hiiden md:block absolute  h-[552px] w-[127px] bg-[#D47BFF] rounded-[100%] -top-[2rem] -right-[4rem]   blur-[150px]"></div>
+                            <div className="hiiden md:block absolute  h-[552px] w-[127px] bg-[#DCFCE266] rounded-[100%] -top-[2rem] -right-[4rem]   blur-[150px]"></div>
                             <h2 className="text-lg md:text-xl font-bold mb-4">
                                 Deep Dive Assessment{" "}
                                 <span className="bg-[#175959] lg:max-txl:absolute lg:max-txl:right-[25px] text-xs font-bold px-2 py-1 rounded-full border border-[#BFF1C8]">
@@ -160,7 +160,7 @@ function Pricing() {
                             </p>
 
                             <a href="https://discord.gg/deanslist" target="blank" rel="noopener noreferrer" className="w-full md:w-auto">
-                                <button className="2xl:-translate-y-[12px]  bg-[#175959] w-full md:px-6 mt-5 md:mt-0 overflow-hidden py-2  relative rounded-[10px] border border-[#156161] font-medium hover:bg-purple-400 transition flex gap-2 items-center">
+                                <button className="2xl:-translate-y-[12px]  bg-[#175959] w-full md:px-6 mt-5 md:mt-0 overflow-hidden py-2  relative rounded-[10px] border border-[#156161] font-medium hover:bg-[#DCFCE266] transition flex gap-2 items-center">
                                     <span className="hidden lg:block left-[1px] absolute xl:border-b-[2px] border-b-[#ffffff] h-[40px] blur-[2px] px-16 rounded-[2px] -z-2 mb-[78px]"></span>
                                     <div className="w-fit mx-auto">Get Started </div>
 
