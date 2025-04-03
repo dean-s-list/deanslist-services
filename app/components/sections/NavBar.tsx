@@ -17,7 +17,7 @@ const NavBar: React.FC = () => {
 
     return (
         <div id="nav">
-            <header id="head" className="flex justify-between md:max-xl:mx-16 xl:w-[75%] mx-auto md:mt-10 bg-[#061E1E1A] bg-opacity-10 px-3 md:px-9 py-5 items-center relative rounded-lg">
+            <header id="head" className="flex justify-between md:max-xl:mx-16 xl:w-[75%] mx-auto md:mt-12 bg-[#061E1E1A] bg-opacity-10 px-3 md:px-9 py-5 items-center relative rounded-lg">
                 {/* Logo */}
                 <Link href="/">
                     <div className="flex items-center gap-2">
@@ -96,7 +96,7 @@ const NavBar: React.FC = () => {
                             </Link>
                         </li>        <li className="hover:text-[#ffff]">
                             <Link
-                                href="/nft/eligibility"
+                                href="/nft/mint"
                                 target="_blank"
                                 className="flex items-center gap-1"
                             >
@@ -164,7 +164,7 @@ const NavBar: React.FC = () => {
                                 Leaderboard
                             </Link>
                             <Link
-                                href="/nft/eligibility"
+                                href="/nft/mint"
                                 target="_blank"
                                 className="block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-200"
                                 onClick={toggleMenu}

@@ -11,7 +11,7 @@ const roadmapData = [
     status: "in-progress",
     progress: 65,
     progressItems: [
-      { text: "Rename the DAO", status: "in-progress", progress: 100 },
+      { text: "Rename the DAO", status: "completed", progress: 100 },
       { text: ["Launch the NFT ", <strong key="supply">(1,114 supply)</strong>], status: "in-progress", progress: 60 },
     ],
     icon: "🚀"
