@@ -96,7 +96,7 @@ const NavBar: React.FC = () => {
                             </Link>
                         </li>        <li className="hover:text-[#ffff]">
                             <Link
-                                href="/nft/eligibility"
+                                href="/nft/mint"
                                 target="_blank"
                                 className="flex items-center gap-1"
                             >
