@@ -31,20 +31,20 @@ const AboutUs: React.FC = () => {
                 {/* Right content */}
                 <div className="p-5 text-[16px]">
                     <div>
-                        <h3>Dean&apos;s List is a Service DAO consisting of Web3 power users who provide valuable <br /> feedback sessions, as well as a variety of other services and consultation to <br /> projects wishing to succeed in the space, or simply seeking to refine their products <br />for an overall better UX.</h3>
+                        <h3>Island DAO is a Service DAO consisting of Web3 power users who provide valuable <br /> feedback sessions, as well as a variety of other services and consultation to <br /> projects wishing to succeed in the space, or simply seeking to refine their products <br />for an overall better UX.</h3>
                     </div>
                     <div className="pt-2">
-                        <h3>Consider our community an ecosystem of feedback bounty opportunities. Dean’s <br />List is hired by clients for a rigorous feedback session, in which participants are paid <br /> USDC and $DEAN for work contributed.<br /></h3>
+                        <h3>Consider our community an ecosystem of feedback bounty opportunities. Island DAO is hired by clients for a rigorous feedback session, in which participants are paid <br /> USDC and $ISLAND for work contributed.<br /></h3>
                     </div>
                     <div className="pt-2">
-                        <h3>Dean&apos;s List started as a subDAO from Grape Protocol in 2022 as Grape served as<br /> foundation to find core power users on the Solana blockchain which the core focus<br /> would be providing feedback sessions to new and upcoming protocols on the<br />Solana ecosystem.</h3>
+                        <h3>Island DAO started as a subDAO from Grape Protocol in 2022 as Grape served as<br /> foundation to find core power users on the Solana blockchain which the core focus<br /> would be providing feedback sessions to new and upcoming protocols on the<br />Solana ecosystem.</h3>
                     </div>
                 </div>
             </div>
 
             {/* Base content */}
             <div className="w-[1000px] flex flex-col items-center p-5 text-[#061E1E]">
-                <h3 className="text-[20px]">Dean&apos;s List DAO doing numbers!</h3>
+                <h3 className="text-[20px]">Island DAO doing numbers!</h3>
                 <div className="pt-5">
                     <ul className="flex flex-col md:flex-row items-center gap-8 md:gap-[300px]">
                         <li className="text-center">

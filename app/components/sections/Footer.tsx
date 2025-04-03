@@ -44,7 +44,7 @@ function Footer() {
           <a href="https://www.tensor.trade/trade/deanslist" target="blank" className="hover:text-gray-300">NFT Store</a>
           <Link href="privacy" className="hover:text-gray-300">Privacy</Link>
         </div>
-        <p className="text-center">&copy; {new Date().getFullYear()} DeanslistDAO. All rights reserved.</p>
+        <p className="text-center">&copy; {new Date().getFullYear()} Island DAO. All rights reserved.</p>
       </div>
     </footer>
   );

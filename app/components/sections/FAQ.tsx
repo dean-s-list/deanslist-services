@@ -2,9 +2,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 const FAQs = [
 	{
-		question: "What's DeanslistDAO?",
+		question: "What's Island DAO?",
 		answer:
-			"Dean's List is a Service DAO consisting of Web3 power users who provide valuable feedback sessions, as well as a variety of other services and consultation to projects wishing to succeed in the space, or simply seeking to refine their products for an overall better UX.",
+			"Island DAO is a Service DAO consisting of Web3 power users who provide valuable feedback sessions, as well as a variety of other services and consultation to projects wishing to succeed in the space, or simply seeking to refine their products for an overall better UX.",
 	},
 	{
 		question: "How can I join the community?",
@@ -19,7 +19,7 @@ const FAQs = [
 	{
 		question: "What are the benefits of joining the community?",
 		answer:
-			"Joining the DeansListDAO community offers networking opportunities with like-minded individuals and professionals. You can collaborate on community-driven projects and contribute your skills to shape the future of the DAO. Members often get access to exclusive events, updates, and content. You may also have voting power to influence key decisions. Additionally, being part of the community provides opportunities for learning, growth, and recognition within the Web3 and blockchain space.",
+			"Joining the Island DAO community offers networking opportunities with like-minded individuals and professionals. You can collaborate on community-driven projects and contribute your skills to shape the future of the DAO. Members often get access to exclusive events, updates, and content. You may also have voting power to influence key decisions. Additionally, being part of the community provides opportunities for learning, growth, and recognition within the Web3 and blockchain space.",
 	},
 	{
 		question: "When is the grant program available?",

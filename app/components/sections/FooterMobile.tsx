@@ -42,7 +42,7 @@ export default function FooterMobile() {
                         <img src="git_colored.png" alt="GitHub" className="w-6 h-6" />
                     </a>
                 </div>
-                <p className="text-center">&copy; {new Date().getFullYear()} DeanslistDAO. All rights reserved.</p>
+                <p className="text-center">&copy; {new Date().getFullYear()} Island DAO. All rights reserved.</p>
 
             </div>
         </div>
