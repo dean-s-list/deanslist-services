@@ -113,7 +113,7 @@ const NavBar: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <button className="bg-[#061E1E] overflow-hidden py-2 px-6 relative rounded-full border border-[#C4F9CF] font-medium hover:bg-green-200 transition flex gap-2 items-center">
+                        <button className="bg-[#061E1E] overflow-hidden py-2 px-6 relative rounded-full border border-[#C4F9CF] font-medium hover:bg-green-900 transition flex gap-2 items-center">
                             <span className="left-[1px] absolute border-b-[2px] border-b-[#ffffff] h-[40px] blur-[2px] px-16 rounded-[20px] -z-10"></span>
                             Get Started
                         </button>

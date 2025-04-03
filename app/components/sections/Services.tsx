@@ -70,7 +70,7 @@ const Services = () => {
                         </p>
                         <div className="flex relative justify-center items-center flex-grow h-[200px]">
                             {/* Hackathon Badges */}
-                            <img src="/images/hackathon-judging.svg" alt="hackathon judging" />
+                            <img src="/images/feedback-hackathon.png" alt="hackathon judging"  className="w-[450px] h-[148px] md:w-[500px] h-[260px] "/>
                         </div>
                     </div>
 
@@ -85,7 +85,7 @@ const Services = () => {
                         </p>
                         <div className="relative w-full h-full grid grid-cols-[30%,1fr] gap-1">
                             <div className="py-2">
-                                <img src="/images/feedback-bonanza.svg" alt="feedback bonanza" />
+                                <img src="/images/bonanza.png" alt="feedback bonanza" />
                             </div>
                             <div className=" w-full h-full">
                                 <ReactPlayer url="https://youtu.be/ILuvSo5gw6w" width="100%" height="100%" />

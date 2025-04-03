@@ -37,7 +37,7 @@ function Hero() {
 			{/* Buttons */}
 			<div className="flex self-start md:self-auto md:justify-center space-x-4">
 			<a href="https://discord.gg/deanslist" target="blank"  rel="noopener noreferrer">
-			<button className="bg-[#061E1E] overflow-hidden md:py-[15px] py-[14px] px-[27px] relative rounded-full border border-[#C4F9CF] font-medium hover:bg-purple-400 transition flex gap-2 items-center">
+			<button className="bg-[#061E1E] overflow-hidden md:py-[15px] py-[14px] px-[27px] relative rounded-full border border-[#C4F9CF] font-medium hover:bg-green-900 transition flex gap-2 items-center">
 					<span className="left-[1px] absolute border-b-[2px] border-b-[#ffffff] md:h-[50px] h-[50px] blur-[2px] px-[82px] rounded-[20px] -z-10"></span> 
 					<CircleArrowUp className="hidden md:block "/>
 
