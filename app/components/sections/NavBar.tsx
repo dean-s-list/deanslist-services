@@ -22,7 +22,7 @@ const NavBar: React.FC = () => {
                 <Link href="/">
                     <div className="flex items-center gap-2">
                         <Image src="dean.png" alt="logo" width={36} height={36} />
-                        <span className="text-2xl font-semibold text-[#061E1E] ">Isand DAO</span>
+                        <span className="text-2xl font-semibold text-[#061E1E] ">Island DAO</span>
                     </div>
                 </Link>
 
