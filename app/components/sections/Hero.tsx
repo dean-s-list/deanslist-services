@@ -6,10 +6,10 @@ function Hero() {
 	return (
 		<div id="hero" className="relative pt-20 px-4 md:text-center flex flex-col md:items-center ">
 			{/* Backgroud Blur Effect  */}
-		<div className="absolute hidden md:block  h-[1052px] w-[177px] bg-[#ABD6B3] rounded-[100%] -top-[40rem] -left-[15rem] rotate-[45deg] blur-[90px] -z-10"></div>
-		<div className="absolute  h-[1852px] w-[77px] bg-[#ABD6B3] rounded-[100%] -top-[40rem] left-[25rem] rotate-[65deg] blur-[110px] -z-10"></div>
-		<div className="absolute hidden xl:block  h-[652px] w-[227px] bg-[#ABD6B3] rounded-[100%] top-[20rem] -left-[15rem] rotate-[65deg] blur-[90px] -z-10"></div>
-		<div className="absolute hidden xl:block h-[1452px] w-[377px] bg-[#ABD6B3] rounded-[100%] -top-[20rem] -right-[10rem] -rotate-[15deg] blur-[190px] -z-10"></div>
+		<div className="absolute hidden md:block  h-[1052px] w-[177px] bg-[#DCFCE2] rounded-[100%] -top-[40rem] -left-[15rem] rotate-[45deg] blur-[90px] -z-10"></div>
+		<div className="absolute  h-[1852px] w-[77px] bg-[#DCFCE2] rounded-[100%] -top-[40rem] left-[25rem] rotate-[65deg] blur-[110px] -z-10"></div>
+		<div className="absolute hidden xl:block  h-[652px] w-[227px] bg-[#DCFCE2] rounded-[100%] top-[20rem] -left-[15rem] rotate-[65deg] blur-[90px] -z-10"></div>
+		<div className="absolute hidden xl:block h-[1452px] w-[377px] bg-[#DCFCE2] rounded-[100%] -top-[20rem] -right-[10rem] -rotate-[15deg] blur-[190px] -z-10"></div>
 
 			{/* Badge Section */}
 			<div className="flex justify-center items-center space-x-4 mb-6 md:mt-5 bg-[#061E1E] p-1 rounded-full cursor-pointer text-xs md:text-normal max-w-[fit-content]">
