@@ -37,8 +37,8 @@ const destination = createPublicKey("GaKuQyYqJKNy8nN9Xf6VmYJQXzQDvvUHHc8kTeGQLL3
 const candyGuardId = createPublicKey("AqaR7wdw4NeSwr92HN5bYyqjsxgSsmeVmVpSZoBQGRCk")
 
 // Set fixed UTC dates
-const START_DATE = new Date(Date.UTC(2025, 3, 15, 20, 0, 0)); // April 1, 2025, 20:00 UTC
-const END_DATE = new Date(Date.UTC(2025, 3, 30, 20, 0, 0));  // April 10, 2025, 20:00 UTC
+const START_DATE = new Date(Date.UTC(2025, 3, 15, 12, 0, 0)); // April 1, 2025, 20:00 UTC
+const END_DATE = new Date(Date.UTC(2025, 3, 30, 12, 0, 0));  // April 10, 2025, 20:00 UTC
 
 
 const MINT_PHASES = [
