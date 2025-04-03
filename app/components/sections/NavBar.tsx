@@ -11,7 +11,7 @@ const NavBar: React.FC = () => {
         setIsOpen(!isOpen);
         const headerElement = document.getElementById('head');
         if (headerElement) {
-            headerElement.classList.toggle('bg-[#061E1E1A]');
+            headerElement.classList.toggle('bg-[#ABD6B3]');
         }
     };
 
@@ -123,7 +123,7 @@ const NavBar: React.FC = () => {
                 {/* Mobile Menu */}
                 {isOpen && (
                     <div
-                        className="absolute top-full left-0 mt-2 w-full -translate-y-[6px] bg-[#090118] text-white pb-[40px] shadow-lg z-10 lg:hidden"
+                        className="absolute top-full left-0 mt-2 w-full -translate-y-[6px] bg-[#ABD6B3] text-white pb-[40px] shadow-lg z-10 lg:hidden"
                         id="mobile-menu"
                     >
                         <div className="space-y-2 px-3 py-3">

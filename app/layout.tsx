@@ -1,9 +1,27 @@
 import { Inter } from 'next/font/google';
+import localFont from "next/font/local";
 import "./globals.css";
 import { WalletAdapterProvider } from './providers';
 import { WalletButtonStyles } from "./WalletStyles";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+
+const newEditorial = localFont({
+  src: [
+    {
+       path: "./fonts/EditorialNew-Italic.otf",
+       weight: "400",
+       style: "italic",
+     },
+    {
+      path: "./fonts/EditorialNew-UltralightItalic.otf",
+      weight: "300",
+      style: "italic",
+    },
+  ],
+  variable: '--font-editorial-new',
+})
+
 
 export const metadata = {
   title: "Dean\'slist Network State",
@@ -33,7 +51,7 @@ export default function RootLayout({
         <meta name="twitter:description" content="A Network State Of Web3 Power users" />
         <meta name="twitter:image" content="image/svg+xml" />
       </head>
-      <body className={inter.className}>
+      <body  className={`${inter.className} ${newEditorial.variable} antialiased   font-inter`}>
         <WalletButtonStyles />
         <WalletAdapterProvider>
           {children}

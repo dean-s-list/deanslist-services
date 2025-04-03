@@ -24,13 +24,13 @@ function Footer() {
         {/* Top right content */}
         <div className="flex justify-center space-x-4 ">
           <a href="https://x.com/deanslistDAO" target="blank" className="hover:text-gray-300 ">
-            <img src="twitter.png" alt="Twitter" className="w-6 h-6 " />
+            <img src="twitter_colored.png" alt="Twitter" className="w-6 h-6 " />
           </a>
           <a href="https://discord.gg/deanslist" target="blank" className="hover:text-gray-300">
-            <img src="discord.png" alt="Discord" className="w-6 h-6" />
+            <img src="discord_colored.png" alt="Discord" className="w-6 h-6" />
           </a>
           <a href="https://github.com/dean-s-list" target="blank" className="hover:text-gray-300">
-            <img src="git.png" alt="GitHub" className="w-6 h-6" />
+            <img src="git_colored.png" alt="GitHub" className="w-6 h-6" />
           </a>
         </div>
       </div>
