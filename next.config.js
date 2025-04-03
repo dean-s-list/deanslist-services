@@ -15,9 +15,10 @@ const nextConfig = {
     '@metaplex-foundation/mpl-core-das',
   ],
   images: {
+    unoptimized: true, // <-- Add this to allow static export
     domains: ['gateway.irys.xyz'],
   },
   reactStrictMode: true,
-}
+};
 
-module.exports = nextConfig; 
+module.exports = nextConfig;

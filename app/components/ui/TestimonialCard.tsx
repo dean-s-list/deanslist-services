@@ -11,11 +11,12 @@ interface TestimonialCardProps {
     testimonial: Testimonial;
 }
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
+const   TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
     return (
         <div
-            className="bg-gradient-to-tr from-[#2B153B] to-[#130821] text-white rounded-2xl shadow-md p-6 min-w-[300px] max-w-[450px] md:max-w-[300px] md:min-w-[500px] grid grid-rows-[1fr,fit] space-y-4"
+            className="bg-gradient-to-tr from-[#061E1E] to-[#061E1E] text-white rounded-2xl shadow-md p-6 min-w-[300px] max-w-[450px] md:max-w-[300px] md:min-w-[500px] grid grid-rows-[1fr,fit] space-y-4 relative" 
         >
+             <div className="absolute hiiden md:block h-[152px] w-[107px] bg-[#DCFCE2] rounded-[100%] top-[1rem] left-[10rem] -rotate-[45deg]  blur-[105px]"></div>
             <p className="text-lg">“{testimonial.quote}”</p>
             <div className="flex items-center space-x-4">
                 <div className="w-10 h-10">

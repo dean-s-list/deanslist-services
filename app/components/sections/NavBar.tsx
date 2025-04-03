@@ -11,18 +11,18 @@ const NavBar: React.FC = () => {
         setIsOpen(!isOpen);
         const headerElement = document.getElementById('head');
         if (headerElement) {
-            headerElement.classList.toggle('bg-[#814D9A1A]');
+            headerElement.classList.toggle('bg-[#ABD6B3]');
         }
     };
 
     return (
         <div id="nav">
-            <header id="head" className="flex justify-between md:max-xl:mx-16 xl:w-[75%] mx-auto md:mt-10 bg-[#814D9A1A] bg-opacity-10 px-3 md:px-9 py-5 items-center relative rounded-lg">
+            <header id="head" className="flex justify-between md:max-xl:mx-16 xl:w-[75%] mx-auto md:mt-10 bg-[#061E1E1A] bg-opacity-10 px-3 md:px-9 py-5 items-center relative rounded-lg">
                 {/* Logo */}
                 <Link href="/">
                     <div className="flex items-center gap-2">
-                        <Image src="logo.svg" alt="logo" width={36} height={36} />
-                        <span className="text-2xl font-semibold">DeansListDAO</span>
+                        <Image src="dean.png" alt="logo" width={36} height={36} />
+                        <span className="text-2xl font-semibold text-[#061E1E] ">Island DAO</span>
                     </div>
                 </Link>
 
@@ -73,20 +73,20 @@ const NavBar: React.FC = () => {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden lg:block">
-                    <ul className="flex space-x-10 font-semibold">
+                    <ul className="flex space-x-10 font-semibold text-[#061E1E] ">
                         <li>
-                            <Link className="hover:text-[#D896F7] active:text-[#D896F7] focus:text-[#D896F7]" href="#">Home</Link>
+                            <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]" href="#">Home</Link>
                         </li>
                         <li>
-                            <Link className="hover:text-[#D896F7] active:text-[#D896F7] focus:text-[#D896F7]" href="#services">Services</Link>
+                            <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]" href="#services">Services</Link>
                         </li>
-                        <li className="hover:text-[#D896F7]">
-                            <Link className="hover:text-[#D896F7] active:text-[#D896F7] focus:text-[#D896F7]" href="#about-us">About Us</Link>
+                        <li >
+                            <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]" href="#about-us">About Us</Link>
                         </li>
-                        <li className="hover:text-[#D896F7]">
-                            <Link className="hover:text-[#D896F7] active:text-[#D896F7] focus:text-[#D896F7]" href="#events">Events</Link>
+                        <li >
+                            <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]" href="#events">Events</Link>
                         </li>
-                        <li className="hover:text-[#D896F7]">
+                        <li className="hover:text-[#ffff]">
                             <Link
                                 href="https://leaderboard.deanslist.services/leaderboard"
                                 target="_blank"
@@ -94,7 +94,7 @@ const NavBar: React.FC = () => {
                             >
                                 Leaderboard
                             </Link>
-                        </li>        <li className="hover:text-[#D896F7]">
+                        </li>        <li className="hover:text-[#ffff]">
                             <Link
                                 href="/nft/eligibility"
                                 target="_blank"
@@ -113,7 +113,7 @@ const NavBar: React.FC = () => {
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <button className="bg-[#9A59BA80] overflow-hidden py-2 px-6 relative rounded-full border border-[#9A59BA] font-medium hover:bg-purple-400 transition flex gap-2 items-center">
+                        <button className="bg-[#061E1E] overflow-hidden py-2 px-6 relative rounded-full border border-[#C4F9CF] font-medium hover:bg-green-900 transition flex gap-2 items-center">
                             <span className="left-[1px] absolute border-b-[2px] border-b-[#ffffff] h-[40px] blur-[2px] px-16 rounded-[20px] -z-10"></span>
                             Get Started
                         </button>
@@ -123,7 +123,7 @@ const NavBar: React.FC = () => {
                 {/* Mobile Menu */}
                 {isOpen && (
                     <div
-                        className="absolute top-full left-0 mt-2 w-full -translate-y-[6px] bg-[#090118] text-white pb-[40px] shadow-lg z-10 lg:hidden"
+                        className="absolute top-full left-0 mt-2 w-full -translate-y-[6px] bg-[#ABD6B3] text-white pb-[40px] shadow-lg z-10 lg:hidden"
                         id="mobile-menu"
                     >
                         <div className="space-y-2 px-3 py-3">
