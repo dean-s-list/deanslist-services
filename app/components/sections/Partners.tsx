@@ -2,7 +2,6 @@
 function Partners() {
 	const partners = [
 		{ img: "realms.png", name: "Realms", link: "https://www.realms.today" },
-		{ img: "island.png", name: "IslandDAO", link: "https://island-dao.com" },
 		{ img: "pubkey.png", name: "Pubkey", link: "https://app.pubkey.link/" },
 		{ img: "solana.png", name: "Solana Foundation", link: "https://solana.com" },
 		{ img: "coloseum.png", name: "Colosseum", link: "https://www.colosseum.org/" },

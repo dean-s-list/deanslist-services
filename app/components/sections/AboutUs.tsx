@@ -29,12 +29,12 @@ const AboutUs: React.FC = () => {
                 </div>
 
                 {/* Right content */}
-                <div className="p-5 text-[16px]">
+                <div className="p-5 text-[16px] ">
                     <div>
                         <h3>Island DAO is a Service DAO consisting of Web3 power users who provide valuable <br /> feedback sessions, as well as a variety of other services and consultation to <br /> projects wishing to succeed in the space, or simply seeking to refine their products <br />for an overall better UX.</h3>
                     </div>
                     <div className="pt-2">
-                        <h3>Consider our community an ecosystem of feedback bounty opportunities. Island DAO is hired by clients for a rigorous feedback session, in which participants are paid <br /> USDC and $ISLAND for work contributed.<br /></h3>
+                        <h3>Consider our community an ecosystem of feedback bounty opportunities. <br/> Island DAO is hired by clients for a rigorous feedback session, in which participants are <br /> paid USDC and $ISLAND for work contributed.<br /></h3>
                     </div>
                     <div className="pt-2">
                         <h3>Island DAO started as a subDAO from Grape Protocol in 2022 as Grape served as<br /> foundation to find core power users on the Solana blockchain which the core focus<br /> would be providing feedback sessions to new and upcoming protocols on the<br />Solana ecosystem.</h3>
