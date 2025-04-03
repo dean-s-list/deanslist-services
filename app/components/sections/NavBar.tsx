@@ -164,7 +164,7 @@ const NavBar: React.FC = () => {
                                 Leaderboard
                             </Link>
                             <Link
-                                href="/nft/eligibility"
+                                href="/nft/mint"
                                 target="_blank"
                                 className="block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-200"
                                 onClick={toggleMenu}
