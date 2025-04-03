@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 
 const NavBar = dynamic(() => import("./components/sections/NavBar"));
 const Hero = dynamic(() => import("./components/sections/Hero"));
+const NetworkGraph = dynamic(() => import("./components/sections/NetworkGraph"));
 const Partners = dynamic(() => import("./components/sections/Partners"));
 const Services = dynamic(() => import("./components/sections/Services"));
 const Pricing = dynamic(() => import("./components/sections/Pricing"));
@@ -65,6 +66,7 @@ export default function Home() {
           <Trusties />
           <Testimonials />
           <AboutUs />
+          <NetworkGraph/>
           <Branches/>
           <Events />
           <FAQ />
