@@ -9,7 +9,7 @@ function Footer() {
         {/* Top left content */}
         <div className="flex items-center justify-center sm:justify-start">
           <img src="dean.png" alt="DeansListDAO Logo" className="w-10 h-10 mr-2" />
-          <span className="text-xl font-bold">Island DAO</span>
+          <span className="text-xl font-bold">IslandDAO</span>
         </div>
 
         {/* Top middle content */}
@@ -26,7 +26,7 @@ function Footer() {
           <a href="https://x.com/deanslistDAO" target="blank" className="hover:text-gray-300 ">
             <img src="twitter_colored.png" alt="Twitter" className="w-6 h-6 " />
           </a>
-          <a href="https://discord.gg/deanslist" target="blank" className="hover:text-gray-300">
+          <a href="https://discord.gg/dvHrj9SXQS" target="blank" className="hover:text-gray-300">
             <img src="discord_colored.png" alt="Discord" className="w-6 h-6" />
           </a>
           <a href="https://github.com/dean-s-list" target="blank" className="hover:text-gray-300">
@@ -44,7 +44,7 @@ function Footer() {
           <a href="https://www.tensor.trade/trade/deanslist" target="blank" className="hover:text-gray-300">NFT Store</a>
           <Link href="privacy" className="hover:text-gray-300">Privacy</Link>
         </div>
-        <p className="text-center">&copy; {new Date().getFullYear()} Island DAO. All rights reserved.</p>
+        <p className="text-center">&copy; {new Date().getFullYear()} IslandDAO. All rights reserved.</p>
       </div>
     </footer>
   );

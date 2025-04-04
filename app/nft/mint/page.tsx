@@ -494,7 +494,7 @@ export default function MintPage() {
                     <span className="font-medium bg-gradient-to-r from-[#1DA1F2] to-[#199CDC] bg-clip-text text-transparent">Follow on Twitter</span>
                   </a>
                   <a
-                    href="https://discord.gg/islanddao"
+                    href="https://discord.gg/dvHrj9SXQS"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2.5 px-5 py-2.5 bg-gradient-to-b from-white to-gray-50 hover:to-gray-100 rounded-xl border border-gray-200 shadow-sm transition-all hover:shadow"

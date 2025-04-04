@@ -22,7 +22,7 @@ const NavBar: React.FC = () => {
                 <Link href="/">
                     <div className="flex items-center gap-2">
                         <Image src="dean.png" alt="logo" width={36} height={36} />
-                        <span className="text-2xl font-semibold text-[#061E1E] ">Island DAO</span>
+                        <span className="text-2xl font-semibold text-[#061E1E] ">IslandDAO</span>
                     </div>
                 </Link>
 
@@ -109,7 +109,7 @@ const NavBar: React.FC = () => {
                 {/* Button (Desktop Only) */}
                 <div className="hidden lg:block">
                     <a
-                        href="https://discord.gg/deanslist"
+                        href="https://discord.gg/dvHrj9SXQS"
                         target="_blank"
                         rel="noopener noreferrer"
                     >

@@ -80,7 +80,7 @@ function Pricing() {
                                 <span className=" font-semibold text-4xl lg:max-txl:text-3xl">$</span>999<span className="text-sm text-gray-300">per session</span>
                             </p>
 
-                            <a href="https://discord.gg/deanslist" target="blank" rel="noopener noreferrer" className="w-full md:w-auto">
+                            <a href="https://discord.gg/dvHrj9SXQS" target="blank" rel="noopener noreferrer" className="w-full md:w-auto">
                                 <button className=" bg-[#175959] 2xl:-translate-y-[12px] w-full  md:px-6  overflow-hidden py-2 relative rounded-[10px] border border-[#156161] font-medium hover:bg-[#DCFCE266] transition flex gap-2 items-center  mt-5 md:mt-0">
                                     <span className="hidden lg:block md:left-[1px] absolute xl:border-b-[2px] border-b-[#ffffff] h-[40px] blur-[2px] px-16 rounded-[2px] -z-2 mb-[78px]"></span>
 
@@ -117,7 +117,7 @@ function Pricing() {
                                 <span className="font-semibold text-4xl lg:max-txl:text-3xl">$</span>1,499<span className="text-sm text-gray-300">per session</span>
                             </p>
 
-                            <a href="https://discord.gg/deanslist" target="blank" rel="noopener noreferrer" className="w-full md:w-auto">
+                            <a href="https://discord.gg/dvHrj9SXQS" target="blank" rel="noopener noreferrer" className="w-full md:w-auto">
                                 <button className="bg-[#061E1E] 2xl:-translate-y-[12px] w-full overflow-hidden md:py-[10px] py-2 md:px-6 mt-5 md:mt-0 relative rounded-[10px] border border-[#ABD6B3] text-center font-medium hover:bg-gray-800 transition flex gap-2 items-center ">
                                     <span className="hidden lg:block left-[1px] absolute xl:border-b-[2px] border-b-[#ffffff] h-[40px] blur-[2px] text-center px-16 rounded-[2px] w-full  -z-2 mb-[78px]"></span>
                                     <div className="w-fit mx-auto">Get Started </div>
@@ -159,7 +159,7 @@ function Pricing() {
                                 <span className="font-semibold text-4xl lg:max-txl:text-3xl">$</span>4,999<span className="text-sm text-gray-300">per session</span>
                             </p>
 
-                            <a href="https://discord.gg/deanslist" target="blank" rel="noopener noreferrer" className="w-full md:w-auto">
+                            <a href="https://discord.gg/dvHrj9SXQS" target="blank" rel="noopener noreferrer" className="w-full md:w-auto">
                                 <button className="2xl:-translate-y-[12px]  bg-[#175959] w-full md:px-6 mt-5 md:mt-0 overflow-hidden py-2  relative rounded-[10px] border border-[#156161] font-medium hover:bg-[#DCFCE266] transition flex gap-2 items-center">
                                     <span className="hidden lg:block left-[1px] absolute xl:border-b-[2px] border-b-[#ffffff] h-[40px] blur-[2px] px-16 rounded-[2px] -z-2 mb-[78px]"></span>
                                     <div className="w-fit mx-auto">Get Started </div>

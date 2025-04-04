@@ -5,7 +5,7 @@ const PrivacyPolicy: React.FC = () => {
         <div className="privacy-policy-container" style={{ padding: '20px', maxWidth: '800px', margin: 'auto' }}>
             <h1 className="text-4xl font-bold mb-6">Privacy Policy</h1>
     
-            <p>At DeansListDAO, we respect your privacy. This Privacy Policy outlines the types of information we collect, how we use it, and how we protect it.</p>
+            <p>At IslandDAO, we respect your privacy. This Privacy Policy outlines the types of information we collect, how we use it, and how we protect it.</p>
 
             <h2 className="text-2xl font-bold">Information We Collect:</h2>
             <p>We do not collect any personal information from users. Our website only provides static content and does not actively collect, store, or process any personal data.</p>

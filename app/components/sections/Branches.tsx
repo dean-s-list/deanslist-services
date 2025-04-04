@@ -18,7 +18,7 @@ const Branches: React.FC = () => {
                     <div className="p-4 ">
                         {/* <SectionHeader title="Branches" /> */}
                         <h4 className="text-[#061E1E] text-[36px] tracking-[1px] font-semibold mb-4">Our Regional <span className="font-light font-editorial-new">States</span></h4>
-                        <h5 className="text-[20px] text-[#061E1E]">Countries in which you can find us IRL and visit our <br /> branches.</h5>
+                        <h5 className="text-[20px] text-[#061E1E]">Countries in which you can find us IRL and visit our branches.</h5>
                     </div>
                 </div>
 

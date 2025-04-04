@@ -6,7 +6,7 @@ export default function FooterMobile() {
 
             <div className="mb-10 flex items-center gap-2 px-10  ">
                 <Image src="dean.png" alt="logo" width={28} height={28} />
-                <span className="text-xl font-semibold">Island DAO</span>
+                <span className="text-xl font-semibold">IslandDAO</span>
             </div>
 
             <div className='flex justify-between px-10'>
@@ -35,14 +35,14 @@ export default function FooterMobile() {
                     <a href="https://x.com/islandDAO_DL" target="blank" className="hover:text-gray-300">
                         <img src="twitter_colored.png" alt="Twitter" className="w-6 h-6" />
                     </a>
-                    <a href="https://discord.gg/deanslist" target="blank" className="hover:text-gray-300">
+                    <a href="https://discord.gg/dvHrj9SXQS" target="blank" className="hover:text-gray-300">
                         <img src="discord_colored.png" alt="Discord" className="w-6 h-6" />
                     </a>
                     <a href="https://github.com/dean-s-list" target="blank" className="hover:text-gray-300">
                         <img src="git_colored.png" alt="GitHub" className="w-6 h-6" />
                     </a>
                 </div>
-                <p className="text-center">&copy; {new Date().getFullYear()} Island DAO. All rights reserved.</p>
+                <p className="text-center">&copy; {new Date().getFullYear()} IslandDAO. All rights reserved.</p>
 
             </div>
         </div>
