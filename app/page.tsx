@@ -19,7 +19,7 @@ const Scroller = dynamic(() => import("./components/ui/Scroller"));
 export default function Home() {
     return (
         <main
-            className="min-h-screen bg-gradient-to-b from-[#ABD6B3] via-[#ABD6B3] to-[#ABD6B3] text-white overflow-x-hidden relative">
+            className="min-h-screen bg-gradient-to-b from-[#ABD6B3] via-[#ABD6B3] to-[#ABD6B3] text-white overflow-x-hidden relative -z-20">
 
             <div className="pt-4">
                 <NavBar/>
