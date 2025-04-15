@@ -32,7 +32,7 @@ export default function FooterMobile() {
 
             <div className='my-10'>
                 <div className="flex justify-center space-x-4 border-t border-[#191028]  pt-10 pb-5">
-                    <a href="https://x.com/islandDAO_DL" target="blank" className="hover:text-gray-300">
+                    <a href="https://x.com/islanddao?s=21" target="blank" className="hover:text-gray-300">
                         <img src="twitter_colored.png" alt="Twitter" className="w-6 h-6" />
                     </a>
                     <a href="https://discord.gg/dvHrj9SXQS" target="blank" className="hover:text-gray-300">

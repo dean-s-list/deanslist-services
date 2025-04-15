@@ -23,7 +23,7 @@ function Footer() {
 
         {/* Top right content */}
         <div className="flex justify-center space-x-4 ">
-          <a href="https://x.com/deanslistDAO" target="blank" className="hover:text-gray-300 ">
+          <a href="https://x.com/islanddao?s=21" target="blank" className="hover:text-gray-300 ">
             <img src="twitter_colored.png" alt="Twitter" className="w-6 h-6 " />
           </a>
           <a href="https://discord.gg/dvHrj9SXQS" target="blank" className="hover:text-gray-300">
