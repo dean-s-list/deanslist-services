@@ -14,10 +14,10 @@ const WalletMultiButtonDynamic = dynamic(
 
 const NAV_LINKS = [
   { href: "https://eligibility.deanslist.services/", label: "Eligibility" },
-  { href: "/nft/mint", label: "Mint" },
-  // { href: "/nft/perks", label: "Perks" },
-  { href: "/nft/roadmap", label: "Roadmap" },
-  //{ href: "/nft/stats", label: "Stats" },
+  //{ href: "/PERKS/mint", label: "Mint" },
+  // { href: "/PERKS/perks", label: "Perks" },
+  { href: "/PERKS/roadmap", label: "Roadmap" },
+  //{ href: "/PERKS/stats", label: "Stats" },
 ];
 
 const NFTHeader = () => {
