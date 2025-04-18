@@ -1,15 +1,19 @@
 // app/perks/whitepaper/page.tsx
 
 'use client'
-import { useEffect } from 'react'
-import { useRouter } from 'next/navigation'
 
-export default function WhitepaperRedirect() {
-  const router = useRouter()
+import React from 'react'
 
-  useEffect(() => {
-    router.replace('https://drive.google.com/file/d/1zmdOe4AkauvIVTk5F5DHl4e_ocNBvkJE/view?usp=sharing')
-  }, [router])
+export default function WhitepaperPage() {
+  return (
+    <div style={{ width: '100%', height: '100vh', padding: '1rem' }}>
+      <iframe
+        src="https://drive.google.com/file/d/1_x2rvT4BaZOMU0zDvzKHv1dADDegmYJF/preview"
+        width="100%"
+        height="100%"
 
-  return null
+        style={{ border: 'none' }}
+      />
+    </div>
+  )
 }
