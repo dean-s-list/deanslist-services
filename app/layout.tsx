@@ -43,10 +43,10 @@ export default function RootLayout({
         <meta name="keywords" content="Dean'slist, Network State, Web3, DAO, Power Users, Blockchain, Community, IslandDAO, Solana, Dean'slist NG, Dean'slist BR" />
         <meta property="og:title" content="IslandDAO" />
         <meta property="og:description" content="A Network State Of Web3 Power users" />
-        <meta property="og:image" content="image/svg+xml" />
-        <meta property="og:url" content="https://deanslist.services" />
+        <meta property="og:image" content="https://islanddao.org/logo.svg " />
+        <meta property="og:url" content="https://islanddao.org" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@deanslistDAO" />
+        <meta name="twitter:site" content="@islanddao" />
         <meta name="twitter:title" content="IslandDAO" />
         <meta name="twitter:description" content="A Network State Of Web3 Power users" />
         <meta name="twitter:image" content="image/svg+xml" />
