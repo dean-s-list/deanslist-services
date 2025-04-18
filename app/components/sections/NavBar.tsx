@@ -1,5 +1,5 @@
 "use client"
-import {useState} from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,11 +18,11 @@ const NavBar: React.FC = () => {
     return (
         <div id="nav">
             <header id="head"
-                    className="flex justify-between md:max-xl:mx-16 xl:w-[75%] mx-auto md:mt-12 bg-[#061E1E1A] bg-opacity-10 px-3 md:px-9 py-5 items-center relative rounded-lg">
+                className="flex justify-between md:max-xl:mx-16 xl:w-[75%] mx-auto md:mt-12 bg-[#061E1E1A] bg-opacity-10 px-3 md:px-9 py-5 items-center relative rounded-lg">
                 {/* Logo */}
                 <Link href="/">
                     <div className="flex items-center gap-2">
-                        <Image src="dean.png" alt="logo" width={36} height={36}/>
+                        <Image src="dean.png" alt="logo" width={36} height={36} />
                         <span className="text-2xl font-semibold text-[#061E1E] ">IslandDAO</span>
                     </div>
                 </Link>
@@ -77,19 +77,19 @@ const NavBar: React.FC = () => {
                     <ul className="flex space-x-10 font-semibold text-[#061E1E] ">
                         <li>
                             <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]"
-                                  href="#">Home</Link>
+                                href="#">Home</Link>
                         </li>
                         <li>
                             <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]"
-                                  href="#services">Services</Link>
+                                href="#services">Services</Link>
                         </li>
                         <li>
                             <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]"
-                                  href="#about-us">About Us</Link>
+                                href="#about-us">About Us</Link>
                         </li>
                         <li>
                             <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]"
-                                  href="#events">Events</Link>
+                                href="#events">Events</Link>
                         </li>
                         <li className="hover:text-[#ffff]">
                             <Link
