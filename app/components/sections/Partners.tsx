@@ -10,7 +10,18 @@ function Partners() {
 		{ img: "waterloo.png", name: "University of Waterloo", link: "https://uwaterloo.ca/" },
 		{ img: "sec.png", name: "Sec3", link: "https://pro.sec3.dev/" },
 		{ img: "metaplex.png", name: "Metaplex", link: "https://www.metaplex.com/" },
-		{ img: "superteam.png", name: "SuperTeam", link: "https://superteam.fun/" },
+		{ img: "alldomain.png", name: "AllDomains", link: "https://alldomains.id/" },
+		{ img: "superteamcanada.png", name: "SuperTeam Canada", link: "https://superteam.ca/" },
+		{ img: "superteambalkan.png", name: "SuperTeam Balkan", link: "https://superteam.fun/" },
+		{ img: "superteamjapan.png", name: "SuperTeam Japan", link: "https://superteamjp.fun/" },
+		{ img: "superteampoland.png", name: "SuperTeam Poland", link: "https://pl.superteam.fun/" },
+		{ img: "superteamindia.png", name: "SuperTeam India", link: "https://in.superteam.fun/" },
+		{ img: "saga.png", name: "Saga DAO", link: "https://sagamobiledao.com/" },
+		{ img: "solfare.png", name: "Solflare", link: "https://www.solflare.com/" },
+		{ img: "cabana.png", name: "Cabana Exchange", link: "https://cabana.exchange/" },
+		{ img: "monkedao.png", name: "MonkeDAO", link: "https://monkedao.io/" },
+		{ img: "metadao.png", name: "MetaDAO", link: "https://www.metadao.fi/" },
+		{ img: "pilled.png", name: "", link: "https://superteam.fun/" },
 	];
 	
 	
