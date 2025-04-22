@@ -9,7 +9,7 @@ export default function WhitepaperPage() {
     <div style={{ width: '100%', height: '100vh', padding: '1rem' }}>
       <iframe
         src={`https://docs.google.com/gview?url=${encodeURIComponent(
-          'https://drive.google.com/uc?export=download&id=1LJrWlC9KyXKxvrKhk70qFy6k3WtEtksD/'
+          'https://drive.google.com/uc?export=download&id=1LJrWlC9KyXKxvrKhk70qFy6k3WtEtksD'
         )}&embedded=true`}
         style={{ width: '100%', height: '100%', border: 'none' }}
         title="Whitepaper Viewer"
