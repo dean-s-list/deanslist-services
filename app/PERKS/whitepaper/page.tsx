@@ -7,7 +7,7 @@ import React from 'react'
 export default function WhitepaperPage() {
   return (
 <iframe
-  src="/whitepaper.pdf"
+  src="/Whitepaper.pdf"
   width="100%"
   height="100%"
   style={{border: "none;"}}
