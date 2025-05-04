@@ -115,7 +115,6 @@
     @apply border-border;
   }
   body {
-    /* background-color: #090118; */
     @apply bg-background text-foreground;
     overflow-x:hidden ;
     height: 100vh;

@@ -20,7 +20,7 @@ const Scroller = dynamic(() => import("./components/ui/Scroller"))
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#ABD6B3] via-[#ABD6B3] to-[#ABD6B3] text-white overflow-x-hidden relative">
+    <main className="min-h-screen bg-gradient-to-b from-[#010C0C] via-[#010C0C] to-[#010C0C] text-white overflow-x-hidden relative">
       <div className="absolute inset-0" />
       <div className="relative z-10">
         {/* Announcement Banner */}

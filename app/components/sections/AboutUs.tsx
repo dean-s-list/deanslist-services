@@ -4,26 +4,26 @@ const AboutUs: React.FC = () => {
     return (
         <div className="md:bg-[url(/Aboudt_Us.png)] bg-[url(/about-mobie.png)] md:bg-cover mx-auto flex flex-col justify-center items-center text-[white] relative max-w-[1440px]" id="about-us">
             {/* Background blur effect  */}
-            <div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#9A59BA] rounded-[100%] -top-[40rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
-            <div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#f7f7f7] rounded-[100%] -top-[30rem] -right-[8rem] rotate-[45deg] blur-[390px] "></div>
+            <div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#044B4B] rounded-[100%] -top-[40rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
+            <div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#044B4B] rounded-[100%] -top-[30rem] -right-[8rem] rotate-[45deg] blur-[390px] "></div>
             
             {/* Heading */}
             {/* <SectionHeader title="About Us" /> */}
-            <div className="relative text-[#061E1E]">
+            <div className="relative text-[#FFFFFF]">
                 <div className="hidden md:block absolute -left-[1615px] top-[10px] h-2 w-[100rem] bg-[#061E1E]"></div>
                 About us
             </div>
 
             <div className="flex flex-col items-center p-5 mt-8 ">
-                <h4 className="text-[#061E1E] text-[48px] font-bold mb-4">Redefining Excellence</h4>
-                <h5 className="text-[20px] text-[#061E1E] ">We&apos;re committed to pushing boundaries and creating impactful solutions that drive progress.</h5>
+                <h4 className="text-[#FFFFFF] text-[48px] font-bold mb-4">Redefining Excellence</h4>
+                <h5 className="text-[20px] text-[#FFFFFF] ">We&apos;re committed to pushing boundaries and creating impactful solutions that drive progress.</h5>
             </div>
 
             {/* Content */}
-            <div className="flex flex-col md:flex-row mt-8 md:space-x-[180px] lg:max-txl:space-x-[100px] text-[#061E1E]">
+            <div className="flex flex-col md:flex-row mt-8 md:space-x-[180px] lg:max-txl:space-x-[100px] text-[#FFFFFF]">
                 {/* Left Content */}
                 <div className="md:w-[500px] text-[40px] leading-[45px] px-5 md:px-0 pt-5">
-                    <h4 className="text-[#061E1E] font-bold mb-4 tracking-[1px]">
+                    <h4 className="text-[#FFFFFF] font-bold mb-4 tracking-[1px]">
                         Designed with a <span className="font-light font-editorial-new">distinct</span> <br /> and <span className="font-light font-editorial-new">outstanding </span>approach. <br /> <br />
                     </h4>
                 </div>
@@ -43,7 +43,7 @@ const AboutUs: React.FC = () => {
             </div>
 
             {/* Base content */}
-            <div className="w-[1000px] flex flex-col items-center p-5 text-[#061E1E]">
+            <div className="w-[1000px] flex flex-col items-center p-5 text-[#FFFFFF]">
                 <h3 className="text-[20px]">IslandDAO doing numbers!</h3>
                 <div className="pt-5">
                     <ul className="flex flex-col md:flex-row items-center gap-8 md:gap-[300px]">

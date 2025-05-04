@@ -28,8 +28,8 @@ function Partners() {
 	return (
 		<div className=" h-96 flex justify-center items-center text-white">
 			<div className="w-screen md:w-[1000px] flex flex-col items-center">
-				<h6 className="text-[#061E1E] text-sm md:text-[16px] font-semibold mb-4">Partners</h6>
-				<h4 className="text-[#061E1E] xl:text-[36px]  font-bold mb-4">
+				<h6 className="text-[#FFFFFF] text-sm md:text-[16px] font-semibold mb-4">Partners</h6>
+				<h4 className="text-[#FFFFFF] xl:text-[36px]  font-bold mb-4">
 					Our <span className="font-light font-editorial-new">partners</span> are our strength
 				</h4>
 				<div className="overflow-hidden w-full scroller">
@@ -49,7 +49,7 @@ function Partners() {
 											alt={partner.name}
 											className="w-[40px] h-[40px] "
 										/>
-										<span className="text-[24px] font-[600px] text-[#061E1E] ">{partner.name}</span></a>
+										<span className="text-[24px] font-[600px] text-[#FFFFFF] ">{partner.name}</span></a>
 								</li>
 							))}
 						</ul>

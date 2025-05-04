@@ -3,7 +3,7 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <footer className="max-w-[1440px] mx-auto hidden md:block text-[#061E1E] p-6 sm:p-16 ">
+    <footer className="max-w-[1440px] mx-auto hidden md:block text-[#FFFFFF] p-6 sm:p-16 ">
       {/* Top Footer */}
       <div className="flex flex-col sm:flex-row justify-between items-center pb-10 space-y-6 sm:space-y-0">
         {/* Top left content */}
@@ -24,18 +24,18 @@ function Footer() {
         {/* Top right content */}
         <div className="flex justify-center space-x-4 ">
           <a href="https://x.com/islanddao?s=21" target="blank" className="hover:text-gray-300 ">
-            <img src="twitter_colored.png" alt="Twitter" className="w-6 h-6 " />
+            <img src="twitter.png" alt="Twitter" className="w-6 h-6 " />
           </a>
           <a href="https://discord.gg/dvHrj9SXQS" target="blank" className="hover:text-gray-300">
-            <img src="discord_colored.png" alt="Discord" className="w-6 h-6" />
+            <img src="discord.png" alt="Discord" className="w-6 h-6" />
           </a>
           <a href="https://github.com/dean-s-list" target="blank" className="hover:text-gray-300">
-            <img src="git_colored.png" alt="GitHub" className="w-6 h-6" />
+            <img src="git.png" alt="GitHub" className="w-6 h-6" />
           </a>
         </div>
       </div>
 
-      <hr className="border-t border-gray-700 my-4 xl:mb-10" />
+      <hr className="border-t border-[#002828] my-4 xl:mb-10" />
 
       {/* Base content */}
       <div className="flex flex-col sm:flex-row justify-between items-center mt-4 space-y-4 sm:space-y-0">

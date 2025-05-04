@@ -18,12 +18,12 @@ const NavBar: React.FC = () => {
     return (
         <div id="nav">
             <header id="head"
-                className="flex justify-between md:max-xl:mx-16 xl:w-[75%] mx-auto md:mt-12 bg-[#061E1E1A] bg-opacity-10 px-3 md:px-9 py-5 items-center relative rounded-lg">
+                className="flex justify-between md:max-xl:mx-16 xl:w-[75%] mx-auto md:mt-12 bg-[#061E1E80] bg-opacity-10 px-3 md:px-9 py-5 items-center relative rounded-lg">
                 {/* Logo */}
                 <Link href="/">
                     <div className="flex items-center gap-2">
                         <Image src="dean.png" alt="logo" width={36} height={36} />
-                        <span className="text-2xl font-semibold text-[#061E1E] ">IslandDAO</span>
+                        <span className="text-2xl font-semibold text-[#FFFFFF] ">IslandDAO</span>
                     </div>
                 </Link>
 
@@ -74,7 +74,7 @@ const NavBar: React.FC = () => {
 
                 {/* Desktop Navigation */}
                 <nav className="hidden lg:block">
-                    <ul className="flex space-x-10 font-semibold text-[#061E1E] ">
+                    <ul className="flex space-x-10 font-semibold text-[#FFFFFF] ">
                         <li>
                             <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]"
                                 href="#">Home</Link>

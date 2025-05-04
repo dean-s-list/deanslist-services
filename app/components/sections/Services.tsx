@@ -8,16 +8,16 @@ const Services = () => {
     return (
         <div className="py-16 md:px-12 relative" id="services">
             {/* Background blur effect  */}
-            <div className="absolute  md:h-[1052px] md:w-[277px] bg-[#DCFCE2] rounded-[100%] -top-[10rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
-            <div className="absolute  md:h-[1052px] md:w-[277px] bg-[#DCFCE2] rounded-[100%] -top-[0rem] -right-[8rem] rotate-[45deg] blur-[390px] "></div>
+            <div className="absolute  md:h-[1052px] md:w-[277px] bg-[#044B4B] rounded-[100%] -top-[10rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
+            <div className="absolute  md:h-[1052px] md:w-[277px] bg-[#044B4B] rounded-[100%] -top-[0rem] -right-[8rem] rotate-[45deg] blur-[390px] "></div>
 
             <SectionHeader title="Services"  />
             {/* Header Section */}
             <div className="md:text-center px-5 mb-12">
-                <h2 className="text-4xl font-bold text-[#061E1E] ">
+                <h2 className="text-4xl font-bold text-[#FFFFFF] ">
                     Community of Web3 <span className="font-editorial-new font-light">power users</span>.
                 </h2>
-                <p className="text-[#061E1E] mt-4  mx-auto text-[20px]">
+                <p className="text-[#FFFFFF] mt-4  mx-auto text-[20px]">
                     As experienced Web3 users, we provide in-depth feedback sessions and a suite of consulting <br/> services to
                     projects looking to thrive in the space. From product quality to user experience, we’re <br /> here to elevate
                     your project to the next level.

@@ -58,10 +58,10 @@ const Testimonials = () => {
 				{/* Testimonials */}
             {/* </div> */}
 			<div className="md:text-center mb-12">
-				<h2 className="text-[#061E1E] text-4xl font-bold">
+				<h2 className="text-[#FFFFFF] text-4xl font-bold">
 					They say it <span className="font-light font-editorial-new">better</span> than we do!
 				</h2>
-				<p className="text-[#061E1E] mt-4">
+				<p className="text-[#FFFFFF] mt-4">
 					We&apos;re proud to be working with these incredible and outstanding
 					projects, and thankful for their <br /> feedback, suggestions, and support.
 				</p>

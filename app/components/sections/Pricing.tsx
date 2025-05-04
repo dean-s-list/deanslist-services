@@ -43,13 +43,13 @@ function Pricing() {
     return (
         <div className="w-screen flex flex-col justify-center items-center text-white relative">
             {/* Background blur effect  */}
-            <div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#ABD6B3] rounded-[100%] -top-[10rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
-            <div className="absolute hidden md:block  h-[1052px] w-[277px] bg-[#ABD6B3] rounded-[100%] -top-[0rem] -right-[8rem] rotate-[45deg] blur-[390px] "></div>
+            <div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#044B4B] rounded-[100%] -top-[10rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
+            <div className="absolute hidden md:block  h-[1052px] w-[277px] bg-[#044B4B] rounded-[100%] -top-[0rem] -right-[8rem] rotate-[45deg] blur-[390px] "></div>
 
             <SectionHeader title="Pricing" isLeft={false} />
             <div className="flex flex-col items-center p-10">
-                <h4 className="text-[#061E1E] text-4xl font-semibold mb-4 mt-2">Plans that fit your <span className="font-light font-editorial-new">scale</span></h4>
-                <h5 className="text-[#061E1E]">No additional fees or hidden costs.</h5>
+                <h4 className="text-[#FFFFFF] text-4xl font-semibold mb-4 mt-2">Plans that fit your <span className="font-light font-editorial-new">scale</span></h4>
+                <h5 className="text-[#FFFFFF]">No additional fees or hidden costs.</h5>
             </div>
 
             <div className="flex flex-col md:p-8 items-center">

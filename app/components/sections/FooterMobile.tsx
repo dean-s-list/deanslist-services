@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function FooterMobile() {
     return (
-        <div className='md:hidden text-[#061E1E]'>
+        <div className='md:hidden text-[#FFFFFF]'>
 
             <div className="mb-10 flex items-center gap-2 px-10  ">
                 <Image src="dean.png" alt="logo" width={28} height={28} />
@@ -31,15 +31,15 @@ export default function FooterMobile() {
             </div>
 
             <div className='my-10'>
-                <div className="flex justify-center space-x-4 border-t border-[#191028]  pt-10 pb-5">
+                <div className="flex justify-center space-x-4 border-t border-[#002828]  pt-10 pb-5">
                     <a href="https://x.com/islanddao?s=21" target="blank" className="hover:text-gray-300">
-                        <img src="twitter_colored.png" alt="Twitter" className="w-6 h-6" />
+                        <img src="twitter.png" alt="Twitter" className="w-6 h-6" />
                     </a>
                     <a href="https://discord.gg/dvHrj9SXQS" target="blank" className="hover:text-gray-300">
-                        <img src="discord_colored.png" alt="Discord" className="w-6 h-6" />
+                        <img src="discord.png" alt="Discord" className="w-6 h-6" />
                     </a>
                     <a href="https://github.com/dean-s-list" target="blank" className="hover:text-gray-300">
-                        <img src="git_colored.png" alt="GitHub" className="w-6 h-6" />
+                        <img src="git.png" alt="GitHub" className="w-6 h-6" />
                     </a>
                 </div>
                 <p className="text-center">&copy; {new Date().getFullYear()} IslandDAO. All rights reserved.</p>

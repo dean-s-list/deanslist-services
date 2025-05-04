@@ -30,27 +30,27 @@ const FAQs = [
 function FAQ() {
 	return (
 		<div className="mx-auto max-w-[1440px]">
-			<div className="relative mx-auto w-fit text-[#061E1E]">
-                <div className="hidden md:block absolute -left-[1610px] top-[10px] h-2 w-[100rem] bg-[#061E1E]"></div>
+			<div className="relative mx-auto w-fit text-[#FFFFFF]">
+                <div className="hidden md:block absolute -left-[1610px] top-[10px] h-2 w-[100rem] bg-[#FFFFFF]"></div>
                 <div className="">FAQ</div>
             </div>
 			<div className="bg-[#] h-auto grid grid-cols-1 md:grid-cols-2 my-8 mb-32 p-2 relative mx-auto max-w-[1440px]">
 				
 					{/* Background blur effect */}
-					<div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#DCFCE2] rounded-[100%] -top-[40rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
+					<div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#044B4B] rounded-[100%] -top-[40rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
 					
 
-				<div className="md:pl-16 relative text-[#061E1E]">
+				<div className="md:pl-16 relative text-[#FFFFFF]">
 					<p className="text-[36px] font-semibold">
 						All the <span className="font-light font-editorial-new">A&rsquo;s</span> to your{" "}
 						<span className="font-light font-editorial-new">Q&rsquo;s</span>
 					</p>
-					<p className="font-extralight text-[20px] text-[#061E1E]">
+					<p className="font-extralight text-[20px] text-[#FFFFFF]">
 						Everything you need to know about our community.
 					</p>
 				</div>
 
-				<div className="md:pr-16 text-[18px] text-[#061E1E]">
+				<div className="md:pr-16 text-[18px] text-[#FFFFFF]">
 					<Accordion type="single" collapsible className="w-full">
 						{FAQs.map((faq, i) => (
 							<AccordionItem value={`item-${i}`} key={i}>
