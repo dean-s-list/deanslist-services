@@ -12,15 +12,16 @@ function Hero() {
 		<div className="absolute hidden xl:block h-[1452px] w-[377px] bg-[#044B4B] rounded-[100%] -top-[20rem] -right-[10rem] -rotate-[15deg] blur-[190px] -z-10"></div>
 
 			{/* Badge Section */}
-			<div className="hidden  justify-center items-center space-x-4 mb-6 md:mt-5 bg-[#061E1E] p-1 rounded-full cursor-pointer text-xs md:text-normal max-w-[fit-content]">
-				<span className="bg-white text-[#061E1E] md:text-[15px] py-1 px-3 rounded-full">
-					New feature
+
+			<div className="flex justify-center items-center space-x-4 mb-6 bg-[#0A2C2C] p-1 rounded-full border border-[#C4F9CF]  cursor-pointer text-xs md:text-normal">
+				<span className="bg-white text-[#061E1E] md:text-sm py-1 px-3 rounded-full">
+					Lastest update
 				</span>
-				<p
-					className="flex gap-2 items-center text-[12px] md:text-[15px]"
+				<a href="https://magiceden.io/marketplace/island_dao_perks" target="_blank"><p
+					className="flex gap-2 items-center"
 				>
-					Check out the Realms dashboard <ArrowRight size={16} />
-				</p>
+					Check out the NFT Perks collection <ArrowRight size={16} />
+				</p></a>
 			</div>
 
 			{/* Main Title */}
