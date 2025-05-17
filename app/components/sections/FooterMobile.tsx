@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from "next/link"
 
 export default function FooterMobile() {
     return (
@@ -21,7 +22,7 @@ export default function FooterMobile() {
 
                 <div>
                     <ul className='flex flex-col space-y-5'>
-                        <a href="https://leaderboard.deanslist.services/leaderboard" target="blank" className="hover:text-gray-300"><li>Leaderboard</li></a>
+                        <Link href="/leaderboard" target="_blank" className="hover:text-gray-300">Leaderboard</Link>
                         <a href="https://deans-list-docs.pages.dev/" className="hover:text-gray-300" target="blank"><li>Documentation</li></a>
                         <a href="https://www.tensor.trade/trade/deanslist" target="blank" className="hover:text-gray-300"><li>NFT Store</li></a>
                         <a href="/privacy" className="hover:text-gray-300" target="blank"><li>Privacy</li></a>

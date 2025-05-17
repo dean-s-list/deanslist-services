@@ -1,6 +1,9 @@
 import { Inter } from 'next/font/google';
 import localFont from "next/font/local";
 import "./globals.css";
+import NavBar from './components/sections/NavBar';
+import Footer from './components/sections/Footer';
+import FooterMobile from './components/sections/FooterMobile';
 import { WalletAdapterProvider } from './providers';
 import { WalletButtonStyles } from "./WalletStyles";
 
@@ -51,10 +54,13 @@ export default function RootLayout({
         <meta name="twitter:description" content="A Network State Of Web3 Power users" />
         <meta name="twitter:image" content="image/svg+xml" />
       </head>
-      <body  className={`${inter.className} ${newEditorial.variable} antialiased   font-inter`}>
+      <body  className={`${inter.className} ${newEditorial.variable} antialiased  bg-[#010C0C] font-inter`}>
         <WalletButtonStyles />
         <WalletAdapterProvider>
-          {children}
+        <NavBar />
+        {children}
+        <Footer />
+        <FooterMobile />
         </WalletAdapterProvider>
       </body>
     </html>

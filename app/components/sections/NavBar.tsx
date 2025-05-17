@@ -11,12 +11,12 @@ const NavBar: React.FC = () => {
         setIsOpen(!isOpen);
         const headerElement = document.getElementById('head');
         if (headerElement) {
-            headerElement.classList.toggle('bg-[#ABD6B3]');
+            headerElement.classList.toggle('bg-[#010C0C]');
         }
     };
 
     return (
-        <div id="nav">
+        <div id="nav" className=" relative pt-12  text-white  " >
             <header id="head"
                 className="flex justify-between md:max-xl:mx-16 xl:w-[75%] mx-auto md:mt-12 bg-[#061E1E80] bg-opacity-10 px-3 md:px-9 py-5 items-center relative rounded-lg">
                 {/* Logo */}
@@ -92,9 +92,8 @@ const NavBar: React.FC = () => {
                                 href="#events">Events</Link>
                         </li>
                         <li className="hover:text-[#ffff]">
-                            <Link
-                                href="https://leaderboard.deanslist.services/leaderboard"
-                                target="_blank"
+                        <Link
+                                href="./leaderboard"
                                 className="flex items-center gap-1"
                             >
                                 Leaderboard

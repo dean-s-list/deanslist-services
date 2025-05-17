@@ -18,7 +18,7 @@ function Footer() {
           <a href="#services" className="hover:text-gray-300">Services</a>
           <a href="#about-us" className="hover:text-gray-300">About Us</a>
           <a href="#events" className="hover:text-gray-300">Events</a>
-          <a href="https://leaderboard.deanslist.services/leaderboard " target="blank" className="hover:text-gray-300">Leaderboard</a>
+          <Link href="/leaderboard" target="_blank" className="hover:text-gray-300">Leaderboard</Link>
         </nav>
 
         {/* Top right content */}

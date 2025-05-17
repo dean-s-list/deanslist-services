@@ -20,9 +20,10 @@ const Scroller = dynamic(() => import("./components/ui/Scroller"))
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#010C0C] via-[#010C0C] to-[#010C0C] text-white overflow-x-hidden relative">
+    <main className="min-h-screen bg-gradient-to-b from-[#010C0C] via-[#010C0C] to-[#010C0C] text-white  relative">
       <div className="absolute inset-0" />
       <div className="relative z-10">
+        
         {/* Announcement Banner */}
         <div className="fixed top-0 left-1/2 transform -translate-x-1/2 z-40 w-full max-w-3xl px-4">
           <div className="bg-gradient-to-r from-green-700/50 via-purple-600/50 to-green-400/50 backdrop-blur-sm border border-amber-400/30 rounded-lg p-3 shadow-lg mt-3 hover:shadow-amber-500/30 transition-all duration-300 group hover:scale-[1.02] relative overflow-hidden">
@@ -59,11 +60,9 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="pt-12">
-          <NavBar />
-        </div>
+        
 
-        <div className="relative">
+        <div >
           <Hero />
           <Partners />
           <Services />
@@ -75,8 +74,6 @@ export default function Home() {
           <Branches />
           <Events />
           <FAQ />
-          <Footer />
-          <FooterMobile />
           <Scroller />
         </div>
       </div>
