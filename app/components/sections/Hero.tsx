@@ -1,6 +1,7 @@
 import { CircleArrowUp } from "lucide-react";
 import { ArrowDown } from "lucide-react";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 function Hero() {
 	return (
@@ -58,7 +59,7 @@ function Hero() {
 			<div className="w-full hidden md:flex justify-center mt-[76px] overflow-hidden h-[320px] 	relative">
 				<div className="w-[1024px] h-[1024px] rounded-full border-[10px] blur-[3px]  translate-y-1 border-[#061E1E] absolute"></div>
 				<div className=" w-[1024px] h-[1024px] rounded-full translate-y-4 ">
-					<img src="/continents.png" className="w-full" />
+					<Image src="/continents.png" alt="continents" width={500} height={500} className="w-full" />
 				</div>
 			</div>
 

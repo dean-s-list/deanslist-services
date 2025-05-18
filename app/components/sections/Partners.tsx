@@ -1,4 +1,4 @@
-
+import Image from 'next/image';
 function Partners() {
 	const partners = [
 		{ img: "realms.png", name: "Realms", link: "https://www.realms.today" },
@@ -36,7 +36,7 @@ function Partners() {
 
 					<div className="flex overflow-hidden  w-max">
 
-						<ul className="flex items-center gap-8 scroller__inner">
+						<ul className="flex items-center gap-8 scroller__inner group hover:[animation-play-state:paused]">
 							{partners.map((partner, index) => (
 								<li
 									key={index}
@@ -44,9 +44,11 @@ function Partners() {
 								>
 									<a href={partner.link} target="blank" rel="noopener noreferrer"
 										className="flex items-center gap-4">
-										<img
+										<Image
 											src={partner.img}
 											alt={partner.name}
+											width={40}
+											height={40}
 											className="w-[40px] h-[40px] "
 										/>
 										<span className="text-[24px] font-[600px] text-[#FFFFFF] ">{partner.name}</span></a>
@@ -60,9 +62,11 @@ function Partners() {
 									key={`duplicate-${index}`}
 									className="flex items-center justify-between gap-4 px-4 py-2"
 								>
-									<img
+									<Image
 										src={partner.img}
 										alt={partner.name}
+										width={12}
+										height={12}
 										className="w-12 h-12 rounded-full"
 									/>
 									<span className="text-sm font-medium">{partner.name}</span>

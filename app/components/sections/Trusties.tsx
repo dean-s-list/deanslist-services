@@ -1,188 +1,45 @@
 
-function Trusties() {
+  'use client';
+  import Image from 'next/image';
 
-    return (
-      <div className="w-screen h-40 flex justify-center items-center text-white pt-20 md:mt-0 mt-[35px]">
-        <div className="w-screen md:w-[1300px] flex flex-col items-center pt-12 overflow-hidden" data-speed="fast">
-          <h6 className="text-[#FFFFFF] text-sm font-semibold mb-4">
-            We&apos;ve been trusted by <em className="font-light font-editorial-new">founders</em> from
-          </h6>
-          <div className='w-full scroller'>
-            <div className="relative w-max h-64 pt-4">
-              <div className="flex scroller__inner">
-                <img
-                  src="image209.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image187.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image210.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image214.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image215.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image218.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image219.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image227.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image233.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="realms.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="gib.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image63.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image182.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image188.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image207.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image208.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image212.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image213.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image217.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image222.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image223.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image225.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image226.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image230.png"
-                  alt="Image 1"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image211.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image216.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image220.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image231.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image234.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image228.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image232.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image224.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-                <img
-                  src="image229.png"
-                  alt="Image 2"
-                  className="w-12 h-12 flex-shrink-0 object-cover mr-4"
-                />
-  
-              
-              </div>
-            </div>
-          </div>
+const trustedLogos = [
+  "image209.png", "image187.png", "image210.png", "image214.png", "image215.png",
+  "image218.png", "image219.png", "image227.png", "image233.png", "realms.png",
+  "gib.png", "image63.png", "image182.png", "image188.png", "image207.png",
+  "image208.png", "image212.png", "image213.png", "image217.png", "image222.png",
+  "image223.png", "image225.png", "image226.png", "image230.png", "image211.png",
+  "image216.png", "image220.png", "image231.png", "image234.png", "image228.png",
+  "image232.png", "image224.png", "image229.png"
+];
+ 
+
+function Trusties() {
+  return (
+    <div className="w-screen py-20 flex justify-center items-center text-white relative overflow-hidden" >
+      <div className="w-full md:max-w-[1300px] flex flex-col items-center">
+        <h6 className="text-sm font-semibold text-center text-white mb-6">
+          We&apos;ve been trusted by <em className="font-light font-editorial-new">founders</em> from
+        </h6>
+
+        <div className="w-full overflow-hidden scroller" >
+          <div className="flex overflow-hidden  w-max">
+         <ul className="flex items-center gap-8 scroller__inner group hover:[animation-play-state:paused]">
+            {trustedLogos.concat(trustedLogos).map((src, idx) => (
+              <Image
+                key={idx}
+                src={src}
+                alt={`Trusted Logo ${idx + 1}`}
+                width={12}
+                height={12}
+                className="w-12 h-12 flex-shrink-0 object-cover"
+              />
+            ))}
+        </ul>
+        </div>
         </div>
       </div>
-    );
-  }
-  
-  export default Trusties;
+    </div>
+  );
+}
+
+export default Trusties;

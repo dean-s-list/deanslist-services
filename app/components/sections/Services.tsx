@@ -2,6 +2,7 @@
 
 import SectionHeader from "../ui/SectionHeader";
 import ReactPlayer from "react-player";
+import Image from "next/image";
 
 const Services = () => {
 
@@ -37,7 +38,7 @@ const Services = () => {
                         </p>
                     </div>
                     <div className="w-full max-h-[165px] items-baseline">
-                        <img src="/images/feedback-review.png" alt="feedback review" className="w-full" />
+                        <Image src="/images/feedback-review.png" alt="feedback review" width={500} height={500} className="w-full" />
                     </div>
 
                 </div>
@@ -53,7 +54,7 @@ const Services = () => {
                         </p>
                     </div>
                     <div className="flex flex-wrap space-x-2 space-y-2 mt-4">
-                        <img src="/images/feedback3.png" alt="feedback" />
+                        <Image src="/images/feedback3.png" alt="feedback" width={800} height={500} />
                     </div>
                 </div>
 
@@ -70,7 +71,7 @@ const Services = () => {
                         </p>
                         <div className="flex relative justify-center items-center flex-grow h-[200px]">
                             {/* Hackathon Badges */}
-                            <img src="/images/feedback-hackathon.png" alt="hackathon judging"  className="w-[450px] h-[148px] md:w-[500px] h-[260px] "/>
+                            <Image src="/images/feedback-hackathon.png" alt="hackathon judging"  width={500} height={500} className="w-[450px] h-[148px] md:w-[500px] h-[260px] "/>
                         </div>
                     </div>
 
@@ -85,7 +86,7 @@ const Services = () => {
                         </p>
                         <div className="relative w-full h-full grid grid-cols-[30%,1fr] gap-1">
                             <div className="py-2">
-                                <img src="/images/bonanza.png" alt="feedback bonanza" />
+                                <Image src="/images/bonanza.png" width={500} height={500} alt="feedback bonanza" />
                             </div>
                             <div className=" w-full h-full">
                                 <ReactPlayer url="https://youtu.be/ILuvSo5gw6w" width="100%" height="100%" />
