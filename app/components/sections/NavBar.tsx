@@ -121,8 +121,8 @@ const NavBar: React.FC = () => {
                 {/* Mobile Menu */}
                 {isOpen && (
                     <div
-                        className="absolute top-full left-0 mt-2 w-full -translate-y-[6px] bg-[#061E1E] text-white pb-[40px] shadow-lg z-10 lg:hidden"
-                        id="mobile-menu"
+                         className="absolute left-0 top-full w-full bg-[#061E1E] text-white pb-[40px] shadow-lg z-50 lg:hidden"
+                         id="mobile-menu"
                     >
                         <div className="space-y-2 px-3 py-3">
                             <Link
