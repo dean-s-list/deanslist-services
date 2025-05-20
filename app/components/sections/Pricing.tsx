@@ -94,7 +94,7 @@ function Pricing() {
                     {/* Feedback Bonanza PLUS */}
                     <div className="bg-[#175959]  text-white py-6 shadow-lg flex flex-col h-full card-animated-border relative max-w-[470px] gap-4">
                         <div className="px-4">
-                            <div className="absolute top-6 right-1.5 bg-[#061E1E] text-xs font-bold px-2 py-1 rounded-full border border-[#ABD6B3]">
+                            <div className="absolute top-6 right-1.5 bg-gradient-to-r from-[#EEEE09] to-[#FDFD7C] text-xs font-bold px-2 py-1 rounded-full border border-[#AAAA00] text-[#A6860A]">
                                 Most Popular
                             </div>
                             <h2 className="text-lg md:text-xl font-bold mb-4">Feedback Bonanza PLUS</h2>
@@ -134,7 +134,7 @@ function Pricing() {
                             <div className="hiiden md:block absolute  h-[552px] w-[127px] bg-[#DCFCE266] rounded-[100%] -top-[2rem] -right-[4rem]   blur-[150px]"></div>
                             <h2 className="text-lg md:text-xl font-bold mb-4">
                                 Deep Dive Assessment{" "}
-                                <span className="bg-[#175959] lg:max-txl:absolute lg:max-txl:right-[25px] text-xs font-bold px-2 py-1 rounded-full border border-[#BFF1C8]">
+                                <span className="bg-gradient-to-r from-[#39FF14] to-[#BDF2B3] lg:max-txl:absolute lg:max-txl:right-[25px] text-xs font-bold px-2 py-1 rounded-full border border-[#2E9E19] text-[#1F6911]">
                                     Exclusive
                                 </span>
                             </h2>
