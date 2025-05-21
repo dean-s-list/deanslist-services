@@ -10,7 +10,7 @@ function Hero() {
 		<div className="absolute hidden md:block  h-[1052px] w-[177px] bg-[#044B4B] rounded-[100%] -top-[40rem] -left-[15rem] rotate-[45deg] blur-[90px] -z-10"></div>
 		<div className="absolute  h-[1852px] w-[77px] bg-[#044B4B] rounded-[100%] -top-[40rem] left-[25rem] rotate-[65deg] blur-[110px] -z-10"></div>
 		<div className="absolute hidden xl:block  h-[652px] w-[227px] bg-[#044B4B] rounded-[100%] top-[20rem] -left-[15rem] rotate-[65deg] blur-[90px] -z-10"></div>
-		<div className="absolute hidden xl:block h-[1452px] w-[377px] bg-[#044B4B] rounded-[100%] -top-[20rem] -right-[10rem] -rotate-[15deg] blur-[190px] -z-10"></div>
+		<div className="absolute hidden xl:block h-[1452px] w-[377px] bg-[#044B4B] rounded-[100%] -top-[5rem] -right-[10rem] -rotate-[5deg] blur-[350px] -z-10"></div>
 
 			{/* Badge Section */}
 

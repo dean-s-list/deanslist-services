@@ -89,6 +89,10 @@ const NavBar: React.FC = () => {
                         </li>
                         <li>
                             <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]"
+                                href="https://islanddaogrants.replit.app/" target="_blank">Grants</Link>
+                        </li>
+                        <li>
+                            <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]"
                                 href="#events">Events</Link>
                         </li>
                         <li className="hover:text-[#ffff]">
@@ -145,6 +149,13 @@ const NavBar: React.FC = () => {
                                 onClick={toggleMenu}
                             >
                                 About Us
+                            </Link>
+                            <Link
+                                href="https://islanddaogrants.replit.app/" target="_blank"
+                                className="block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-200"
+                                onClick={toggleMenu}
+                            >
+                               Grants
                             </Link>
                             <Link
                                 href="#events"
