@@ -89,7 +89,7 @@ const NavBar: React.FC = () => {
                         </li>
                         <li>
                             <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]"
-                                href="https://islanddaogrants.replit.app/" target="_blank">Grants</Link>
+                                href="https://metaplexdaogrants.replit.app/" target="_blank">Grants</Link>
                         </li>
                         <li>
                             <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]"
@@ -151,7 +151,7 @@ const NavBar: React.FC = () => {
                                 About Us
                             </Link>
                             <Link
-                                href="https://islanddaogrants.replit.app/" target="_blank"
+                                href="https://metaplexdaogrants.replit.app/" target="_blank"
                                 className="block rounded-md px-3 py-2 text-base font-medium hover:bg-gray-200"
                                 onClick={toggleMenu}
                             >
