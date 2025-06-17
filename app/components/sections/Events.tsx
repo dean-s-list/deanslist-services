@@ -44,7 +44,7 @@ const Events = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-[1fr,auto] md:gap-5 text-sm items-center">
             <p className="text-base md:mb-6 mb-2">
-              This year's IslandDAOx will feature extended collaboration weeks, speaker sessions, and real-world DAO experiments — all on the beach! Happening Q4 2025.
+              This year&apos;s IslandDAOx will feature extended collaboration weeks, speaker sessions, and real-world DAO experiments — all on the beach! Happening Q4 2025.
             </p>
             <a
               href="https://x.com/islanddao/status/1932526787785089154"
