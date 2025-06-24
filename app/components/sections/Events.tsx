@@ -30,6 +30,12 @@ const Events = () => {
         <div className="border-[#FFC700] border-[2px] bg-gradient-to-br from-[#332600] via-[#FFDD6E] to-[#332600] rounded-lg p-6 shadow-lg flex flex-col gap-4 pb-5 md:pb-1">
           <div className="flex flex-col items-center">
             <h3 className="text-[20px] font-[600] md:mb-2">IslandDAOx 2025</h3>
+
+            {/* ===== Neon Flashing Date & Location ===== */}
+            <div className="mt-2 text-center animate-pulse text-[18px] md:text-[20px] font-bold text-[#00FFD1] neon-text">
+              📍 Mykonos, Greece — <span className="text-[#FF00FF]">17 Sept - 17 Oct</span>
+            </div>
+
             <p className="text-sm md:mb-4">A new wave of innovation is coming.</p>
           </div>
 
@@ -142,6 +148,17 @@ const Events = () => {
           </div>
         </div>
       </div>
+
+      {/* Neon Text Style */}
+      <style jsx>{`
+        .neon-text {
+          text-shadow:
+            0 0 5px #00ffd1,
+            0 0 10px #00ffd1,
+            0 0 20px #00ffd1,
+            0 0 40px #00ffd1;
+        }
+      `}</style>
     </section>
   );
 };
