@@ -46,7 +46,7 @@ export default function Home() {
                 </div>
               </div>
               <a
-                href="https://islanddaov3.replit.app/" target="_blank" rel="noopener noreferrer"
+                href="https://v3.islanddao.org" target="_blank" rel="noopener noreferrer"
                 className="relative px-3 py-1.5 text-xs font-medium text-white overflow-hidden rounded-md transition-all duration-300 group-hover:scale-105 hover:shadow-md hover:shadow-amber-500/20"
               >
                 <span className="relative z-10">Apply Now</span>
