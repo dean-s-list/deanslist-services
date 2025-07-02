@@ -75,8 +75,8 @@ function Pricing() {
                                 ))}
                             </ul>
                         </div>
-                        <div className="px-4 border-t border-[#175869] pt-4 mt-auto flex flex-col md:flex-row md:justify-between items-baseline">
-                            <p className="text-5xl 2xl:mt-[3px] item lg:max-txl:text-4xl font-semibold">
+                        <div className="px-4 border-t border-[#175869] pt-6 mt-auto flex flex-col md:flex-row md:justify-between items-baseline">
+                            <p className="text-4xl 2xl:mt-[3px] item lg:max-txl:text-4xl font-semibold">
                                 <span className=" font-semibold text-4xl lg:max-txl:text-3xl">$</span>999<span className="text-sm text-gray-300">per session</span>
                             </p>
 
@@ -113,8 +113,8 @@ function Pricing() {
                         </div>
 
                         <div className="px-4 border-t border-[#ABD6] pt-4 mt-auto flex flex-col md:flex-row md:justify-between items-baseline">
-                            <p className="text-5xl lg:max-txl:text-4xl font-semibold">
-                                <span className="font-semibold text-4xl lg:max-txl:text-3xl">$</span>1,499<span className="text-sm text-gray-300">per session</span>
+                            <p className="text-4xl lg:max-txl:text-4xl font-semibold">
+                                <span className="font-semibold text-3xl lg:max-txl:text-2xl">$</span>1499<span className="text-sm text-gray-300">per session</span>
                             </p>
 
                             <a href="https://discord.gg/dvHrj9SXQS" target="blank" rel="noopener noreferrer" className="w-full md:w-auto">
@@ -155,8 +155,8 @@ function Pricing() {
                         </div>
 
                         <div className=" px-4 border-t border-[#175869] pt-4 mt-auto flex flex-col md:flex-row md:justify-between items-baseline">
-                            <p className="text-5xl lg:max-txl:text-4xl font-semibold">
-                                <span className="font-semibold text-4xl lg:max-txl:text-3xl">$</span>4,999<span className="text-sm text-gray-300">per session</span>
+                            <p className="text-4xl lg:max-txl:text-4xl font-semibold">
+                                <span className="font-semibold text-4xl lg:max-txl:text-3xl">$</span>4999<span className="text-sm text-gray-300">per session</span>
                             </p>
 
                             <a href="https://discord.gg/dvHrj9SXQS" target="blank" rel="noopener noreferrer" className="w-full md:w-auto">
