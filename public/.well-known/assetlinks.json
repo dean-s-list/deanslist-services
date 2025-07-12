@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.islanddao.mobile",
+      "sha256_cert_fingerprints": [
+        "5E:F7:53:5B:B4:02:12:D5:D5:80:73:98:CD:7F:76:F3:6B:A8:56:23:78:7F:41:C4:03:22:3E:3C:8A:F9:C1:7D"
+      ]
+    }
+  }
+]
