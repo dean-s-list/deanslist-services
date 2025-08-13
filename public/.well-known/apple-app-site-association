@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "TEAM_ID.com.islanddao.mobile",
+        "appID": "V5HK33F828.com.islanddao.mobile",
         "paths": [
           "/connect",
           "/signMessage",
@@ -16,7 +16,7 @@
   },
   "webcredentials": {
     "apps": [
-      "TEAM_ID.com.islanddao.mobile"
+      "V5HK33F828.com.islanddao.mobile"
     ]
   }
 }
