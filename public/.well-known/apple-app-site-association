@@ -5,11 +5,11 @@
       {
         "appID": "V5HK33F828.com.islanddao.mobile",
         "paths": [
-          "/connect",
-          "/signMessage",
-          "/signTransaction",
-          "/signAllTransactions",
-          "/disconnect"
+          "/ul/connect",
+          "/ul/signMessage",
+          "/ul/signTransaction",
+          "/ul/signAllTransactions",
+          "/ul/disconnect"
         ]
       }
     ]
