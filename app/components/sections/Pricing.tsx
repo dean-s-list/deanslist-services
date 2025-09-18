@@ -1,4 +1,4 @@
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, Plus } from "lucide-react";
 import SectionHeader from "../ui/SectionHeader";
 import { CircleMinus } from "lucide-react";
 
@@ -16,15 +16,16 @@ function Pricing() {
     ];
 
     const bonanzaPlusItems = [
-        'Resolve critical issues in real-time for immediate impact, streamed live on X, YouTube, and Twitch. ',
-        'Real-time testing and live insights for immediate adjustments from a panel of 6-8 experts.',
-        'Optimize visuals and layout with direct feedback from experts.',
-        'Optimize visuals, user journey, and layout with direct feedback from top-tier experts.',
-        'In-depth analysis comparing your app to competitors, focusing on key areas of usability and design. ',
-        'Feature requests tailored to enhance your app\'s potential and user engagement.',
+        'Feedback Bonanza included! ',
         'Comprehensive summary and actionable recommendations delivered post-session.',
         'Sentiment Analysis for each power-user on the panel. ',
-        'Mobile-only dApps will be reviewed in collaboration with the official Solana SAGA DAO. ',
+        'Documentation of findings, delivered with clear, context-aware guidance for immediate next steps.',
+        'In-depth analysis comparing your app to competitors, focusing on key areas of usability and design. ',
+        'Actionable suggestions will be included to outline clear next steps based on the session.',
+        'Our power users will provided individual report detailing their sentiments throughout the session for documentation.',
+        'Advanced analytics paired with qualitative cues to help understand how core users perceive your product or initiative. ',
+        'Qualitative insight reports that dissect how each contributor interacted with the product/project.',
+        'Mobile-only dApps will be reviewed in collaboration with the official Solana SAGA DAO.'
     ];
 
     const deepDiveItems = [
@@ -68,7 +69,7 @@ function Pricing() {
                                 {bonanzaItems.map((item, index) => (
                                     <li className="flex items-start gap-2" key={index}>
                                         <span className="text-[#CFCDCD]">{
-                                            index <= 5 ? <BadgeCheck size={22} /> : <CircleMinus size={22} />
+                                            index <= 5 ? <BadgeCheck className="text-[#ABD6B3]" size={22} /> : <CircleMinus className="text-[#FFA5A5] " size={22} />
                                         }</span>
                                         {item}
                                     </li>
@@ -105,7 +106,9 @@ function Pricing() {
                             <ul className="space-y-2 text-sm">
                                 {bonanzaPlusItems.map((item, index) => (
                                     <li className="flex items-start gap-2" key={index}>
-                                        <span><BadgeCheck size={22} /></span>
+                                        <span className="text-[#ABD6B3]">{
+                                            index <=  0? <Plus  size={22} /> : <BadgeCheck size={22} />
+                                        }</span>
                                         {item}
                                     </li>
                                 ))}
@@ -145,8 +148,10 @@ function Pricing() {
                             <ul className="space-y-2 text-sm text-gray-300">
                                 {deepDiveItems.map((item, index) => (
                                     <li className="flex items-start gap-2" key={index}>
-                                        <span className="text-[#CFCDCD]">
-                                            <BadgeCheck size={22} />
+                                        <span className="text-[#ABD6B3]">
+                                            {
+                                            index <=  0? <Plus  size={22} /> : <BadgeCheck size={22} />
+                                        }
                                         </span>
                                         {item}
                                     </li>
