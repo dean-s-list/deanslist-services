@@ -1,18 +1,19 @@
 import React from 'react';
+import SectionHeader from '../ui/SectionHeader';
 
 const AboutUs: React.FC = () => {
     return (
-        <div className="md:bg-[url(/Aboudt_Us.png)] bg-[url(/about-mobie.png)] md:bg-cover mx-auto flex flex-col justify-center items-center text-[white] relative max-w-[1440px]" id="about-us">
+        <div className="md:bg-[url(/Aboudt_Us.png)] bg-[url(/about-mobie.png)] md:bg-cover mx-auto flex flex-col justify-center items-center text-[white] relative max-w-[1440px]" id="about-us relative" >
             {/* Background blur effect  */}
             <div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#044B4B] rounded-[100%] -top-[40rem] -left-[8rem] -rotate-[45deg] blur-[390px] "></div>
             <div className="absolute hidden md:block h-[1052px] w-[277px] bg-[#044B4B] rounded-[100%] -top-[30rem] -right-[8rem] rotate-[45deg] blur-[390px] "></div>
             
             {/* Heading */}
-            {/* <SectionHeader title="About Us" /> */}
-            <div className="relative text-[#FFFFFF]">
+            <SectionHeader title="About Us" />
+            {/* <div className="relative text-[#FFFFFF]">
                 <div className="hidden md:block absolute -left-[1615px] top-[10px] h-2 w-[100rem] bg-[#061E1E]"></div>
                 About us
-            </div>
+            </div> */}
 
             <div className="flex flex-col items-center p-5 mt-8 ">
                 <h4 className="text-[#FFFFFF] text-[48px] font-bold mb-4">Redefining Excellence</h4>

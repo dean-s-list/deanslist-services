@@ -252,3 +252,34 @@ export {
   CarouselPrevious,
   CarouselNext,
 }
+
+// Dot buttons
+export function DotButtons({ className }: { className?: string }) {
+  const { api } = useCarousel()
+  const [selectedIndex, setSelectedIndex] = React.useState(0)
+  const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([])
+
+  React.useEffect(() => {
+    if (!api) return
+    setScrollSnaps(api.scrollSnapList())
+    setSelectedIndex(api.selectedScrollSnap())
+    api.on("select", () => setSelectedIndex(api.selectedScrollSnap()))
+  }, [api])
+
+  if (!api) return null
+
+  return (
+    <div className={cn("flex gap-2 justify-center", className)}>
+      {scrollSnaps.map((_, idx) => (
+        <button
+          key={idx}
+          onClick={() => api.scrollTo(idx)}
+          className={cn(
+            "h-2 w-2 rounded-full transition-colors",
+            idx === selectedIndex ? "bg-primary" : "bg-muted"
+          )}
+        />
+      ))}
+    </div>
+  )
+}
