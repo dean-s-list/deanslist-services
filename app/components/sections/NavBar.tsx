@@ -73,7 +73,7 @@ const NavBar: React.FC = () => {
                 </div>
 
                 {/* Desktop Navigation */}
-                <nav className="hidden lg:block w-fit mx-2 border border-[#ABD6B3]">
+                <nav className="hidden lg:block w-fit mx-2 ">
                     <ul className="flex space-x-10 font-semibold text-[#FFFFFF] ">
                         <li>
                             <Link className="hover:text-[#ffff] active:text-[#ffff] focus:text-[#ffff]"
