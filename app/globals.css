@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "./tailwind.css/typography.css";
 
 /*Pricing*/
 @keyframes rotate-border {
@@ -50,6 +51,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+    --perkBg: #061E1E;
+  --perkBorder: #BFF1C8;
 }
 
 @layer base {

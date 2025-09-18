@@ -1,6 +1,7 @@
 'use client'
 
 import dynamic from "next/dynamic"
+import Perks from "./components/sections/Perks"
 
 const Hero = dynamic(() => import("./components/sections/Hero"))
 const NetworkGraph = dynamic(() => import("./components/sections/NetworkGraph"))
@@ -64,6 +65,7 @@ export default function Home() {
           <Pricing />
           <Trusties />
           <Testimonials />
+          <Perks />
           <AboutUs />
           <NetworkGraph />
           <Branches />
