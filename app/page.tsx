@@ -15,6 +15,7 @@ const Events = dynamic(() => import("./components/sections/Events"))
 const FAQ = dynamic(() => import("./components/sections/FAQ"))
 const Branches = dynamic(() => import("./components/sections/Branches"))
 const Scroller = dynamic(() => import("./components/ui/Scroller"))
+const NewsletterSignup = dynamic(() => import("./components/sections/NewsletterSignup"))
 
 export default function Home() {
   return (
@@ -60,6 +61,7 @@ export default function Home() {
 
         <div>
           <Hero />
+          <NewsletterSignup />
           <Partners />
           <Services />
           <Pricing />
